@@ -1,64 +1,44 @@
+import data from '../content/education.json';
+import { records, text, texts } from './normalize';
 import type { Achievement, Activity, EducationEntry } from './types';
 
-/* Taken from Abigail's resume (October 2026). */
+const raw: Record<string, unknown> = data;
 
-export const education: EducationEntry[] = [
-  {
-    institution: 'Universiti Malaysia Sabah',
-    qualification: 'Bachelor of Computer Science (Hons.), Software Engineering',
-    period: '2023 – 2027',
-    details: ['CGPA 3.58', 'BKNS Scholar'],
-  },
-  {
-    institution: 'Labuan Matriculation College',
-    qualification: 'Module III, Science Technology',
-    period: '2022 – 2023',
-    details: ['CGPA 3.21', 'MUET Band 4.0'],
-  },
-];
+// Content is edited in src/content/education.json (or through Pages CMS).
 
-export const achievements: Achievement[] = [
-  {
-    title: 'Overall Best Project: SchoolFam',
-    issuer: null,
-    date: '2025',
-  },
-  {
-    title: 'First runner-up, Technopreneurship Business Idea Pitching competition (SchoolFam)',
-    issuer: null,
-    date: '2025',
-  },
-  {
-    title: "Dean's List",
-    issuer: 'Universiti Malaysia Sabah',
-    // TODO: add the semester(s) awarded.
-    date: null,
-  },
-];
+const toAchievement = (a: Record<string, unknown>): Achievement[] => {
+  const title = text(a.title);
+  if (!title) return [];
+  return [
+    {
+      title,
+      issuer: text(a.issuer),
+      date: text(a.date),
+      description: text(a.description) ?? undefined,
+      credentialUrl: text(a.credentialUrl) ?? undefined,
+    },
+  ];
+};
 
-export const training: Achievement[] = [
-  {
-    title: 'MITE Generative AI Tools Training for the Workplace',
-    issuer: 'Sponsored by Yayasan Peneraju',
-    date: '2026',
-    description: 'Two-day programme on generative AI tools for workplace productivity and workflow optimisation.',
-  },
-  {
-    title: 'Gemini No-Code Hackathon',
-    issuer: null,
-    date: '2026',
-    description: 'Building a no-code application prototype with Google AppSheet and Gemini AI.',
-  },
-  {
-    title: 'PETRONAS BeDigital Bootcamp',
-    issuer: 'PETRONAS',
-    date: '2025',
-    description: 'Two-day bootcamp on digital innovation, technology applications and digital transformation.',
-  },
-];
+export const education: EducationEntry[] = records(raw.education).flatMap((e) => {
+  const qualification = text(e.qualification);
+  if (!qualification) return [];
+  return [
+    {
+      qualification,
+      institution: text(e.institution) ?? '',
+      period: text(e.period) ?? '',
+      details: texts(e.details),
+    },
+  ];
+});
 
-export const activities: Activity[] = [
-  { role: 'Committee Member', organisation: 'Anti-Drug Prevention Club', period: '2023 – present' },
-  { role: 'AJK Food and Gift', organisation: 'SULAM Project at Masjid Al-Huda, Kg. Unggun Jaya', period: '2026' },
-  { role: 'Treasurer', organisation: 'Program Kembara Jati Diri UMS', period: '2024' },
-];
+export const achievements: Achievement[] = records(raw.achievements).flatMap(toAchievement);
+
+export const training: Achievement[] = records(raw.training).flatMap(toAchievement);
+
+export const activities: Activity[] = records(raw.activities).flatMap((a) => {
+  const role = text(a.role);
+  if (!role) return [];
+  return [{ role, organisation: text(a.organisation) ?? '', period: text(a.period) ?? '' }];
+});

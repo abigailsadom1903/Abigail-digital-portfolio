@@ -1,0 +1,88 @@
+{
+  "projects": [
+    {
+      "title": "Web-Based Church Management System",
+      "context": "Archdiocese of Kota Kinabalu · Final Year Project",
+      "summary": "A web-based management system that centralises church information, digital bulletins, announcements, sacramental services, donation management and catechesis for the 23 churches in Kota Kinabalu.",
+      "featured": true,
+      "year": "2026",
+      "role": "Full-stack developer",
+      "problem": "Church information, bulletins, announcements and services across the 23 churches in Kota Kinabalu needed a single, central web platform.",
+      "approach": "Following the Waterfall methodology, the project covers system analysis, database design, implementation and software testing, with three distinct user roles.",
+      "features": [
+        "Church information",
+        "Digital bulletins and announcements",
+        "Sacramental services",
+        "Donation management",
+        "Catechesis",
+        "AI chatbot"
+      ],
+      "stack": ["HTML", "CSS", "JavaScript", "PHP", "Laravel", "MySQL"],
+      "testing": ["System testing", "User Acceptance Testing (UAT)", "Usability evaluation"],
+      "outcome": "Currently in development as my Final Year Project.",
+      "links": [],
+      "screenshots": [
+        { "image": "", "caption": "Main screen (sample data)", "alt": "Church Management System main screen" },
+        { "image": "", "caption": "Secondary screen (sample data)", "alt": "Church Management System secondary screen" }
+      ],
+      "privacyNote": "Screenshots use sample data only. No real parishioner records, credentials or internal church information are shown."
+    },
+    {
+      "title": "SchoolFam",
+      "context": "Parent–teacher communication application",
+      "summary": "A collaborative project: a parent–teacher communication application designed to improve information sharing between parents and teachers.",
+      "featured": false,
+      "year": "2025",
+      "role": "Team member (collaborative project)",
+      "problem": "",
+      "approach": "",
+      "features": [],
+      "stack": ["Google AI Studio"],
+      "testing": [],
+      "outcome": "Received Overall Best Project recognition and achieved first runner-up in a Technopreneurship Business Idea Pitching competition.",
+      "links": [],
+      "screenshots": [{ "image": "", "caption": "Application screen", "alt": "SchoolFam application screen" }],
+      "privacyNote": ""
+    },
+    {
+      "title": "Smart Street Light System",
+      "context": "IoT project · Solar-powered smart street light",
+      "summary": "A solar-powered smart street light with automated motion and light detection, ESP32-CAM surveillance and Telegram alerts for remote monitoring.",
+      "featured": false,
+      "year": "2025",
+      "role": "",
+      "problem": "",
+      "approach": "",
+      "features": [
+        "Solar-powered operation",
+        "Automated motion detection (PIR sensor)",
+        "Automated light detection (LDR sensor)",
+        "ESP32-CAM surveillance",
+        "Telegram alerts for remote monitoring"
+      ],
+      "stack": ["ESP32", "ESP32-CAM", "Arduino IDE", "C++", "PIR sensor", "LDR sensor", "Telegram Bot API"],
+      "testing": ["Unit testing", "Integration testing", "Field testing"],
+      "outcome": "Achieved an estimated 80% energy reduction.",
+      "links": [],
+      "screenshots": [{ "image": "", "caption": "Prototype photo", "alt": "Smart Street Light System prototype" }],
+      "privacyNote": ""
+    },
+    {
+      "title": "StudyUsia",
+      "context": "College study-room booking management system",
+      "summary": "A system for managing study-room bookings in a college.",
+      "featured": false,
+      "year": "",
+      "role": "",
+      "problem": "",
+      "approach": "",
+      "features": [],
+      "stack": [],
+      "testing": [],
+      "outcome": "",
+      "links": [],
+      "screenshots": [{ "image": "", "caption": "Booking screen", "alt": "StudyUsia booking screen" }],
+      "privacyNote": ""
+    }
+  ]
+}

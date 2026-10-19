@@ -29,34 +29,24 @@ Progress is shown under the repository's **Actions** tab; the site updates about
 
 ## Editing content
 
-All content lives in typed files in `src/data/`. A `null` value or empty array renders a
-clearly labelled **Placeholder** on the page, so fill in real, verified details only.
+**Easiest: Pages CMS.** Sign in at https://app.pagescms.org with GitHub, open this repository,
+and edit with forms: Profile & About, Projects, Skills, Education & Achievements.
+Upload buttons handle the profile photo, CV (PDF) and project screenshots. Each save
+publishes automatically. The forms are defined in .
 
-| What | File |
-| --- | --- |
-| Name, intro, CV link, contact links | `src/data/profile.ts` |
-| Project case studies | `src/data/projects.ts` |
-| Skills by category | `src/data/skills.ts` |
-| Education and achievements | `src/data/education.ts` |
+**By hand:** the same content lives in JSON files in (, , , ).
+Uploaded files go in  and ; reference them as  or .
 
-### CV
-Put the PDF at `public/cv/Abigail-Sadom-CV.pdf`, then set `cvUrl: withBase('cv/Abigail-Sadom-CV.pdf')`.
-
-### Screenshots
-Export images (WebP or PNG, ~1600×1000) to `public/images/projects/`, then set each `media[].src` with `withBase`,
-e.g. `withBase('images/projects/church-dashboard.webp')`, and write a meaningful `alt`.
+Blank fields render as a clearly labelled **Placeholder**, so fill in real, verified details only.
 **Church Management System screenshots must use sample data only.**
-
-### Contact links
-In `profile.ts`, set `href` (e.g. `'mailto:you@example.com'`, `'https://www.linkedin.com/in/…'`)
-and an optional `display` text.
 
 ## Structure
 
 ```
 src/
   styles/     tokens.css (design tokens), global.css (reset, base, focus, motion)
-  data/       typed content
+  content/    editable content (JSON, used by Pages CMS)
+  data/       loaders that turn content into typed data
   components/ reusable UI: Container, Section, ButtonLink, Placeholder, TagList, CaseStudy, Navbar
   sections/   page sections: Hero, About, Work, Skills, Education, Contact, Footer
   hooks/      useActiveSection, useHideOnScroll, useReveal

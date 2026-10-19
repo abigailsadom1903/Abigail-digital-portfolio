@@ -1,0 +1,24 @@
+{
+  "name": "Abigail Alau R. Sadom",
+  "shortName": "Abigail Sadom",
+  "initials": "AS",
+  "role": "Software Engineering Intern",
+  "headline": "Building clear, dependable web software, and testing it properly.",
+  "intro": "I am a Software Engineering undergraduate at Universiti Malaysia Sabah, building web applications with Laravel, PHP and MySQL, and looking for an internship in software engineering, web development or software testing.",
+  "photo": "/images/profile/abigail-sadom.webp",
+  "photoAlt": "Portrait of Abigail Alau R. Sadom",
+  "cv": "/cv/Abigail-Sadom-CV.pdf",
+  "degree": "Bachelor of Computer Science (Hons.), Software Engineering",
+  "university": "Universiti Malaysia Sabah",
+  "expectedGraduation": "2027",
+  "interests": ["Web development", "Software testing & QA"],
+  "about": [
+    "I am studying for a Bachelor of Computer Science (Hons.), Software Engineering at Universiti Malaysia Sabah, with graduation expected in 2027.",
+    "My interests sit in two places that belong together: building web applications people can rely on, and the software testing and quality assurance that makes that reliability possible.",
+    "My Final Year Project, a web-based church management system for the Archdiocese of Kota Kinabalu, is taking me through the full software development life cycle: system analysis, database design, implementation and testing. Academic team projects and part-time roles in customer service have also strengthened my communication, teamwork and time management."
+  ],
+  "lookingFor": "Software engineering, web development or software testing internships",
+  "email": "abigailsadom1903@gmail.com",
+  "linkedin": "",
+  "github": "https://github.com/abigailsadom1903"
+}

@@ -33,6 +33,9 @@ export interface Profile {
   university: string;
   expectedGraduation: string;
   interests: string[];
+  /** About section paragraphs; the first is shown as the lead. */
+  about: string[];
+  lookingFor: string | null;
   /** Portrait shown in the hero. `null` hides it. */
   photo: { src: string; alt: string } | null;
   /** Path to the CV inside /public, e.g. "/cv/Abigail-Sadom-CV.pdf". `null` until supplied. */

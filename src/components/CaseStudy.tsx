@@ -108,8 +108,8 @@ export function CaseStudy({ project, index }: CaseStudyProps) {
       </header>
 
       <div className="case__gallery" data-reveal>
-        {project.media.map((media) => (
-          <Media key={media.alt} media={media} />
+        {project.media.map((media, i) => (
+          <Media key={`${i}-${media.alt}`} media={media} />
         ))}
       </div>
 

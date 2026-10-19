@@ -1,44 +1,43 @@
-import type { NavItem, Profile } from './types';
+import data from '../content/profile.json';
+import { text, texts } from './normalize';
+import type { ContactLink, NavItem, Profile } from './types';
 import { withBase } from './withBase';
 
+const raw: Record<string, unknown> = data;
+
+// Content is edited in src/content/profile.json (or through Pages CMS).
+
+const email = text(raw.email);
+const linkedin = text(raw.linkedin);
+const github = text(raw.github);
+const photo = text(raw.photo);
+const cv = text(raw.cv);
+
+/** "https://www.github.com/name/" → "github.com/name" */
+const displayUrl = (url: string) => url.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');
+
+const contact: ContactLink[] = [
+  { kind: 'email', label: 'Email', href: email && `mailto:${email}`, display: email },
+  { kind: 'linkedin', label: 'LinkedIn', href: linkedin, display: linkedin && displayUrl(linkedin) },
+  { kind: 'github', label: 'GitHub', href: github, display: github && displayUrl(github) },
+];
+
 export const profile: Profile = {
-  name: 'Abigail Alau R. Sadom',
-  shortName: 'Abigail Sadom',
-  initials: 'AS',
-  role: 'Software Engineering Intern',
-  headline: 'Building clear, dependable web software, and testing it properly.',
-  intro:
-    'I am a Software Engineering undergraduate at Universiti Malaysia Sabah, building web applications with ' +
-    'Laravel, PHP and MySQL, and looking for an internship in software engineering, web development or software testing.',
-  degree: 'Bachelor of Computer Science (Hons.), Software Engineering',
-  university: 'Universiti Malaysia Sabah',
-  expectedGraduation: '2027',
-  interests: ['Web development', 'Software testing & QA'],
-
-  // To change the photo, replace public/images/profile/abigail-sadom.webp (portrait, about 640×830).
-  photo: {
-    src: withBase('images/profile/abigail-sadom.webp'),
-    alt: 'Portrait of Abigail Alau R. Sadom',
-  },
-
-  cvUrl: withBase('cv/Abigail-Sadom-CV.pdf'),
-
-  contact: [
-    {
-      kind: 'email',
-      label: 'Email',
-      href: 'mailto:abigailsadom1903@gmail.com',
-      display: 'abigailsadom1903@gmail.com',
-    },
-    // TODO: the resume lists "linkedin.com/in/abigail", which looks incomplete. Add the full profile URL.
-    { kind: 'linkedin', label: 'LinkedIn', href: null, display: null },
-    {
-      kind: 'github',
-      label: 'GitHub',
-      href: 'https://github.com/abigailsadom1903',
-      display: 'github.com/abigailsadom1903',
-    },
-  ],
+  name: text(raw.name) ?? '',
+  shortName: text(raw.shortName) ?? text(raw.name) ?? '',
+  initials: text(raw.initials) ?? '',
+  role: text(raw.role) ?? '',
+  headline: text(raw.headline) ?? '',
+  intro: text(raw.intro) ?? '',
+  degree: text(raw.degree) ?? '',
+  university: text(raw.university) ?? '',
+  expectedGraduation: text(raw.expectedGraduation) ?? '',
+  interests: texts(raw.interests),
+  about: texts(raw.about),
+  lookingFor: text(raw.lookingFor),
+  photo: photo ? { src: withBase(photo), alt: text(raw.photoAlt) ?? `Portrait of ${text(raw.name) ?? ''}` } : null,
+  cvUrl: cv && withBase(cv),
+  contact,
 };
 
 export const navItems: NavItem[] = [

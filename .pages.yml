@@ -1,0 +1,168 @@
+# Pages CMS configuration (https://pagescms.org).
+# Defines the editing forms at app.pagescms.org. Every save commits to the
+# repository, which triggers the GitHub Pages deploy workflow.
+
+media:
+  - name: images
+    input: public/images
+    output: /images
+    extensions: [jpg, jpeg, png, webp]
+  - name: documents
+    input: public/cv
+    output: /cv
+    extensions: [pdf]
+
+content:
+  - name: profile
+    label: Profile & About
+    type: file
+    path: src/content/profile.json
+    format: json
+    fields:
+      - { name: name, label: Full name, type: string }
+      - { name: shortName, label: Short name (shown in the menu bar), type: string }
+      - { name: initials, label: Initials (logo), type: string }
+      - { name: role, label: Role (small text above your name), type: string }
+      - { name: headline, label: Headline (purple italic line), type: string }
+      - { name: intro, label: Introduction, type: text }
+      - name: photo
+        label: Profile photo (portrait; under 500 KB loads fastest)
+        type: image
+        options:
+          media: images
+      - { name: photoAlt, label: Photo description (for screen readers), type: string }
+      - name: cv
+        label: CV (PDF)
+        type: file
+        options:
+          media: documents
+      - { name: degree, label: Degree, type: string }
+      - { name: university, label: University, type: string }
+      - { name: expectedGraduation, label: Expected graduation, type: string }
+      - { name: interests, label: Areas of interest, type: string, list: true }
+      - { name: about, label: About paragraphs (first one is shown larger), type: text, list: true }
+      - { name: lookingFor, label: Looking for, type: string }
+      - { name: email, label: Email address, type: string }
+      - { name: linkedin, label: LinkedIn URL (full https link), type: string }
+      - { name: github, label: GitHub URL (full https link), type: string }
+
+  - name: projects
+    label: Projects
+    type: file
+    path: src/content/projects.json
+    format: json
+    fields:
+      - name: projects
+        label: Projects (shown in this order)
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{title}"
+        fields:
+          - { name: title, label: Title, type: string }
+          - { name: context, label: Context (organisation or project type), type: string }
+          - { name: summary, label: Summary, type: text }
+          - { name: featured, label: Featured case study (larger layout), type: boolean }
+          - { name: year, label: Year, type: string }
+          - { name: role, label: My role, type: string }
+          - { name: problem, label: The problem, type: text }
+          - { name: approach, label: Approach, type: text }
+          - { name: features, label: Key features, type: string, list: true }
+          - { name: stack, label: Tech stack, type: string, list: true }
+          - { name: testing, label: Testing & quality (only testing you actually did), type: string, list: true }
+          - { name: outcome, label: Outcome, type: text }
+          - name: links
+            label: Links (demo, repository, report)
+            type: object
+            list: true
+            fields:
+              - { name: label, label: Link text, type: string }
+              - { name: url, label: URL (full https link), type: string }
+          - name: screenshots
+            label: Screenshots (use sample data only)
+            type: object
+            list: true
+            fields:
+              - name: image
+                label: Image
+                type: image
+                options:
+                  media: images
+              - { name: caption, label: Caption, type: string }
+              - { name: alt, label: Description (for screen readers), type: string }
+          - { name: privacyNote, label: Privacy note (optional), type: text }
+
+  - name: skills
+    label: Skills
+    type: file
+    path: src/content/skills.json
+    format: json
+    fields:
+      - name: categories
+        label: Skill categories
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{title}"
+        fields:
+          - { name: title, label: Category, type: string }
+          - { name: description, label: Short description, type: string }
+          - { name: items, label: Skills, type: string, list: true }
+
+  - name: education
+    label: Education & Achievements
+    type: file
+    path: src/content/education.json
+    format: json
+    fields:
+      - name: education
+        label: Education
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{qualification}"
+        fields:
+          - { name: qualification, label: Qualification, type: string }
+          - { name: institution, label: Institution, type: string }
+          - { name: period, label: Period (e.g. 2023 – 2027), type: string }
+          - { name: details, label: Details (e.g. CGPA), type: string, list: true }
+      - name: achievements
+        label: Honours & achievements
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{title}"
+        fields:
+          - { name: title, label: Title, type: string }
+          - { name: issuer, label: Issuer / organiser, type: string }
+          - { name: date, label: Date or year, type: string }
+          - { name: description, label: Description (optional), type: text }
+          - { name: credentialUrl, label: Credential link (optional), type: string }
+      - name: training
+        label: Training & programmes
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{title}"
+        fields:
+          - { name: title, label: Title, type: string }
+          - { name: issuer, label: Organiser / sponsor, type: string }
+          - { name: date, label: Date or year, type: string }
+          - { name: description, label: Description (optional), type: text }
+          - { name: credentialUrl, label: Certificate link (optional), type: string }
+      - name: activities
+        label: Leadership & activities
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{role}"
+        fields:
+          - { name: role, label: Role, type: string }
+          - { name: organisation, label: Organisation / event, type: string }
+          - { name: period, label: Period, type: string }
