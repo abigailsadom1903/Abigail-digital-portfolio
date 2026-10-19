@@ -95,6 +95,10 @@
         {
           "label": "Explore it in the Engineering Lab",
           "url": "#lab-schoolfam"
+        },
+        {
+          "label": "Application Link",
+          "url": "https://schoolfam-lonaa.netlify.app/"
         }
       ],
       "screenshots": [
