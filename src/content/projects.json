@@ -183,6 +183,41 @@
       ]
     },
     {
+      "title": "UniFest",
+      "category": "Web application",
+      "context": "Campus event management system · Team project",
+      "summary": "A web-based campus event system where students, staff and the public browse and register for university events, organisers manage their events and participants, and admins approve events and manage users.",
+      "featured": false,
+      "year": "2026",
+      "role": "Developer (team of five)",
+      "problem": "University events are announced in many places, so students miss them, and organisers have no single place to track registrations, participants and feedback.",
+      "approach": "Built in PHP with PDO and MySQL, with role-based access for admins, staff, students and public users. Events go through an approval step before they are listed, and passwords are stored with password_hash.",
+      "features": [
+        "Event listings by type (workshop, seminar, competition, festival, sport, course) and mode (physical, online, hybrid)",
+        "Public or university-only events, shown only after admin approval",
+        "One-click event registration that prevents duplicate sign-ups and notifies the organiser",
+        "Participant lists with CSV export and update messages to participants",
+        "In-app notifications and simulated email notifications",
+        "Event ratings and feedback",
+        "Admin reports, user management and role promotion",
+        "User profiles with password change"
+      ],
+      "stack": [
+        "PHP",
+        "PDO",
+        "MySQL",
+        "HTML",
+        "CSS",
+        "XAMPP"
+      ],
+      "links": [
+        {
+          "label": "View code on GitHub",
+          "url": "https://github.com/abigailsadom1903/UniFest"
+        }
+      ]
+    },
+    {
       "title": "FYP System For UMS",
       "category": "UI/UX",
       "featured": false,
