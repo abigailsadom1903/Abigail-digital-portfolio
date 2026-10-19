@@ -1,0 +1,573 @@
+<!doctype html>
+<html lang="en-MY">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Cover Letter Editor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+/* Layout: form panel on the left, live A4 preview on the right; stacks on narrow screens. */
+:root {
+  --bg: #f7f4fa;
+  --panel: #ffffff;
+  --ink: #1c1622;
+  --muted: #5a5266;
+  --subtle: #786f84;
+  --line: #e2dbea;
+  --line-strong: #cbbfd9;
+  --accent: #5b2c83;
+  --accent-strong: #45206a;
+  --accent-soft: #efe7f7;
+  --danger: #b3261e;
+  --ok: #1d6b43;
+  --paper: #ffffff;
+  --paper-ink: #111111;
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-ui: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-letter: Helvetica, Arial, sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #17121c; --panel: #211a28; --ink: #f1ecf6; --muted: #c3b8cf; --subtle: #a497b2;
+    --line: #362c40; --line-strong: #4a3d58; --accent: #b993e0; --accent-strong: #d2b6ee; --accent-soft: #2e2339;
+    --danger: #f2a39d; --ok: #8fd3ad; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #17121c; --panel: #211a28; --ink: #f1ecf6; --muted: #c3b8cf; --subtle: #a497b2;
+  --line: #362c40; --line-strong: #4a3d58; --accent: #b993e0; --accent-strong: #d2b6ee; --accent-soft: #2e2339;
+  --danger: #f2a39d; --ok: #8fd3ad; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { background: var(--bg); color: var(--ink); font: 15px/1.5 var(--font-ui); }
+button, input, textarea, select { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.top { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 24px;
+  padding: 20px max(16px, env(safe-area-inset-left, 0px)) 16px; border-bottom: 1px solid var(--line); background: var(--panel); }
+.top h1 { margin: 0; font: 500 1.5rem/1.2 var(--font-display); letter-spacing: -0.01em; }
+.top p { margin: 0; color: var(--subtle); font-size: 0.875rem; }
+
+.app { display: grid; gap: 24px; max-width: 1320px; margin: 0 auto;
+  padding: 24px max(16px, env(safe-area-inset-right, 0px)) 48px max(16px, env(safe-area-inset-left, 0px)); }
+@media (min-width: 980px) { .app { grid-template-columns: minmax(340px, 420px) minmax(0, 1fr); align-items: start; } }
+
+.panel { display: grid; gap: 20px; padding: 20px; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); }
+@media (min-width: 980px) { .panel { position: sticky; top: 16px; max-height: calc(100vh - 32px); overflow-y: auto; } }
+
+.field { display: grid; gap: 6px; }
+.field label, .label { font-size: 0.8125rem; font-weight: 600; color: var(--ink); }
+.field .hint { font-size: 0.8125rem; color: var(--subtle); }
+.field input, .field textarea { width: 100%; padding: 10px 12px; border: 1px solid var(--line-strong); border-radius: 6px; background: var(--panel); }
+.field textarea { resize: vertical; min-height: 96px; line-height: 1.5; }
+.field input:focus, .field textarea:focus { border-color: var(--accent); outline: none; box-shadow: 0 0 0 3px var(--accent-soft); }
+.field [aria-invalid="true"] { border-color: var(--danger); }
+.error { margin: 0; font-size: 0.8125rem; color: var(--danger); }
+.row { display: grid; gap: 12px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.inline { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.check { display: flex; gap: 8px; align-items: flex-start; font-size: 0.875rem; color: var(--muted); }
+.check input { margin-top: 3px; accent-color: var(--accent); }
+
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 42px; padding: 0 16px;
+  border: 1px solid var(--line-strong); border-radius: 6px; background: var(--panel); font-weight: 500; cursor: pointer; }
+.btn:hover { border-color: var(--accent); color: var(--accent); }
+.btn--primary { border-color: var(--accent); background: var(--accent); color: #fff; }
+.btn--primary:hover { background: var(--accent-strong); border-color: var(--accent-strong); color: #fff; }
+:root[data-theme="dark"] .btn--primary, :root:not([data-theme="light"]) .btn--primary { color: var(--panel); }
+@media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) .btn--primary { color: #fff; } }
+.btn--small { min-height: 32px; padding: 0 10px; font-size: 0.8125rem; }
+.btn--link { min-height: auto; padding: 0; border: 0; background: none; color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+.actions { display: grid; gap: 8px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.actions .btn--primary { grid-column: 1 / -1; min-height: 48px; }
+.status { margin: 0; font-size: 0.875rem; color: var(--ok); min-height: 1.3em; }
+.status--error { color: var(--danger); }
+
+details.more { border-top: 1px solid var(--line); padding-top: 14px; }
+details.more summary { cursor: pointer; font-weight: 600; font-size: 0.875rem; color: var(--muted); }
+details.more[open] summary { margin-bottom: 14px; }
+details.more .stack { display: grid; gap: 14px; }
+.sig { display: flex; align-items: center; gap: 12px; padding: 10px; border: 1px dashed var(--line-strong); border-radius: 6px; background: #fff; }
+.sig img { height: 44px; width: auto; }
+.sig span { color: #555; font-size: 0.8125rem; }
+
+/* Preview */
+.preview { min-width: 0; display: grid; gap: 10px; }
+.preview-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; color: var(--subtle); font-size: 0.8125rem; }
+.sheet-wrap { width: 100%; overflow: hidden; }
+.sheet { width: 794px; height: 1123px; transform-origin: top left; background: var(--paper); color: var(--paper-ink);
+  box-shadow: 0 1px 2px rgba(0,0,0,.08), 0 12px 32px -12px rgba(40,20,60,.28); border-radius: 2px;
+  padding: 98px 94px 0 96px; font: 14.67px/1.24 var(--font-letter); }
+.sheet p { margin: 0; }
+.sheet .b { font-weight: 700; }
+.sheet .rule { border-top: 1px solid #111; margin: 6px 0 22px; }
+.sheet .rcpt-last { display: flex; justify-content: space-between; gap: 16px; }
+.sheet .gap { height: 1.24em; }
+.sheet .title { font-weight: 700; text-decoration: underline; text-underline-offset: 2px; }
+.sheet .para { text-align: justify; }
+.sheet .num { display: inline-block; width: 48px; }
+.sheet .sig-img { height: 62px; margin: 8px 0 0; display: block; }
+.sheet .sig-line { width: 170px; border-top: 1px solid #111; margin-top: 6px; }
+.sheet .empty { color: #b00020; background: #fff3f3; }
+.sheet sup { font-size: 0.65em; }
+</style>
+</head>
+<body>
+<header class="top">
+  <h1>Cover Letter Editor</h1>
+  <p>Type the company details, check the preview, then download. Everything stays on this computer.</p>
+</header>
+
+<main class="app">
+  <form class="panel" id="form" novalidate>
+    <div class="field">
+      <label for="company">Company name</label>
+      <input id="company" autocomplete="organization" placeholder="e.g. Petronas Digital Sdn Bhd" />
+      <p class="error" id="company-error" hidden></p>
+    </div>
+
+    <div class="field">
+      <label for="address">Company address</label>
+      <textarea id="address" rows="4" placeholder="Level 12, Menara ABC&#10;Jalan Sultan Ismail&#10;50250 Kuala Lumpur, Malaysia"></textarea>
+      <div class="inline">
+        <span class="hint">One line per row, as it should appear on the letter.</span>
+        <button type="button" class="btn--link btn" id="split">Split at commas</button>
+      </div>
+      <p class="error" id="address-error" hidden></p>
+    </div>
+
+    <div class="field">
+      <label for="position">Position</label>
+      <input id="position" />
+      <span class="hint">Used in the heading and the first paragraph.</span>
+    </div>
+
+    <div class="row">
+      <div class="field">
+        <label for="date">Date</label>
+        <input id="date" type="date" />
+      </div>
+      <div class="field">
+        <label for="recipient">Addressed to</label>
+        <input id="recipient" />
+      </div>
+    </div>
+
+    <label class="check"><input type="checkbox" id="useName" /> Use the company name instead of “your company” in the letter</label>
+
+    <div class="actions">
+      <button type="submit" class="btn btn--primary" id="pdf">Download PDF</button>
+      <button type="button" class="btn" id="word">Download Word</button>
+      <button type="button" class="btn" id="copy">Copy text</button>
+    </div>
+    <p class="status" id="status" role="status"></p>
+
+    <details class="more" id="yourDetails">
+      <summary>Greeting, your details and signature</summary>
+      <div class="stack">
+        <div class="field"><label for="salutation">Greeting</label><input id="salutation" /></div>
+        <div class="field"><label for="senderName">Your name</label><input id="senderName" /></div>
+        <div class="field">
+          <label for="senderAddress">Your address</label><textarea id="senderAddress" rows="5"></textarea>
+          <p class="error" id="senderAddress-error" hidden></p>
+        </div>
+        <div class="row">
+          <div class="field">
+            <label for="phone">Phone</label><input id="phone" />
+            <p class="error" id="phone-error" hidden></p>
+          </div>
+          <div class="field"><label for="email">Email</label><input id="email" /></div>
+        </div>
+        <div class="field">
+          <span class="label">Signature</span>
+          <div class="sig"><img id="sigPreview" alt="Your signature" /><span id="sigNote"></span></div>
+          <div class="inline">
+            <label class="btn btn--small" for="sigFile">Upload a new signature</label>
+            <input id="sigFile" type="file" accept="image/png,image/jpeg" hidden />
+            <button type="button" class="btn btn--small" id="sigReset">Use original</button>
+            <label class="check"><input type="checkbox" id="showSig" /> Include signature</label>
+          </div>
+        </div>
+      </div>
+    </details>
+
+    <details class="more">
+      <summary>Edit the letter text</summary>
+      <div class="stack">
+        <p class="hint" style="margin:0;color:var(--subtle);font-size:.8125rem">
+          Placeholders fill in automatically: {position}, {company}, {phone}, {email}.
+        </p>
+        <div class="field"><label for="p1">Opening paragraph</label><textarea id="p1" rows="6"></textarea></div>
+        <div class="field"><label for="p2">Paragraph 2</label><textarea id="p2" rows="8"></textarea></div>
+        <div class="field"><label for="p3">Paragraph 3</label><textarea id="p3" rows="7"></textarea></div>
+        <div class="field"><label for="p4">Paragraph 4</label><textarea id="p4" rows="7"></textarea></div>
+        <div class="field"><label for="closing">Closing</label><input id="closing" /></div>
+        <button type="button" class="btn btn--small" id="resetText">Restore my original wording</button>
+      </div>
+    </details>
+  </form>
+
+  <section class="preview" aria-label="Letter preview">
+    <div class="preview-head"><span>Preview (A4)</span><span id="fileName"></span></div>
+    <div class="sheet-wrap" id="sheetWrap"><div class="sheet" id="sheet"></div></div>
+  </section>
+</main>
+
+<script src="lib/jspdf.umd.min.js"></script>
+<!-- Optional and private (git-ignored): your address/phone and your signature. See README.md. -->
+<script src="personal.local.js" onerror="void 0"></script>
+<script src="signature.local.js" onerror="void 0"></script>
+<script>
+(() => {
+  // ---------- Content ----------
+  const PERSONAL = window.PERSONAL_DEFAULTS || {};
+  const ORIGINAL = {
+    salutation: 'Dear Sir/Madam,',
+    recipient: 'Hiring Manager',
+    position: 'Software Engineering Internship',
+    senderName: 'Abigail Alau R. Sadom',
+    senderAddress: PERSONAL.senderAddress || '',
+    phone: PERSONAL.phone || '',
+    email: 'abigailsadom1903@gmail.com',
+    closing: 'Yours sincerely,',
+    p1: 'I am writing to express my interest in applying for the {position} position at {company}. I am currently pursuing a Bachelor of Computer Science (Software Engineering) at Universiti Malaysia Sabah (UMS) and I am seeking an opportunity to gain practical industry experience, strengthen my technical skills and contribute to real-world software development projects.',
+    p2: 'Throughout my academic journey, I have developed technical skills in web development, database management, application development, and software quality assurance. My experience includes working with HTML, CSS, JavaScript, PHP, Java, MySQL, Laravel and GitHub. For my Final Year Project, I am developing a Web-Based Church Management System for the Archdiocese of Kota Kinabalu, which involves three user roles, system analysis, database design, implementation and software testing. This project has strengthened my understanding of the software development life cycle and the importance of building reliable, user-friendly systems.',
+    p3: 'In addition to my technical background, I have gained valuable experience through academic projects, collaborative teamwork, and previous part-time employment in customer service and retail operations. My participation in software development projects has helped me improve my problem-solving, communication, teamwork, and time-management skills. I am adaptable, eager to learn, and comfortable taking on new challenges while working towards project objectives.',
+    p4: 'I would greatly appreciate the opportunity to be considered for an internship position at {company}. I am enthusiastic about applying my academic knowledge in a professional environment, learning from experienced industry professionals, and contributing to your team’s success. I would welcome the opportunity to attend an interview at your convenience and can be contacted via phone: {phone} or email: {email}. Thank you for your time and consideration.',
+  };
+  const TEXT_FIELDS = ['company', 'address', 'position', 'date', 'recipient', 'salutation', 'senderName', 'senderAddress', 'phone', 'email', 'p1', 'p2', 'p3', 'p4', 'closing'];
+  const STORE_KEY = 'cover-letter-editor:v1';
+  const $ = (id) => document.getElementById(id);
+
+  const todayIso = () => {
+    const d = new Date();
+    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+  };
+
+  // ---------- State (remembered in this browser only) ----------
+  let state = { ...ORIGINAL, company: '', address: '', date: todayIso(), useName: true, showSig: true, signature: null };
+  try {
+    const saved = JSON.parse(localStorage.getItem(STORE_KEY) || 'null');
+    if (saved) state = { ...state, ...saved, date: todayIso() }; // the date always starts as today
+  } catch { /* storage unavailable: start fresh */ }
+  const save = () => { try { localStorage.setItem(STORE_KEY, JSON.stringify(state)); } catch { /* ignore */ } };
+
+  const signatureSrc = () => state.signature || window.DEFAULT_SIGNATURE || null;
+
+  // ---------- Letter model ----------
+  const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  const ordinal = (n) => (n % 100 >= 11 && n % 100 <= 13 ? 'th' : ({ 1: 'st', 2: 'nd', 3: 'rd' }[n % 10] || 'th'));
+  function dateParts(iso) {
+    const [y, m, d] = (iso || todayIso()).split('-').map(Number);
+    return { day: String(d), suffix: ordinal(d), rest: ` ${MONTHS[m - 1]} ${y}` };
+  }
+  const lines = (s) => s.split('\n').map((l) => l.trim()).filter(Boolean);
+
+  function letter() {
+    const company = state.company.trim();
+    const companyRef = state.useName && company ? company : 'your company';
+    const fill = (t) => t
+      .replaceAll('{position}', state.position.trim() || ORIGINAL.position)
+      .replaceAll('{company}', companyRef)
+      .replaceAll('{phone}', state.phone.trim().replace(/ /g, '\u00a0'))
+      .replaceAll('{email}', state.email.trim());
+    return {
+      senderName: state.senderName.trim(),
+      senderLines: lines(state.senderAddress),
+      recipient: state.recipient.trim() || ORIGINAL.recipient,
+      company,
+      addressLines: lines(state.address),
+      date: dateParts(state.date),
+      salutation: state.salutation.trim(),
+      title: `APPLICATION FOR ${(state.position.trim() || ORIGINAL.position).toUpperCase()}`,
+      paragraphs: [state.p1, state.p2, state.p3, state.p4].map((p) => fill(p).replace(/\s+/g, ' ').trim()),
+      closing: state.closing.trim(),
+      signature: state.showSig ? signatureSrc() : null,
+    };
+  }
+
+  const fileBase = () => {
+    const c = state.company.trim().replace(/[\\/:*?"<>|]+/g, '').replace(/\s+/g, ' ').slice(0, 60);
+    return `Cover Letter - Abigail Sadom${c ? ' - ' + c : ''}`;
+  };
+
+  // ---------- Preview ----------
+  function el(tag, cls, text) {
+    const n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text !== undefined) n.textContent = text;
+    return n;
+  }
+  function renderPreview() {
+    const L = letter();
+    const s = $('sheet');
+    s.replaceChildren();
+    s.append(el('p', 'b', L.senderName));
+    L.senderLines.forEach((l) => s.append(el('p', '', l)));
+    s.append(el('div', 'rule'));
+    s.append(el('p', 'b', L.recipient));
+    s.append(el('p', L.company ? '' : 'empty', L.company || '[Company name]'));
+    const addr = L.addressLines.length ? L.addressLines : ['[Company address]'];
+    addr.forEach((l, i) => {
+      const cls = L.addressLines.length ? '' : 'empty';
+      if (i < addr.length - 1) { s.append(el('p', cls, l)); return; }
+      const row = el('div', 'rcpt-last');
+      row.append(el('span', cls, l));
+      const date = el('span');
+      date.append(L.date.day, el('sup', '', L.date.suffix), L.date.rest);
+      row.append(date);
+      s.append(row);
+    });
+    s.append(el('div', 'gap'), el('p', '', L.salutation), el('div', 'gap'), el('p', 'title', L.title), el('div', 'gap'));
+    L.paragraphs.forEach((t, i) => {
+      const p = el('p', 'para');
+      if (i > 0) p.append(el('span', 'num', `${i + 1}.`));
+      p.append(t);
+      s.append(p, el('div', 'gap'));
+    });
+    s.append(el('p', '', L.closing));
+    if (L.signature) { const img = el('img', 'sig-img'); img.src = L.signature; img.alt = ''; s.append(img); }
+    else s.append(el('div', 'gap'), el('div', 'gap'));
+    s.append(el('div', 'sig-line'), el('p', 'b', L.senderName));
+    $('fileName').textContent = fileBase() + '.pdf';
+    fitSheet();
+  }
+  function fitSheet() {
+    const wrap = $('sheetWrap');
+    const scale = Math.min(1, wrap.clientWidth / 794);
+    $('sheet').style.transform = `scale(${scale})`;
+    wrap.style.height = `${1123 * scale}px`;
+  }
+  new ResizeObserver(fitSheet).observe($('sheetWrap'));
+
+  // ---------- Validation ----------
+  function validate() {
+    const problems = [];
+    const check = (id, msg) => {
+      const bad = !state[id].trim();
+      $(id).setAttribute('aria-invalid', String(bad));
+      const e = $(`${id}-error`);
+      e.textContent = bad ? msg : '';
+      e.hidden = !bad;
+      if (bad) problems.push(id);
+    };
+    check('company', 'Enter the company name.');
+    check('address', 'Enter the company address.');
+    check('senderAddress', 'Enter your own address. It is remembered after the first time.');
+    check('phone', 'Enter your phone number. It is remembered after the first time.');
+    if (problems.includes('senderAddress') || problems.includes('phone')) $('yourDetails').open = true;
+    if (problems.length) $(problems[0]).focus();
+    return problems.length === 0;
+  }
+
+  // ---------- PDF (A4, matches the preview) ----------
+  async function imageSize(src) {
+    return new Promise((res) => { const i = new Image(); i.onload = () => res({ w: i.naturalWidth, h: i.naturalHeight }); i.onerror = () => res(null); i.src = src; });
+  }
+  async function makePdf(size = 11) {
+    const { jsPDF } = window.jspdf;
+    const L = letter();
+    const doc = new jsPDF({ unit: 'mm', format: 'a4' });
+    const left = 25.4, right = 210 - 24.9, width = right - left, lh = size * 0.452;
+    let y = 27;
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(size);
+    const ensure = (needed) => { if (y + needed > 297 - 18) { doc.addPage(); y = 25; } };
+    const textLine = (t, bold = false, x = left) => { doc.setFont('helvetica', bold ? 'bold' : 'normal'); doc.text(t, x, y); y += lh; };
+
+    textLine(L.senderName, true);
+    L.senderLines.forEach((l) => textLine(l));
+    doc.setLineWidth(0.25);
+    doc.line(left, y - 2.2, right, y - 2.2);
+    y += 5;
+    textLine(L.recipient, true);
+    textLine(L.company);
+    L.addressLines.forEach((l, i) => {
+      if (i === L.addressLines.length - 1) {
+        // Date on the same row as the last address line, right-aligned, with a raised ordinal.
+        doc.setFont('helvetica', 'normal');
+        const restW = doc.getTextWidth(L.date.rest);
+        doc.setFontSize(size * 0.64);
+        const supW = doc.getTextWidth(L.date.suffix);
+        doc.setFontSize(size);
+        const dayW = doc.getTextWidth(L.date.day);
+        let x = right - restW - supW - dayW;
+        doc.text(L.date.day, x, y); x += dayW;
+        doc.setFontSize(size * 0.64); doc.text(L.date.suffix, x, y - size * 0.145); x += supW;
+        doc.setFontSize(size); doc.text(L.date.rest, x, y);
+      }
+      textLine(l);
+    });
+    y += lh;
+    textLine(L.salutation);
+    y += lh;
+    doc.setFont('helvetica', 'bold');
+    doc.text(L.title, left, y);
+    doc.setLineWidth(0.3);
+    doc.line(left, y + 0.9, left + doc.getTextWidth(L.title), y + 0.9);
+    y += lh * 2;
+
+    doc.setFont('helvetica', 'normal');
+    const indent = 12.7;
+    L.paragraphs.forEach((text, i) => {
+      const first = i > 0 ? indent : 0;
+      const words = text.split(' '); // non-breaking spaces (e.g. in the phone number) keep words together
+      const rows = [];
+      let row = [];
+      for (const w of words) {
+        const avail = width - (rows.length === 0 ? first : 0);
+        const trial = [...row, w].join(' ');
+        if (row.length && doc.getTextWidth(trial) > avail) { rows.push(row); row = [w]; } else row.push(w);
+      }
+      if (row.length) rows.push(row);
+      ensure(rows.length * lh);
+      if (i > 0) doc.text(`${i + 1}.`, left, y);
+      rows.forEach((r, ri) => {
+        const x0 = left + (ri === 0 ? first : 0);
+        const avail = width - (ri === 0 ? first : 0);
+        if (ri === rows.length - 1 || r.length === 1) { doc.text(r.join(' '), x0, y); }
+        else {
+          const wordsW = r.reduce((sum, w) => sum + doc.getTextWidth(w), 0);
+          const gap = (avail - wordsW) / (r.length - 1);
+          let x = x0;
+          r.forEach((w) => { doc.text(w, x, y); x += doc.getTextWidth(w) + gap; });
+        }
+        y += lh;
+      });
+      y += lh;
+    });
+
+    ensure(40);
+    textLine(L.closing);
+    if (L.signature) {
+      const dim = await imageSize(L.signature);
+      if (dim) {
+        const h = 16, w = Math.min(45, (dim.w / dim.h) * h);
+        doc.addImage(L.signature, 'PNG', left + 1, y - 1, w, h);
+      }
+      y += 17;
+    } else y += 12;
+    doc.setLineWidth(0.25);
+    doc.line(left, y, left + 45, y);
+    y += lh;
+    textLine(L.senderName, true);
+    return doc;
+  }
+
+  /** The largest text size (11pt down to 9.5pt) at which the letter fits on one A4 page. */
+  async function makeOnePagePdf() {
+    let doc = null;
+    for (const size of [11, 10.75, 10.5, 10.25, 10, 9.75, 9.5]) {
+      doc = await makePdf(size);
+      if (doc.getNumberOfPages() === 1) return doc;
+    }
+    return doc; // very long text: allow a second page
+  }
+
+  // ---------- Word (.doc, opens in Microsoft Word) ----------
+  const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  function makeWordHtml() {
+    const L = letter();
+    const p = (t, style = '') => `<p style="margin:0;${style}">${t}</p>`;
+    const addr = L.addressLines.map((l, i) => i === L.addressLines.length - 1
+      ? `<table style="width:100%;border-collapse:collapse"><tr><td style="padding:0">${esc(l)}</td><td style="padding:0;text-align:right">${L.date.day}<sup>${L.date.suffix}</sup>${esc(L.date.rest)}</td></tr></table>`
+      : p(esc(l))).join('');
+    const paras = L.paragraphs.map((t, i) => p(`${i > 0 ? `${i + 1}.<span style="mso-tab-count:1">&#9;</span>` : ''}${esc(t)}`, 'text-align:justify;tab-stops:36pt') + p('&nbsp;')).join('');
+    const sig = L.signature ? `<p style="margin:4pt 0 0"><img src="${L.signature}" height="60" alt=""></p>` : p('&nbsp;') + p('&nbsp;');
+    return `<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">
+<head><meta charset="utf-8"><title>${esc(fileBase())}</title>
+<style>@page{size:21cm 29.7cm;margin:2.6cm 2.5cm 2cm 2.54cm}body{font-family:Calibri,Arial,sans-serif;font-size:11pt;line-height:1.15}</style></head>
+<body>${p(`<b>${esc(L.senderName)}</b>`)}${L.senderLines.map((l) => p(esc(l))).join('')}
+<p style="margin:2pt 0 14pt;border-bottom:1px solid #000">&nbsp;</p>
+${p(`<b>${esc(L.recipient)}</b>`)}${p(esc(L.company))}${addr}${p('&nbsp;')}${p(esc(L.salutation))}${p('&nbsp;')}
+${p(`<b><u>${esc(L.title)}</u></b>`)}${p('&nbsp;')}${paras}${p(esc(L.closing))}${sig}
+<p style="margin:0">_________________</p>${p(`<b>${esc(L.senderName)}</b>`)}</body></html>`;
+  }
+
+  function plainText() {
+    const L = letter();
+    const d = `${L.date.day}${L.date.suffix}${L.date.rest}`;
+    return [L.senderName, ...L.senderLines, '', L.recipient, L.company, ...L.addressLines, d, '', L.salutation, '', L.title, '',
+      ...L.paragraphs.flatMap((t, i) => [`${i > 0 ? `${i + 1}.  ` : ''}${t}`, '']), L.closing, '', '', L.senderName].join('\n');
+  }
+
+  function download(blob, name) {
+    const url = URL.createObjectURL(blob);
+    const a = Object.assign(document.createElement('a'), { href: url, download: name });
+    document.body.append(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 2000);
+  }
+  const setStatus = (msg, isError = false) => { $('status').textContent = msg; $('status').className = 'status' + (isError ? ' status--error' : ''); };
+
+  // ---------- Wiring ----------
+  function syncInputs() {
+    TEXT_FIELDS.forEach((id) => { $(id).value = state[id] ?? ''; });
+    $('useName').checked = state.useName;
+    $('showSig').checked = state.showSig;
+    $('sigPreview').src = signatureSrc() || '';
+    $('sigNote').textContent = state.signature
+      ? 'Your uploaded signature'
+      : window.DEFAULT_SIGNATURE
+        ? 'Signature from your original letter'
+        : 'No signature yet. Upload one below.';
+  }
+  TEXT_FIELDS.forEach((id) => $(id).addEventListener('input', (e) => {
+    state[id] = e.target.value;
+    if (['company', 'address', 'senderAddress', 'phone'].includes(id)) { $(id).removeAttribute('aria-invalid'); $(`${id}-error`).hidden = true; }
+    save(); renderPreview(); setStatus('');
+  }));
+  $('useName').addEventListener('change', (e) => { state.useName = e.target.checked; save(); renderPreview(); });
+  $('showSig').addEventListener('change', (e) => { state.showSig = e.target.checked; save(); renderPreview(); });
+  $('split').addEventListener('click', () => {
+    state.address = state.address.split(/,\s*|\n/).map((s) => s.trim()).filter(Boolean).join('\n');
+    $('address').value = state.address; save(); renderPreview();
+  });
+  $('sigFile').addEventListener('change', (e) => {
+    const file = e.target.files && e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => { state.signature = reader.result; state.showSig = true; save(); syncInputs(); renderPreview(); };
+    reader.readAsDataURL(file);
+  });
+  $('sigReset').addEventListener('click', () => { state.signature = null; save(); syncInputs(); renderPreview(); });
+  $('resetText').addEventListener('click', () => {
+    ['p1', 'p2', 'p3', 'p4', 'closing', 'salutation'].forEach((k) => { state[k] = ORIGINAL[k]; });
+    save(); syncInputs(); renderPreview(); setStatus('Original wording restored.');
+  });
+
+  $('form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!validate()) { setStatus('Fill in the highlighted fields first.', true); return; }
+    if (!window.jspdf) { setStatus('The PDF tool did not load. Keep this page in its folder with the "lib" folder next to it.', true); return; }
+    try {
+      const doc = await makeOnePagePdf();
+      doc.save(`${fileBase()}.pdf`);
+      setStatus(`Downloaded “${fileBase()}.pdf”.`);
+    } catch (err) {
+      console.error(err);
+      setStatus('Could not create the PDF. Try again, or use Download Word.', true);
+    }
+  });
+  $('word').addEventListener('click', () => {
+    if (!validate()) { setStatus('Fill in the highlighted fields first.', true); return; }
+    download(new Blob(['﻿', makeWordHtml()], { type: 'application/msword' }), `${fileBase()}.doc`);
+    setStatus(`Downloaded “${fileBase()}.doc”.`);
+  });
+  $('copy').addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText(plainText()); setStatus('Letter text copied.'); }
+    catch { setStatus('Copy is blocked here. Use Download Word instead.', true); }
+  });
+
+  // Handy for checking output from the browser console: await coverLetterEditor.pdfDataUri()
+  window.coverLetterEditor = { pdfDataUri: async () => (await makeOnePagePdf()).output('datauristring'), text: plainText };
+
+  syncInputs();
+  renderPreview();
+  if (document.fonts) document.fonts.ready.then(fitSheet);
+})();
+</script>
+</body>
+</html>
