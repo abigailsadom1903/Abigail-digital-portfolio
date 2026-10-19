@@ -79,6 +79,8 @@ export interface Project {
   media: ProjectMedia[];
   /** Shown prominently, e.g. to state that screenshots contain only sample data. */
   privacyNote?: string;
+  /** Uploaded project report (PDF). `null` until supplied. */
+  report: { href: string; label: string } | null;
 }
 
 export interface SkillCategory {

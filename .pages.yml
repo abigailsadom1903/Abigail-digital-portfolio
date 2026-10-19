@@ -15,6 +15,10 @@ media:
     input: public/certificates
     output: /certificates
     extensions: [pdf, jpg, jpeg, png, webp]
+  - name: reports
+    input: public/reports
+    output: /reports
+    extensions: [pdf]
 
 content:
   - name: profile
@@ -77,6 +81,12 @@ content:
           - { name: stack, label: Tech stack, type: string, list: true }
           - { name: testing, label: Testing & quality (only testing you actually did), type: string, list: true }
           - { name: outcome, label: Outcome, type: text }
+          - name: report
+            label: Project report (PDF; remove any private data first)
+            type: file
+            options:
+              media: reports
+          - { name: reportLabel, label: Report button text (optional; default is Read the report), type: string }
           - name: links
             label: Links (demo, repository, report)
             type: object

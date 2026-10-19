@@ -32,6 +32,17 @@ describe('ProjectList', () => {
     expect(github).toHaveAttribute('rel', 'noopener noreferrer');
   });
 
+  it('shows a report button that opens the PDF in a new tab', () => {
+    const withReport = projects.map((p, i) =>
+      i === 0 ? { ...p, report: { href: '/reports/fyp.pdf', label: 'Final Year Project report' } } : p,
+    );
+    render(<ProjectList projects={withReport} />);
+    const report = screen.getByRole('link', { name: /Final Year Project report/ });
+    expect(report).toHaveAttribute('href', '/reports/fyp.pdf');
+    expect(report).toHaveAttribute('target', '_blank');
+    expect(report).toHaveAttribute('rel', 'noopener noreferrer');
+  });
+
   it('shows an empty state when there are no projects', () => {
     render(<ProjectList projects={[]} />);
     expect(screen.getByText(/Projects will appear here soon/)).toBeInTheDocument();

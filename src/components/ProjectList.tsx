@@ -1,4 +1,4 @@
-import { ArrowLeft, ArrowRight, ArrowUpRight, Expand, Plus, ShieldCheck } from 'lucide-react';
+import { ArrowLeft, ArrowRight, ArrowUpRight, Expand, FileText, Plus, ShieldCheck } from 'lucide-react';
 import { useState, type ReactNode } from 'react';
 import type { Project, ProjectMedia } from '../data/types';
 import { ButtonLink } from './Button';
@@ -97,8 +97,16 @@ function ProjectPanel({ project, previous, next }: PanelProps) {
           </dl>
         )}
 
-        {project.links.length > 0 ? (
+        {project.links.length > 0 || project.report ? (
           <div className="project__links">
+            {project.report && (
+              <a className="btn btn--primary project__report" href={project.report.href} target="_blank" rel="noopener noreferrer">
+                <FileText className="btn__icon" size={18} aria-hidden="true" />
+                <span>{project.report.label}</span>
+                <span className="project__report-type">PDF</span>
+                <span className="visually-hidden"> (opens in a new tab)</span>
+              </a>
+            )}
             {project.links.map((link) =>
               link.href.startsWith('#') ? (
                 <ButtonLink key={link.href} href={link.href} variant="secondary" icon={ArrowRight}>
@@ -112,7 +120,7 @@ function ProjectPanel({ project, previous, next }: PanelProps) {
             )}
           </div>
         ) : (
-          <Placeholder label="TODO: add links (live demo, repository or report) if they can be shared publicly" />
+          <Placeholder label="TODO: upload the project report (PDF) or add links (demo, repository) that can be shared publicly" />
         )}
       </div>
 

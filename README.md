@@ -43,13 +43,13 @@ workflow sets it to `/Abigail-digital-portfolio/`; Netlify and local development
 
 **Easiest: Pages CMS.** Sign in at https://app.pagescms.org with GitHub, open this repository,
 and edit with forms: Profile & About, Projects, Skills, Education, Experience & Awards.
-Upload buttons handle the profile photo, CV (PDF), project screenshots, and a certificate
+Upload buttons handle the profile photo, CV (PDF), project screenshots and reports (PDF), and a certificate
 and photo for each award, training programme or activity. Each save publishes automatically.
 The forms are defined in `.pages.yml`.
 
 **By hand:** the same content lives in JSON files in `src/content/`
 (`profile.json`, `projects.json`, `skills.json`, `education.json`).
-Uploaded files go in `public/images/`, `public/cv/` and `public/certificates/`; reference them as `/images/...`, `/cv/...` or `/certificates/...`.
+Uploaded files go in `public/images/`, `public/cv/`, `public/certificates/` and `public/reports/`; reference them as `/images/...`, `/cv/...`, `/certificates/...` or `/reports/...`.
 
 Blank fields are hidden on the published site; when running locally (`npm run dev`) they show
 as clearly labelled **Placeholders**. Fill in real, verified details only.

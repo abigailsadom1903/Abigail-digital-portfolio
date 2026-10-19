@@ -339,3 +339,13 @@ details[open] > .project__row .project__toggle {
   padding: var(--space-6) 0;
   color: var(--color-text-muted);
 }
+
+/* Report button: the main call to action in a project's links. */
+.project__report-type {
+  padding: 0 0.35rem;
+  border-radius: 2px;
+  background: rgb(255 255 255 / 0.2);
+  font-size: 0.6875rem;
+  font-weight: var(--weight-semibold);
+  letter-spacing: 0.06em;
+}

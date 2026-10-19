@@ -10,9 +10,10 @@ const raw: Record<string, unknown> = data;
  * Blank fields render as labelled placeholders — fill them with verified details only.
  * Church Management System screenshots must use sample data only.
  */
-export const projects: Project[] = records(raw.projects).map((p, i) => {
+export function toProject(p: Record<string, unknown>, i: number): Project {
   const title = text(p.title) ?? `Project ${i + 1}`;
   const image = (s: Record<string, unknown>) => text(s.image);
+  const report = text(p.report);
 
   return {
     id: slugify(title) || `project-${i + 1}`,
@@ -43,5 +44,8 @@ export const projects: Project[] = records(raw.projects).map((p, i) => {
       };
     }),
     privacyNote: text(p.privacyNote) ?? undefined,
+    report: report ? { href: withBase(report), label: text(p.reportLabel) ?? 'Read the report' } : null,
   };
-});
+}
+
+export const projects: Project[] = records(raw.projects).map(toProject);
