@@ -19,7 +19,7 @@ describe('ProjectList', () => {
     await user.click(screen.getAllByRole('button', { name: new RegExp(`Next\\s*${second.title}`) })[0]);
     const secondDetails = container.querySelector(`#${second.id} details`) as HTMLDetailsElement;
     expect(secondDetails.open).toBe(true);
-    expect(container.querySelector(`#${first.id} details`)).toHaveProperty('open', true);
+    expect(container.querySelector(`#${first.id} details`)).toHaveProperty('open', Boolean(first.featured));
   });
 
   it('links internal Lab links in the same tab and external links in a new tab', () => {

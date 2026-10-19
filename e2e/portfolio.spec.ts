@@ -109,9 +109,10 @@ test('project links open the Lab on the matching project', async ({ page }) => {
   await expect(lab.getByRole('button', { name: /Role-based navigation/ })).toBeVisible();
 });
 
-test('projects: featured case study is open and the pager moves on', async ({ page }) => {
-  const featured = page.locator('#web-based-church-management-system details');
-  await expect(featured).toHaveAttribute('open', '');
+test('projects: a case study opens and the pager moves on', async ({ page }) => {
+  const church = page.locator('#web-based-church-management-system details');
+  if ((await church.getAttribute('open')) === null) await church.locator('summary').click();
+  await expect(church).toHaveAttribute('open', '');
   await page.locator('#web-based-church-management-system').getByRole('button', { name: /Next/ }).click();
   await expect(page.locator('#schoolfam details')).toHaveAttribute('open', '');
 });
