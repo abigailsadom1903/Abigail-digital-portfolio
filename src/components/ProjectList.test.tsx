@@ -43,6 +43,33 @@ describe('ProjectList', () => {
     expect(report).toHaveAttribute('rel', 'noopener noreferrer');
   });
 
+  it('shows cover thumbnails and a hover preview for closed projects', async () => {
+    const user = userEvent.setup();
+    const withCovers = projects.map((p, i) => ({ ...p, featured: false, cover: i === 1 ? '/images/schoolfam.jpg' : null }));
+    const { container } = render(<ProjectList projects={withCovers} />);
+
+    // Every row gets a thumbnail slot; rows without a photo show a lettered tile.
+    expect(container.querySelectorAll('.project__thumb')).toHaveLength(withCovers.length);
+    expect(container.querySelector(`#${withCovers[1].id} .project__thumb img`)).toHaveAttribute('src', '/images/schoolfam.jpg');
+
+    const preview = screen.getByTestId('project-preview');
+    expect(preview).not.toHaveClass('is-visible');
+    await user.hover(container.querySelector(`#${withCovers[1].id} summary`)!);
+    expect(preview).toHaveClass('is-visible');
+    expect(preview.querySelector('img')).toHaveAttribute('src', '/images/schoolfam.jpg');
+    await user.unhover(container.querySelector(`#${withCovers[1].id} summary`)!);
+    expect(preview).not.toHaveClass('is-visible');
+
+    // Rows without a cover never show the preview.
+    await user.hover(container.querySelector(`#${withCovers[0].id} summary`)!);
+    expect(preview).not.toHaveClass('is-visible');
+  });
+
+  it('shows no thumbnails when no project has a photo', () => {
+    const { container } = render(<ProjectList projects={projects.map((p) => ({ ...p, cover: null }))} />);
+    expect(container.querySelector('.project__thumb')).toBeNull();
+  });
+
   it('shows an empty state when there are no projects', () => {
     render(<ProjectList projects={[]} />);
     expect(screen.getByText(/Projects will appear here soon/)).toBeInTheDocument();

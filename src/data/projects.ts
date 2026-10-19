@@ -14,6 +14,7 @@ export function toProject(p: Record<string, unknown>, i: number): Project {
   const title = text(p.title) ?? `Project ${i + 1}`;
   const image = (s: Record<string, unknown>) => text(s.image);
   const report = text(p.report);
+  const cover = text(p.cover) ?? records(p.screenshots).map(image).find((src): src is string => src !== null) ?? null;
 
   return {
     id: slugify(title) || `project-${i + 1}`,
@@ -45,6 +46,7 @@ export function toProject(p: Record<string, unknown>, i: number): Project {
     }),
     privacyNote: text(p.privacyNote) ?? undefined,
     report: report ? { href: withBase(report), label: text(p.reportLabel) ?? 'Read the report' } : null,
+    cover: cover && withBase(cover),
   };
 }
 

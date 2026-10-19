@@ -1,5 +1,5 @@
 import { ArrowLeft, ArrowRight, ArrowUpRight, Expand, FileText, Plus, ShieldCheck } from 'lucide-react';
-import { useState, type ReactNode } from 'react';
+import { useRef, useState, type PointerEvent, type ReactNode } from 'react';
 import type { Project, ProjectMedia } from '../data/types';
 import { ButtonLink } from './Button';
 import { ImageLightbox, type LightboxImage } from './ImageLightbox';
@@ -178,36 +178,97 @@ function ProjectPanel({ project, previous, next }: PanelProps) {
   );
 }
 
+const PREVIEW_WIDTH = 320;
+const PREVIEW_GAP = 28;
+
 /**
  * Numbered, collapsible project list. The featured project starts open;
- * the rest show a single tidy row until expanded.
+ * the rest show a single tidy row until expanded. Rows with a cover photo show
+ * a thumbnail, and on mouse devices a larger preview floats beside the cursor
+ * while hovering a closed row.
  */
 export function ProjectList({ projects }: ProjectListProps) {
+  const [previewId, setPreviewId] = useState<string | null>(null);
+  const previewRef = useRef<HTMLDivElement>(null);
+
   if (projects.length === 0) {
     return <p className="project__empty">Projects will appear here soon.</p>;
   }
 
+  const previewProject = projects.find((p) => p.id === previewId && p.cover) ?? null;
+  // Once any project has a cover, every row gets a thumbnail slot so titles stay aligned.
+  const hasCovers = projects.some((p) => p.cover);
+
+  /** Places the floating preview beside the cursor, flipping to the left near the right edge. */
+  const movePreview = (x: number, y: number) => {
+    const el = previewRef.current;
+    if (!el) return;
+    const left = x + PREVIEW_GAP + PREVIEW_WIDTH > window.innerWidth ? x - PREVIEW_GAP - PREVIEW_WIDTH : x + PREVIEW_GAP;
+    el.style.setProperty('--preview-x', `${Math.max(8, left)}px`);
+    el.style.setProperty('--preview-y', `${y}px`);
+  };
+
+  const onRowEnter = (event: PointerEvent<HTMLElement>, project: Project) => {
+    if (event.pointerType !== 'mouse' || !project.cover) return;
+    if ((event.currentTarget.parentElement as HTMLDetailsElement | null)?.open) return;
+    movePreview(event.clientX, event.clientY);
+    setPreviewId(project.id);
+  };
+
   return (
-    <ol className="projects" role="list">
-      {projects.map((project, i) => (
-        <li key={project.id} id={project.id} className="project" data-reveal>
-          <details open={project.featured}>
-            <summary className="project__row">
-              <span className="project__num">{String(i + 1).padStart(2, '0')}</span>
-              <span className="project__heading">
-                <span className="project__title">{project.title}</span>
-                {project.context && <span className="project__context">{project.context}</span>}
-              </span>
-              <span className="project__tags">
-                {project.category && <span className="project__category">{project.category}</span>}
-                {project.year && <span className="project__year">{project.year}</span>}
-              </span>
-              <Plus className="project__toggle" size={20} aria-hidden="true" />
-            </summary>
-            <ProjectPanel project={project} previous={projects[i - 1] ?? null} next={projects[i + 1] ?? null} />
-          </details>
-        </li>
-      ))}
-    </ol>
+    <>
+      <ol
+        className="projects"
+        role="list"
+        onPointerMove={(e) => previewId && movePreview(e.clientX, e.clientY)}
+        onPointerLeave={() => setPreviewId(null)}
+      >
+        {projects.map((project, i) => (
+          <li key={project.id} id={project.id} className="project" data-reveal>
+            <details open={project.featured} onToggle={() => setPreviewId(null)}>
+              <summary
+                className={`project__row${hasCovers ? ' project__row--cover' : ''}`}
+                onPointerEnter={(e) => onRowEnter(e, project)}
+                onPointerLeave={() => setPreviewId(null)}
+              >
+                <span className="project__num">{String(i + 1).padStart(2, '0')}</span>
+                {hasCovers && (
+                  <span className="project__thumb">
+                    {project.cover ? (
+                      <img src={project.cover} alt="" loading="lazy" decoding="async" width={96} height={72} />
+                    ) : (
+                      <span className="project__thumb-initial" aria-hidden="true">
+                        {project.title.charAt(0)}
+                      </span>
+                    )}
+                  </span>
+                )}
+                <span className="project__heading">
+                  <span className="project__title">{project.title}</span>
+                  {project.context && <span className="project__context">{project.context}</span>}
+                </span>
+                <span className="project__tags">
+                  {project.category && <span className="project__category">{project.category}</span>}
+                  {project.year && <span className="project__year">{project.year}</span>}
+                </span>
+                <Plus className="project__toggle" size={20} aria-hidden="true" />
+              </summary>
+              <ProjectPanel project={project} previous={projects[i - 1] ?? null} next={projects[i + 1] ?? null} />
+            </details>
+          </li>
+        ))}
+      </ol>
+
+      {/* Decorative: the same image is available with alt text inside the project. */}
+      <div
+        ref={previewRef}
+        className={`project-preview${previewProject ? ' is-visible' : ''}`}
+        aria-hidden="true"
+        data-testid="project-preview"
+      >
+        {previewProject?.cover && <img src={previewProject.cover} alt="" />}
+        {previewProject && <span className="project-preview__label">{previewProject.title}</span>}
+      </div>
+    </>
   );
 }

@@ -81,6 +81,8 @@ export interface Project {
   privacyNote?: string;
   /** Uploaded project report (PDF). `null` until supplied. */
   report: { href: string; label: string } | null;
+  /** Image for the project list thumbnail and hover preview: the cover photo, else the first screenshot. */
+  cover: string | null;
 }
 
 export interface SkillCategory {

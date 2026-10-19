@@ -70,6 +70,11 @@ content:
         fields:
           - { name: title, label: Title, type: string }
           - { name: category, label: Category (short label e.g. Web application or IoT), type: string }
+          - name: cover
+            label: Cover photo (shown in the project list and when hovering; landscape works best)
+            type: image
+            options:
+              media: images
           - { name: context, label: Context (organisation or project type), type: string }
           - { name: summary, label: Summary, type: text }
           - { name: featured, label: Featured case study (larger layout), type: boolean }
