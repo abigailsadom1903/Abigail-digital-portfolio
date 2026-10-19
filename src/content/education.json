@@ -36,30 +36,15 @@
   "achievements": [
     {
       "title": "Overall Best Project: SchoolFam",
-      "issuer": "",
-      "date": "2025",
-      "description": "",
-      "credentialUrl": "",
-      "certificate": "",
-      "photo": ""
+      "date": "2025"
     },
     {
       "title": "First runner-up, Technopreneurship Business Idea Pitching competition (SchoolFam)",
-      "issuer": "",
-      "date": "2025",
-      "description": "",
-      "credentialUrl": "",
-      "certificate": "",
-      "photo": ""
+      "date": "2025"
     },
     {
       "title": "Dean's List",
-      "issuer": "Universiti Malaysia Sabah",
-      "date": "",
-      "description": "",
-      "credentialUrl": "",
-      "certificate": "",
-      "photo": ""
+      "issuer": "Universiti Malaysia Sabah"
     }
   ],
   "training": [
@@ -67,51 +52,37 @@
       "title": "MITE Generative AI Tools Training for the Workplace",
       "issuer": "Sponsored by Yayasan Peneraju",
       "date": "2026",
-      "description": "Two-day programme on generative AI tools for workplace productivity and workflow optimisation.",
-      "credentialUrl": "",
-      "certificate": "",
-      "photo": ""
+      "description": "Two-day programme on generative AI tools for workplace productivity and workflow optimisation."
     },
     {
       "title": "Gemini No-Code Hackathon",
-      "issuer": "",
       "date": "2026",
-      "description": "Building a no-code application prototype with Google AppSheet and Gemini AI.",
-      "credentialUrl": "",
-      "certificate": "",
-      "photo": ""
+      "description": "Building a no-code application prototype with Google AppSheet and Gemini AI."
     },
     {
       "title": "PETRONAS BeDigital Bootcamp",
       "issuer": "PETRONAS",
       "date": "2025",
       "description": "Two-day bootcamp on digital innovation, technology applications and digital transformation.",
-      "credentialUrl": "",
-      "certificate": "",
-      "photo": ""
+      "certificate": "/certificates/Abigail Alau R.Sadom (2)-1.pdf",
+      "photo": "/images/photo_2026-10-19_18-14-09-1.jpg"
     }
   ],
   "activities": [
     {
       "role": "Committee Member",
       "organisation": "Anti-Drug Prevention Club",
-      "period": "2023 – present",
-      "certificate": "",
-      "photo": ""
+      "period": "2023 – present"
     },
     {
       "role": "AJK Food and Gift",
       "organisation": "SULAM Project at Masjid Al-Huda, Kg. Unggun Jaya",
-      "period": "2026",
-      "certificate": "",
-      "photo": ""
+      "period": "2026"
     },
     {
       "role": "Treasurer",
       "organisation": "Program Kembara Jati Diri UMS",
-      "period": "2024",
-      "certificate": "",
-      "photo": ""
+      "period": "2024"
     }
   ]
 }
