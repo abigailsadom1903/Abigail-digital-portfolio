@@ -1,4 +1,4 @@
-import { ArrowDown, Download, FolderGit2, GraduationCap } from 'lucide-react';
+import { ArrowDown, Download } from 'lucide-react';
 import type { CSSProperties } from 'react';
 import { BrandIcon, type Brand } from '../components/BrandIcon';
 import { ButtonLink } from '../components/Button';
@@ -6,29 +6,15 @@ import { Container } from '../components/Container';
 import type { Profile } from '../data/types';
 import './Hero.css';
 
-interface HeroStats {
-  cgpa: string | null;
-  projects: number;
-  honours: number;
-}
-
 interface HeroProps {
   profile: Profile;
-  /** Figures for the cards beside the portrait; worked out from the content. */
-  stats?: HeroStats;
 }
 
-export function Hero({ profile, stats }: HeroProps) {
+export function Hero({ profile }: HeroProps) {
   // LinkedIn first, then GitHub, whichever have links in Pages CMS.
   const socials = (['linkedin', 'github'] as const)
     .map((kind) => profile.contact.find((c) => c.kind === kind && c.href))
     .filter((c): c is NonNullable<typeof c> => Boolean(c));
-
-  const workLine = stats
-    ? [stats.projects > 0 && `${stats.projects} projects`, stats.honours > 0 && `${stats.honours} honours`]
-        .filter(Boolean)
-        .join(' · ')
-    : '';
 
   return (
     <section className="hero" aria-labelledby="hero-heading">
@@ -99,28 +85,6 @@ export function Hero({ profile, stats }: HeroProps) {
                 decoding="async"
               />
             </figure>
-            {stats?.cgpa && (
-              <p className="hero__card hero__card--cgpa">
-                <span className="hero__card-icon" aria-hidden="true">
-                  <GraduationCap size={18} strokeWidth={1.8} />
-                </span>
-                <span>
-                  <strong>{stats.cgpa}</strong>
-                  <span className="hero__card-label">CGPA · Software Engineering</span>
-                </span>
-              </p>
-            )}
-            {workLine && (
-              <p className="hero__card hero__card--work">
-                <span className="hero__card-icon" aria-hidden="true">
-                  <FolderGit2 size={18} strokeWidth={1.8} />
-                </span>
-                <span>
-                  <strong>{workLine}</strong>
-                  <span className="hero__card-label">Built and recognised</span>
-                </span>
-              </p>
-            )}
           </div>
         )}
       </Container>
