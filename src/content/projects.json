@@ -39,6 +39,10 @@
       "outcome": "Currently in development as my Final Year Project.",
       "links": [
         {
+          "label": "View code on GitHub",
+          "url": "https://github.com/abigailsadom1903/church-management-system-for-the-archdiocese-of-kota-kinabalu"
+        },
+        {
           "label": "Explore it in the Engineering Lab",
           "url": "#lab-church"
         }

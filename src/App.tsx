@@ -27,7 +27,7 @@ export default function App() {
         <Work projects={projects} />
         <Lab />
         <About profile={profile} education={education} experience={experience} />
-        <Skills categories={skillCategories} />
+        <Skills categories={skillCategories} projects={projects} />
         <Recognition achievements={achievements} training={training} activities={activities} />
         <Contact profile={profile} />
       </main>
