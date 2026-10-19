@@ -1,0 +1,222 @@
+{
+  "note": "These scenarios run in your browser against a model of SchoolFam's own rules: the role-based navigation in Layout.tsx, the sign-up checks in App.tsx and the allowed values in types.ts. Codes and IDs are made-up examples.",
+  "navigation": [
+    { "id": "dashboard", "label": "Home", "roles": ["all"] },
+    { "id": "classes", "label": "Classes", "roles": ["ADMIN", "SUPER_ADMIN"] },
+    { "id": "students", "label": "Students", "roles": ["TEACHER", "ADMIN", "SUPER_ADMIN"] },
+    { "id": "attendance", "label": "Attendance Reports", "roles": ["all"] },
+    { "id": "homework", "label": "Homework", "roles": ["TEACHER", "PARENT"] },
+    { "id": "pickup", "label": "Pickup", "roles": ["all"] },
+    { "id": "shop", "label": "Sales & Shop", "roles": ["all"] },
+    { "id": "moments", "label": "Moments", "roles": ["TEACHER", "PARENT"] },
+    { "id": "teachers", "label": "Staff", "roles": ["all"] },
+    { "id": "announcements", "label": "Notices", "roles": ["all"] },
+    { "id": "calendar", "label": "Calendar", "roles": ["all"] },
+    { "id": "messages", "label": "Chat", "roles": ["all"] },
+    { "id": "feedback", "label": "Feedback", "roles": ["all"] },
+    { "id": "billing", "label": "Billing & Fees", "roles": ["all"] },
+    { "id": "health", "label": "Health", "roles": ["TEACHER", "PARENT"] },
+    { "id": "docs", "label": "Docs", "roles": ["all"] },
+    { "id": "profile", "label": "Profile", "roles": ["all"] }
+  ],
+  "scenarios": [
+    {
+      "id": "NAV-01",
+      "title": "A parent can open Homework",
+      "area": "Navigation",
+      "type": "Access",
+      "steps": ["Sign in as a parent.", "Look for Homework in the menu."],
+      "rule": { "kind": "navAccess", "table": "Layout", "role": "PARENT", "view": "homework" },
+      "expect": "visible"
+    },
+    {
+      "id": "NAV-02",
+      "title": "An admin does not see Homework",
+      "area": "Navigation",
+      "type": "Access",
+      "steps": ["Sign in as an admin.", "Look for Homework in the menu."],
+      "rule": { "kind": "navAccess", "table": "Layout", "role": "ADMIN", "view": "homework" },
+      "expect": "hidden"
+    },
+    {
+      "id": "NAV-03",
+      "title": "A parent cannot open class management",
+      "area": "Navigation",
+      "type": "Negative",
+      "steps": ["Sign in as a parent.", "Look for Classes in the menu."],
+      "rule": { "kind": "navAccess", "table": "Layout", "role": "PARENT", "view": "classes" },
+      "expect": "hidden"
+    },
+    {
+      "id": "NAV-04",
+      "title": "A teacher can open the student directory",
+      "area": "Navigation",
+      "type": "Access",
+      "steps": ["Sign in as a teacher.", "Look for Students in the menu."],
+      "rule": { "kind": "navAccess", "table": "Layout", "role": "TEACHER", "view": "students" },
+      "expect": "visible"
+    },
+    {
+      "id": "NAV-05",
+      "title": "A parent cannot browse the student directory",
+      "area": "Navigation",
+      "type": "Negative",
+      "steps": ["Sign in as a parent.", "Look for Students in the menu."],
+      "rule": { "kind": "navAccess", "table": "Layout", "role": "PARENT", "view": "students" },
+      "expect": "hidden"
+    },
+    {
+      "id": "REG-01",
+      "title": "A teacher can claim their profile with their staff ID",
+      "area": "Sign-up",
+      "type": "Validation",
+      "steps": ["An admin has created staff profile T2.", "A teacher signs up with the code 't2' (lower case)."],
+      "rule": {
+        "kind": "registration",
+        "table": "User",
+        "role": "TEACHER",
+        "code": "t2",
+        "fixtures": { "teacherIds": ["T2"], "referralCodes": [], "accessCodes": [] }
+      },
+      "expect": "accepted"
+    },
+    {
+      "id": "REG-02",
+      "title": "A teacher can join with an active invite code",
+      "area": "Sign-up",
+      "type": "Validation",
+      "steps": ["An active teacher invite INV-TEACH-01 exists.", "A teacher signs up with it."],
+      "rule": {
+        "kind": "registration",
+        "table": "ReferralCode",
+        "role": "TEACHER",
+        "code": "INV-TEACH-01",
+        "fixtures": {
+          "teacherIds": [],
+          "referralCodes": [{ "code": "INV-TEACH-01", "status": "active", "forRole": "TEACHER" }],
+          "accessCodes": []
+        }
+      },
+      "expect": "accepted"
+    },
+    {
+      "id": "REG-03",
+      "title": "A used invite code cannot be reused",
+      "area": "Sign-up",
+      "type": "Negative",
+      "steps": ["Invite INV-TEACH-01 has already been used.", "Another teacher signs up with it."],
+      "rule": {
+        "kind": "registration",
+        "table": "ReferralCode",
+        "role": "TEACHER",
+        "code": "INV-TEACH-01",
+        "fixtures": {
+          "teacherIds": [],
+          "referralCodes": [{ "code": "INV-TEACH-01", "status": "used", "forRole": "TEACHER" }],
+          "accessCodes": []
+        }
+      },
+      "expect": "rejected"
+    },
+    {
+      "id": "REG-04",
+      "title": "An invite meant for another role is refused",
+      "area": "Sign-up",
+      "type": "Negative",
+      "steps": ["Invite INV-PAR-07 is for parents.", "A teacher tries to sign up with it."],
+      "rule": {
+        "kind": "registration",
+        "table": "ReferralCode",
+        "role": "TEACHER",
+        "code": "INV-PAR-07",
+        "fixtures": {
+          "teacherIds": [],
+          "referralCodes": [{ "code": "INV-PAR-07", "status": "active", "forRole": "PARENT" }],
+          "accessCodes": []
+        }
+      },
+      "expect": "rejected"
+    },
+    {
+      "id": "REG-05",
+      "title": "A teacher cannot sign up without a code",
+      "area": "Sign-up",
+      "type": "Negative",
+      "steps": ["A teacher leaves the enrolment code empty and submits."],
+      "rule": {
+        "kind": "registration",
+        "table": "User",
+        "role": "TEACHER",
+        "code": "  ",
+        "fixtures": { "teacherIds": ["T2"], "referralCodes": [], "accessCodes": [] }
+      },
+      "expect": "rejected"
+    },
+    {
+      "id": "REG-06",
+      "title": "A parent links to their child with a valid access code",
+      "area": "Sign-up",
+      "type": "Validation",
+      "steps": ["Student access code STU-4821 is on the roster.", "A parent signs up with it."],
+      "rule": {
+        "kind": "registration",
+        "table": "Child",
+        "role": "PARENT",
+        "code": "STU-4821",
+        "fixtures": { "teacherIds": [], "referralCodes": [], "accessCodes": ["STU-4821"] }
+      },
+      "expect": "accepted"
+    },
+    {
+      "id": "REG-07",
+      "title": "An unknown access code is refused",
+      "area": "Sign-up",
+      "type": "Negative",
+      "steps": ["A parent signs up with STU-0000, which matches no student."],
+      "rule": {
+        "kind": "registration",
+        "table": "Child",
+        "role": "PARENT",
+        "code": "STU-0000",
+        "fixtures": { "teacherIds": [], "referralCodes": [], "accessCodes": ["STU-4821"] }
+      },
+      "expect": "rejected"
+    },
+    {
+      "id": "BIL-01",
+      "title": "A bank-transfer invoice can wait for verification",
+      "area": "Billing",
+      "type": "Validation",
+      "steps": ["A parent uploads proof of a bank transfer.", "The invoice status becomes 'verifying'."],
+      "rule": { "kind": "enum", "table": "Invoice", "column": "status", "value": "verifying" },
+      "expect": "accepted"
+    },
+    {
+      "id": "BIL-02",
+      "title": "An undefined invoice status is not allowed",
+      "area": "Billing",
+      "type": "Negative",
+      "steps": ["An invoice status is set to 'refunded', which the model does not define."],
+      "rule": { "kind": "enum", "table": "Invoice", "column": "status", "value": "refunded" },
+      "expect": "rejected"
+    },
+    {
+      "id": "PCK-01",
+      "title": "A child can be sent home by school bus",
+      "area": "Pickup",
+      "type": "Validation",
+      "steps": ["A teacher records the pickup method as bus."],
+      "rule": { "kind": "enum", "table": "PickupSession", "column": "status", "value": "bus" },
+      "expect": "accepted"
+    },
+    {
+      "id": "FBK-01",
+      "title": "Parents can raise emergency-priority feedback",
+      "area": "Feedback",
+      "type": "Validation",
+      "steps": ["A parent creates a feedback ticket with priority 'emergency'."],
+      "rule": { "kind": "enum", "table": "FeedbackTicket", "column": "priority", "value": "emergency" },
+      "expect": "accepted"
+    }
+  ]
+}

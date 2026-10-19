@@ -1,7 +1,8 @@
-import { ArrowUpRight, Plus, ShieldCheck } from 'lucide-react';
-import type { ReactNode } from 'react';
-import type { Project } from '../data/types';
+import { ArrowLeft, ArrowRight, ArrowUpRight, Expand, Plus, ShieldCheck } from 'lucide-react';
+import { useState, type ReactNode } from 'react';
+import type { Project, ProjectMedia } from '../data/types';
 import { ButtonLink } from './Button';
+import { ImageLightbox, type LightboxImage } from './ImageLightbox';
 import { Placeholder, SHOW_PLACEHOLDERS } from './Placeholder';
 import './ProjectList.css';
 
@@ -12,7 +13,46 @@ interface ProjectListProps {
 /** Comma-separated list, or null when empty. */
 const joined = (items: string[]) => (items.length > 0 ? items.join(', ') : null);
 
-function ProjectPanel({ project }: { project: Project }) {
+/** Opens a project's row, scrolls it into view and moves focus to it. */
+function openProject(id: string) {
+  const details = document.getElementById(id)?.querySelector('details');
+  if (!details) return;
+  details.open = true;
+  details.scrollIntoView({ block: 'start' });
+  details.querySelector('summary')?.focus({ preventScroll: true });
+}
+
+/** Screenshot thumbnail that shows a soft placeholder until the image has loaded. */
+function Shot({ media, onOpen }: { media: ProjectMedia & { src: string }; onOpen: () => void }) {
+  const [loaded, setLoaded] = useState(false);
+  return (
+    <button type="button" className={`project__shot${loaded ? ' is-loaded' : ''}`} onClick={onOpen}>
+      <img
+        src={media.src}
+        alt={media.alt}
+        loading="lazy"
+        decoding="async"
+        width={1600}
+        height={1000}
+        onLoad={() => setLoaded(true)}
+      />
+      <span className="project__shot-hint" aria-hidden="true">
+        <Expand size={14} /> View larger
+      </span>
+      <span className="visually-hidden"> (opens larger view)</span>
+    </button>
+  );
+}
+
+interface PanelProps {
+  project: Project;
+  previous: Project | null;
+  next: Project | null;
+}
+
+function ProjectPanel({ project, previous, next }: PanelProps) {
+  const [lightbox, setLightbox] = useState<number | null>(null);
+
   const facts: { label: string; value: ReactNode | null }[] = [
     { label: 'Role', value: project.role },
     { label: 'Stack', value: joined(project.stack) },
@@ -22,21 +62,28 @@ function ProjectPanel({ project }: { project: Project }) {
     { label: 'Outcome', value: project.outcome },
   ];
   const visibleFacts = facts.filter((f) => f.value !== null || SHOW_PLACEHOLDERS);
-  const media = project.media.filter((m) => m.src !== null || SHOW_PLACEHOLDERS);
+
+  const images = project.media.filter((m): m is ProjectMedia & { src: string } => m.src !== null);
+  const missingShots = project.media.filter((m) => m.src === null);
+  const showMedia = images.length > 0 || (SHOW_PLACEHOLDERS && missingShots.length > 0);
+  const lightboxImages: LightboxImage[] = images.map((m) => ({ src: m.src, alt: m.alt, caption: m.caption }));
 
   return (
-    <div className={`project__panel${media.length > 0 ? ' project__panel--media' : ''}`}>
+    <div className={`project__panel${showMedia ? ' project__panel--media' : ''}`}>
       <div className="project__body">
         {project.summary && <p className="project__summary">{project.summary}</p>}
 
         {project.features.length > 0 ? (
-          <ul className="project__features">
-            {project.features.map((feature) => (
-              <li key={feature}>{feature}</li>
-            ))}
-          </ul>
+          <div>
+            <h4 className="project__label">Key features</h4>
+            <ul className="project__features">
+              {project.features.map((feature) => (
+                <li key={feature}>{feature}</li>
+              ))}
+            </ul>
+          </div>
         ) : (
-          <Placeholder label="List the main features you built" />
+          <Placeholder label="TODO: list the main features you built" />
         )}
 
         {visibleFacts.length > 0 && (
@@ -44,7 +91,7 @@ function ProjectPanel({ project }: { project: Project }) {
             {visibleFacts.map((fact) => (
               <div key={fact.label}>
                 <dt>{fact.label}</dt>
-                <dd>{fact.value ?? <span className="project__pending">To be added</span>}</dd>
+                <dd>{fact.value ?? <span className="project__pending">TODO</span>}</dd>
               </div>
             ))}
           </dl>
@@ -52,36 +99,72 @@ function ProjectPanel({ project }: { project: Project }) {
 
         {project.links.length > 0 ? (
           <div className="project__links">
-            {project.links.map((link) => (
-              <ButtonLink key={link.href} href={link.href} variant="secondary" icon={ArrowUpRight} external>
-                {link.label}
-              </ButtonLink>
-            ))}
+            {project.links.map((link) =>
+              link.href.startsWith('#') ? (
+                <ButtonLink key={link.href} href={link.href} variant="secondary" icon={ArrowRight}>
+                  {link.label}
+                </ButtonLink>
+              ) : (
+                <ButtonLink key={link.href} href={link.href} variant="secondary" icon={ArrowUpRight} external>
+                  {link.label}
+                </ButtonLink>
+              ),
+            )}
           </div>
         ) : (
-          <Placeholder label="Add links (live demo, repository or report) if they can be shared publicly" />
+          <Placeholder label="TODO: add links (live demo, repository or report) if they can be shared publicly" />
         )}
       </div>
 
-      {media.length > 0 && (
+      {showMedia && (
         <div className="project__media">
-          {media.map((m, i) => (
+          {images.map((m, i) => (
             <figure key={`${i}-${m.alt}`} className="project__figure">
-              {m.src ? (
-                <img src={m.src} alt={m.alt} loading="lazy" decoding="async" width={1600} height={1000} />
-              ) : (
-                <Placeholder variant="media" label={`Screenshot: ${m.caption ?? m.alt}`} />
-              )}
+              <Shot media={m} onOpen={() => setLightbox(i)} />
               {m.caption && <figcaption>{m.caption}</figcaption>}
             </figure>
           ))}
-          {project.privacyNote && (
+          {SHOW_PLACEHOLDERS &&
+            missingShots.map((m, i) => (
+              <Placeholder key={`missing-${i}`} variant="media" label={`TODO screenshot: ${m.caption ?? m.alt}`} />
+            ))}
+          {project.privacyNote && images.length > 0 && (
             <p className="project__privacy">
               <ShieldCheck size={16} aria-hidden="true" />
               <span>{project.privacyNote}</span>
             </p>
           )}
+          <ImageLightbox images={lightboxImages} index={lightbox} onChange={setLightbox} />
         </div>
+      )}
+
+      {(previous || next) && (
+        <nav className="project__pager" aria-label={`More projects after ${project.title}`}>
+          {previous ? (
+            <button type="button" className="project__pager-btn" onClick={() => openProject(previous.id)}>
+              <ArrowLeft size={16} aria-hidden="true" />
+              <span>
+                <span className="project__pager-label">Previous</span>
+                {previous.title}
+              </span>
+            </button>
+          ) : (
+            <span />
+          )}
+          {next && (
+            <button
+              type="button"
+              className="project__pager-btn project__pager-btn--next"
+              onClick={() => openProject(next.id)}
+            >
+              <span>
+                <span className="project__pager-label">Next</span>
+                {next.title}
+              </span>
+              <ArrowRight size={16} aria-hidden="true" />
+            </button>
+          )}
+        </nav>
       )}
     </div>
   );
@@ -92,6 +175,10 @@ function ProjectPanel({ project }: { project: Project }) {
  * the rest show a single tidy row until expanded.
  */
 export function ProjectList({ projects }: ProjectListProps) {
+  if (projects.length === 0) {
+    return <p className="project__empty">Projects will appear here soon.</p>;
+  }
+
   return (
     <ol className="projects" role="list">
       {projects.map((project, i) => (
@@ -109,7 +196,7 @@ export function ProjectList({ projects }: ProjectListProps) {
               </span>
               <Plus className="project__toggle" size={20} aria-hidden="true" />
             </summary>
-            <ProjectPanel project={project} />
+            <ProjectPanel project={project} previous={projects[i - 1] ?? null} next={projects[i + 1] ?? null} />
           </details>
         </li>
       ))}

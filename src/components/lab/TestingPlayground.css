@@ -82,6 +82,7 @@
 
 .tp__switch input {
   position: absolute;
+  z-index: 1; /* above the visual track, so the real control receives clicks */
   opacity: 0;
   width: 2.25rem;
   height: 1.25rem;

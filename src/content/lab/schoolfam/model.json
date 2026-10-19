@@ -1,0 +1,2243 @@
+{
+  "kind": "typescript",
+  "source": "types.ts (links are inferred from field names such as studentId)",
+  "tables": [
+    {
+      "name": "User",
+      "module": "People & access",
+      "columns": [
+        {
+          "name": "id",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": true,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "role",
+          "type": "UserRole",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "avatarUrl",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "email",
+          "type": "string",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "phone",
+          "type": "string",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "address",
+          "type": "string",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "className",
+          "type": "string",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "subjects",
+          "type": "string[]",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "bio",
+          "type": "string",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        }
+      ],
+      "foreignKeys": [
+        {
+          "column": "role",
+          "table": "UserRole",
+          "references": "",
+          "relation": "contains"
+        }
+      ],
+      "uniqueKeys": [],
+      "indexes": []
+    },
+    {
+      "name": "UserRole",
+      "module": "People & access",
+      "columns": [
+        {
+          "name": "PARENT",
+          "type": "enum value",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": true,
+          "autoIncrement": false
+        },
+        {
+          "name": "TEACHER",
+          "type": "enum value",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": true,
+          "autoIncrement": false
+        },
+        {
+          "name": "ADMIN",
+          "type": "enum value",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": true,
+          "autoIncrement": false
+        },
+        {
+          "name": "SUPER_ADMIN",
+          "type": "enum value",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": true,
+          "autoIncrement": false
+        }
+      ],
+      "foreignKeys": [],
+      "uniqueKeys": [],
+      "indexes": []
+    },
+    {
+      "name": "ReferralCode",
+      "module": "People & access",
+      "columns": [
+        {
+          "name": "id",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": true,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "code",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "forRole",
+          "type": "UserRole",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "status",
+          "type": "'active' | 'used'",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "createdBy",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "createdAt",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        }
+      ],
+      "foreignKeys": [
+        {
+          "column": "forRole",
+          "table": "UserRole",
+          "references": "",
+          "relation": "contains"
+        }
+      ],
+      "uniqueKeys": [],
+      "indexes": []
+    },
+    {
+      "name": "Guardian",
+      "module": "People & access",
+      "columns": [
+        {
+          "name": "id",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": true,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "relation",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "imageUrl",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "phone",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        }
+      ],
+      "foreignKeys": [],
+      "uniqueKeys": [],
+      "indexes": []
+    },
+    {
+      "name": "Child",
+      "module": "People & access",
+      "columns": [
+        {
+          "name": "id",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": true,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "age",
+          "type": "number",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "class",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "avatarUrl",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "attendanceStatus",
+          "type": "'present' | 'absent' | 'late' | 'excused'",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "parentId",
+          "type": "string",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "accessCode",
+          "type": "string",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "medicalConditions",
+          "type": "string",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "medicalNotes",
+          "type": "string",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "allergies",
+          "type": "string",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "bloodType",
+          "type": "string",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "emergencyContact",
+          "type": "object",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        }
+      ],
+      "foreignKeys": [
+        {
+          "column": "parentId",
+          "table": "User",
+          "references": "id",
+          "relation": "reference"
+        }
+      ],
+      "uniqueKeys": [],
+      "indexes": []
+    },
+    {
+      "name": "SimpleStudent",
+      "module": "People & access",
+      "columns": [
+        {
+          "name": "id",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": true,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        }
+      ],
+      "foreignKeys": [],
+      "uniqueKeys": [],
+      "indexes": []
+    },
+    {
+      "name": "SchoolClass",
+      "module": "Classroom",
+      "columns": [
+        {
+          "name": "id",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": true,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "level",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "capacity",
+          "type": "number",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "teacherId",
+          "type": "string",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "status",
+          "type": "'active' | 'archived'",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        }
+      ],
+      "foreignKeys": [
+        {
+          "column": "teacherId",
+          "table": "User",
+          "references": "id",
+          "relation": "reference"
+        }
+      ],
+      "uniqueKeys": [],
+      "indexes": []
+    },
+    {
+      "name": "Activity",
+      "module": "Classroom",
+      "columns": [
+        {
+          "name": "id",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": true,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "studentIds",
+          "type": "string[]",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "type",
+          "type": "'learning' | 'play' | 'food' | 'nap' | 'health'",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "timestamp",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "imageUrls",
+          "type": "string[]",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "likes",
+          "type": "number",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "teacherName",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        }
+      ],
+      "foreignKeys": [
+        {
+          "column": "studentIds",
+          "table": "Child",
+          "references": "id",
+          "relation": "reference"
+        }
+      ],
+      "uniqueKeys": [],
+      "indexes": []
+    },
+    {
+      "name": "Homework",
+      "module": "Classroom",
+      "columns": [
+        {
+          "name": "id",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": true,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "subject",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "dueDate",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "assignedDate",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "attachments",
+          "type": "object[]",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "studentId",
+          "type": "string",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "studentName",
+          "type": "string",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        }
+      ],
+      "foreignKeys": [
+        {
+          "column": "studentId",
+          "table": "Child",
+          "references": "id",
+          "relation": "reference"
+        }
+      ],
+      "uniqueKeys": [],
+      "indexes": []
+    },
+    {
+      "name": "AttendanceRecord",
+      "module": "Classroom",
+      "columns": [
+        {
+          "name": "id",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": true,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "studentId",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "date",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "status",
+          "type": "'present' | 'absent' | 'late' | 'excused'",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "remarks",
+          "type": "string",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "attachmentUrl",
+          "type": "string",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "recordedBy",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "timestamp",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        }
+      ],
+      "foreignKeys": [
+        {
+          "column": "studentId",
+          "table": "Child",
+          "references": "id",
+          "relation": "reference"
+        }
+      ],
+      "uniqueKeys": [],
+      "indexes": []
+    },
+    {
+      "name": "AbsenceRequest",
+      "module": "Classroom",
+      "columns": [
+        {
+          "name": "id",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": true,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "studentId",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "studentName",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "startDate",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "endDate",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "reason",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "status",
+          "type": "'pending' | 'approved' | 'rejected'",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "attachmentUrl",
+          "type": "string",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "requestedOn",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        }
+      ],
+      "foreignKeys": [
+        {
+          "column": "studentId",
+          "table": "Child",
+          "references": "id",
+          "relation": "reference"
+        }
+      ],
+      "uniqueKeys": [],
+      "indexes": []
+    },
+    {
+      "name": "PickupSession",
+      "module": "Safety & health",
+      "columns": [
+        {
+          "name": "studentId",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "status",
+          "type": "PickupStatus ('pending' | 'picked_up' | 'bus' | 'after_care' | 'walk')",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "timestamp",
+          "type": "Date",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "method",
+          "type": "string",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "guardianId",
+          "type": "string",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "verifiedBy",
+          "type": "string",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "signatureUrl",
+          "type": "string",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "photoUrl",
+          "type": "string",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        }
+      ],
+      "foreignKeys": [
+        {
+          "column": "studentId",
+          "table": "Child",
+          "references": "id",
+          "relation": "reference"
+        },
+        {
+          "column": "guardianId",
+          "table": "Guardian",
+          "references": "id",
+          "relation": "reference"
+        }
+      ],
+      "uniqueKeys": [],
+      "indexes": []
+    },
+    {
+      "name": "HealthRecord",
+      "module": "Safety & health",
+      "columns": [
+        {
+          "name": "id",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": true,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "studentId",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "date",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "height",
+          "type": "number",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "weight",
+          "type": "number",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        }
+      ],
+      "foreignKeys": [
+        {
+          "column": "studentId",
+          "table": "Child",
+          "references": "id",
+          "relation": "reference"
+        }
+      ],
+      "uniqueKeys": [],
+      "indexes": []
+    },
+    {
+      "name": "Incident",
+      "module": "Safety & health",
+      "columns": [
+        {
+          "name": "id",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": true,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "studentId",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "date",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "time",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "location",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "severity",
+          "type": "'low' | 'medium' | 'high'",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "actionTaken",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "reportedBy",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "media",
+          "type": "object[]",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "acknowledgedByParent",
+          "type": "boolean",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "acknowledgedAt",
+          "type": "string",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        }
+      ],
+      "foreignKeys": [
+        {
+          "column": "studentId",
+          "table": "Child",
+          "references": "id",
+          "relation": "reference"
+        }
+      ],
+      "uniqueKeys": [],
+      "indexes": []
+    },
+    {
+      "name": "ChatChannel",
+      "module": "Communication",
+      "columns": [
+        {
+          "name": "id",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": true,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "type",
+          "type": "'direct' | 'group'",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "participants",
+          "type": "string[]",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "lastMessage",
+          "type": "string",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "unreadCount",
+          "type": "number",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "avatarUrl",
+          "type": "string",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        }
+      ],
+      "foreignKeys": [
+        {
+          "column": "participants",
+          "table": "User",
+          "references": "id",
+          "relation": "reference"
+        }
+      ],
+      "uniqueKeys": [],
+      "indexes": []
+    },
+    {
+      "name": "Message",
+      "module": "Communication",
+      "columns": [
+        {
+          "name": "id",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": true,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "channelId",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "senderId",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "senderName",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "senderAvatar",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "content",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "timestamp",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "fullTimestamp",
+          "type": "Date",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "isRead",
+          "type": "boolean",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "attachment",
+          "type": "object",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        }
+      ],
+      "foreignKeys": [
+        {
+          "column": "channelId",
+          "table": "ChatChannel",
+          "references": "id",
+          "relation": "reference"
+        },
+        {
+          "column": "senderId",
+          "table": "User",
+          "references": "id",
+          "relation": "reference"
+        }
+      ],
+      "uniqueKeys": [],
+      "indexes": []
+    },
+    {
+      "name": "Notification",
+      "module": "Communication",
+      "columns": [
+        {
+          "name": "id",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": true,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "message",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "type",
+          "type": "'urgent' | 'info' | 'reminder' | 'success'",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "timestamp",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "isRead",
+          "type": "boolean",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        }
+      ],
+      "foreignKeys": [],
+      "uniqueKeys": [],
+      "indexes": []
+    },
+    {
+      "name": "Announcement",
+      "module": "Communication",
+      "columns": [
+        {
+          "name": "id",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": true,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "content",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "type",
+          "type": "'school' | 'class' | 'emergency'",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "author",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "date",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "priority",
+          "type": "'high' | 'normal'",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        }
+      ],
+      "foreignKeys": [],
+      "uniqueKeys": [],
+      "indexes": []
+    },
+    {
+      "name": "FeedbackTicket",
+      "module": "Communication",
+      "columns": [
+        {
+          "name": "id",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": true,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "parentId",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "parentName",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "childId",
+          "type": "string",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "category",
+          "type": "FeedbackCategory ('academic' | 'behavior' | 'health_safety' | 'communication' | 'facilities' | 'teacher' | 'suggestion')",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "priority",
+          "type": "FeedbackPriority ('low' | 'medium' | 'high' | 'emergency')",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "status",
+          "type": "FeedbackStatus ('pending' | 'in_progress' | 'resolved' | 'closed')",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "subject",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "createdAt",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "updatedAt",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "assignedTo",
+          "type": "string",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "comments",
+          "type": "FeedbackComment[]",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "attachments",
+          "type": "object[]",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "resolutionRating",
+          "type": "number",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "resolutionNotes",
+          "type": "string",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        }
+      ],
+      "foreignKeys": [
+        {
+          "column": "parentId",
+          "table": "User",
+          "references": "id",
+          "relation": "reference"
+        },
+        {
+          "column": "childId",
+          "table": "Child",
+          "references": "id",
+          "relation": "reference"
+        },
+        {
+          "column": "assignedTo",
+          "table": "User",
+          "references": "id",
+          "relation": "reference"
+        },
+        {
+          "column": "comments",
+          "table": "FeedbackComment",
+          "references": "",
+          "relation": "contains"
+        }
+      ],
+      "uniqueKeys": [],
+      "indexes": []
+    },
+    {
+      "name": "FeedbackComment",
+      "module": "Communication",
+      "columns": [
+        {
+          "name": "id",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": true,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "authorId",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "authorName",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "authorRole",
+          "type": "UserRole",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "content",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "timestamp",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "isInternal",
+          "type": "boolean",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        }
+      ],
+      "foreignKeys": [
+        {
+          "column": "authorId",
+          "table": "User",
+          "references": "id",
+          "relation": "reference"
+        },
+        {
+          "column": "authorRole",
+          "table": "UserRole",
+          "references": "",
+          "relation": "contains"
+        }
+      ],
+      "uniqueKeys": [],
+      "indexes": []
+    },
+    {
+      "name": "SchoolEvent",
+      "module": "Calendar",
+      "columns": [
+        {
+          "name": "id",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": true,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "date",
+          "type": "Date",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "endDate",
+          "type": "Date",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "startTime",
+          "type": "string",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "endTime",
+          "type": "string",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "category",
+          "type": "EventCategory ('academic' | 'school' | 'class' | 'personal')",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "subType",
+          "type": "EventSubType ('test' | 'assignment' | 'project' | 'meeting' | 'holiday' | 'trip' | 'activity' | 'other')",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "classId",
+          "type": "string",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "creatorId",
+          "type": "string",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "location",
+          "type": "string",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "materials",
+          "type": "object[]",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "rsvpReq",
+          "type": "boolean",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "rsvpDeadline",
+          "type": "Date",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "maxCapacity",
+          "type": "number",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "attendees",
+          "type": "EventAttendee[]",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "rsvpStatus",
+          "type": "'going' | 'not_going' | 'pending'",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "isRecurring",
+          "type": "boolean",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "recurrenceRule",
+          "type": "RecurrenceType ('none' | 'daily' | 'weekly' | 'biweekly' | 'monthly')",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        }
+      ],
+      "foreignKeys": [
+        {
+          "column": "classId",
+          "table": "SchoolClass",
+          "references": "id",
+          "relation": "reference"
+        },
+        {
+          "column": "creatorId",
+          "table": "User",
+          "references": "id",
+          "relation": "reference"
+        },
+        {
+          "column": "attendees",
+          "table": "EventAttendee",
+          "references": "",
+          "relation": "contains"
+        }
+      ],
+      "uniqueKeys": [],
+      "indexes": []
+    },
+    {
+      "name": "EventAttendee",
+      "module": "Calendar",
+      "columns": [
+        {
+          "name": "userId",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "status",
+          "type": "'going' | 'not_going' | 'maybe' | 'pending'",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        }
+      ],
+      "foreignKeys": [
+        {
+          "column": "userId",
+          "table": "User",
+          "references": "id",
+          "relation": "reference"
+        }
+      ],
+      "uniqueKeys": [],
+      "indexes": []
+    },
+    {
+      "name": "Invoice",
+      "module": "Payments & shop",
+      "columns": [
+        {
+          "name": "id",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": true,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "amount",
+          "type": "number",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "dueDate",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "status",
+          "type": "'paid' | 'pending' | 'overdue' | 'verifying'",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "studentName",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "studentId",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "proofOfPaymentUrl",
+          "type": "string",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "paymentMethod",
+          "type": "'card' | 'transfer'",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        }
+      ],
+      "foreignKeys": [
+        {
+          "column": "studentId",
+          "table": "Child",
+          "references": "id",
+          "relation": "reference"
+        }
+      ],
+      "uniqueKeys": [],
+      "indexes": []
+    },
+    {
+      "name": "BankDetails",
+      "module": "Payments & shop",
+      "columns": [
+        {
+          "name": "bankName",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "accountName",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "accountNumber",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        }
+      ],
+      "foreignKeys": [],
+      "uniqueKeys": [],
+      "indexes": []
+    },
+    {
+      "name": "ShopItem",
+      "module": "Payments & shop",
+      "columns": [
+        {
+          "name": "id",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": true,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "price",
+          "type": "number",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "category",
+          "type": "ShopCategory ('uniform' | 'books' | 'merchandise' | 'club_equipment')",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "stock",
+          "type": "number",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "imageUrl",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        }
+      ],
+      "foreignKeys": [],
+      "uniqueKeys": [],
+      "indexes": []
+    },
+    {
+      "name": "CartItem",
+      "module": "Payments & shop",
+      "columns": [
+        {
+          "name": "quantity",
+          "type": "number",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        }
+      ],
+      "foreignKeys": [
+        {
+          "column": "(extends)",
+          "table": "ShopItem",
+          "references": "",
+          "relation": "extends"
+        }
+      ],
+      "uniqueKeys": [],
+      "indexes": []
+    },
+    {
+      "name": "ShopOrder",
+      "module": "Payments & shop",
+      "columns": [
+        {
+          "name": "id",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": true,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "parentId",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "parentName",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "items",
+          "type": "CartItem[]",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "total",
+          "type": "number",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "status",
+          "type": "'pending' | 'ready' | 'delivered'",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "type",
+          "type": "'pickup' | 'delivery'",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "timestamp",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        }
+      ],
+      "foreignKeys": [
+        {
+          "column": "parentId",
+          "table": "User",
+          "references": "id",
+          "relation": "reference"
+        },
+        {
+          "column": "items",
+          "table": "CartItem",
+          "references": "",
+          "relation": "contains"
+        }
+      ],
+      "uniqueKeys": [],
+      "indexes": []
+    },
+    {
+      "name": "SchoolDocument",
+      "module": "Documents",
+      "columns": [
+        {
+          "name": "id",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": true,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "type",
+          "type": "'report' | 'form' | 'policy'",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "date",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "size",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "downloadUrl",
+          "type": "string",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "requiresSignature",
+          "type": "boolean",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "isSigned",
+          "type": "boolean",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "signedDate",
+          "type": "string",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "studentId",
+          "type": "string",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "studentName",
+          "type": "string",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        }
+      ],
+      "foreignKeys": [
+        {
+          "column": "studentId",
+          "table": "Child",
+          "references": "id",
+          "relation": "reference"
+        }
+      ],
+      "uniqueKeys": [],
+      "indexes": []
+    }
+  ]
+}

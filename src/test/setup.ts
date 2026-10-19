@@ -33,3 +33,6 @@ Object.defineProperty(window, 'matchMedia', {
 });
 
 window.scrollTo = () => {};
+
+// Not implemented by jsdom.
+Element.prototype.scrollIntoView = () => {};

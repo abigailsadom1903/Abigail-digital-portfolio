@@ -1,7 +1,7 @@
 import { ChevronDown, FlaskConical, Play, RotateCcw, Search } from 'lucide-react';
 import { useEffect, useId, useMemo, useRef, useState } from 'react';
 import { describeOutcome, runScenario, type TestResult } from '../../data/lab/testEngine';
-import type { Schema, TestSuite } from '../../data/lab/types';
+import type { Schema, TestRule, TestSuite } from '../../data/lab/types';
 import './TestingPlayground.css';
 
 type Status = 'not-run' | 'running' | 'passed' | 'failed';
@@ -17,6 +17,20 @@ interface TestingPlaygroundProps {
 interface RunState {
   status: Status;
   result?: TestResult;
+}
+
+/** Short description of what a scenario inspects, e.g. "donations.status" or "Layout: homework". */
+function checkTarget(rule: TestRule): string[] {
+  switch (rule.kind) {
+    case 'navAccess':
+      return [rule.table, `${rule.role} → ${rule.view}`];
+    case 'registration':
+      return ['App.tsx sign-up', rule.role];
+    case 'unique':
+      return [rule.table];
+    default:
+      return [rule.table, rule.column];
+  }
 }
 
 const STATUS_LABEL: Record<Status, string> = {
@@ -48,7 +62,7 @@ export function TestingPlayground({ suite, schema, runDelay = 400 }: TestingPlay
         for (const id of ids) {
           const scenario = suite.scenarios.find((s) => s.id === id);
           if (!scenario) continue;
-          const result = runScenario(schema, scenario, { regression });
+          const result = runScenario({ schema, navigation: suite.navigation }, scenario, { regression });
           next[id] = { status: result.status, result };
         }
         return next;
@@ -158,7 +172,7 @@ export function TestingPlayground({ suite, schema, runDelay = 400 }: TestingPlay
           <input type="checkbox" role="switch" checked={regression} onChange={toggleRegression} />
           <span className="tp__switch-track" aria-hidden="true" />
           Simulate a regression
-          <span className="tp__switch-hint">(removes the schema's constraints)</span>
+          <span className="tp__switch-hint">(removes the rules being tested)</span>
         </label>
       </div>
 
@@ -240,8 +254,11 @@ export function TestingPlayground({ suite, schema, runDelay = 400 }: TestingPlay
                     <div>
                       <dt>Checks</dt>
                       <dd>
-                        <code className="lab-code">{s.rule.table}</code>
-                        {'column' in s.rule && <code className="lab-code">{s.rule.column}</code>}
+                        {checkTarget(s.rule).map((t) => (
+                          <code key={t} className="lab-code">
+                            {t}
+                          </code>
+                        ))}
                       </dd>
                     </div>
                   </dl>

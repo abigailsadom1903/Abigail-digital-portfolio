@@ -1,0 +1,42 @@
+{
+  "decisions": [
+    {
+      "id": "portfolio-content",
+      "project": "This portfolio",
+      "title": "Separate content from code so it can be edited without coding",
+      "problem": "Portfolio content changes often (new projects, certificates, screenshots), and editing code files for every change is slow and error-prone.",
+      "alternatives": [
+        "Keep content inside React components",
+        "Use a hosted CMS with its own database"
+      ],
+      "decision": "All content lives in JSON files with typed loaders. Pages CMS provides forms and file uploads on top of the same files, and every save redeploys the site.",
+      "tradeoffs": [
+        "Content structure is limited to what the JSON files define",
+        "Edits made online must be pulled before editing locally"
+      ],
+      "evidence": [
+        "src/content/*.json read through typed loaders in src/data/",
+        ".pages.yml defines the editing forms and upload folders"
+      ],
+      "lessons": ""
+    },
+    {
+      "id": "portfolio-images",
+      "project": "This portfolio",
+      "title": "Optimise images before publishing",
+      "problem": "The original profile photo was a 970 KB PNG, which slows the first load, especially on mobile data.",
+      "alternatives": [
+        "Publish the original image",
+        "Add an image-processing build step"
+      ],
+      "decision": "Resize the photo to 640 px wide and convert it to WebP before adding it to the site.",
+      "tradeoffs": [
+        "New photos need the same treatment before upload"
+      ],
+      "evidence": [
+        "Profile photo reduced from 970 KB to 39 KB (about 96% smaller)"
+      ],
+      "lessons": ""
+    }
+  ]
+}

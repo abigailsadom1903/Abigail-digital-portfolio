@@ -25,6 +25,8 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      # Unit and component tests must pass before anything is published.
+      - run: npm test
       - run: npm run build
         env:
           # Must match the repository name exactly (case-sensitive).

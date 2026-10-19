@@ -1,9 +1,9 @@
-// Usage: npm run lab:schema -- <path/to/schema.sql>   (writes src/content/lab/schema.json)
+// Usage: npm run lab:schema -- <path/to/schema.sql>   (writes src/content/lab/church/model.json)
 // Extracts table structure only (names, types, nullability, keys, foreign keys).
 // INSERT statements and DEFAULT values are ignored.
 import { readFileSync, writeFileSync } from 'node:fs';
 
-const [input, output = 'src/content/lab/schema.json'] = process.argv.slice(2);
+const [input, output = 'src/content/lab/church/model.json'] = process.argv.slice(2);
 const sql = readFileSync(input, 'utf8')
   .replace(/--[^\n]*/g, '')
   .replace(/\/\*[\s\S]*?\*\//g, '');
@@ -72,7 +72,7 @@ for (const [, t, col, ref, refCol, del] of sql.matchAll(alterFkRe)) {
 }
 
 const result = {
-  source: 'database/schema.sql (structure only; no data, no default values)',
+  source: 'database/schema.sql',
   tables: [...tables.values()],
 };
 writeFileSync(output, JSON.stringify(result, null, 2) + '\n');

@@ -7,9 +7,12 @@ const raw: Record<string, unknown> = data;
 
 // Content is edited in src/content/profile.json (or through Pages CMS).
 
+/** Drops tracking parameters (e.g. LinkedIn's ?utm_source=…) and fragments from a profile URL. */
+export const cleanProfileUrl = (url: string | null) => url && url.replace(/[?#].*$/, '');
+
 const email = text(raw.email);
-const linkedin = text(raw.linkedin);
-const github = text(raw.github);
+const linkedin = cleanProfileUrl(text(raw.linkedin));
+const github = cleanProfileUrl(text(raw.github));
 const photo = text(raw.photo);
 const cv = text(raw.cv);
 

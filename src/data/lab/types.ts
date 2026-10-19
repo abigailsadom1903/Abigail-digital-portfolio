@@ -51,7 +51,10 @@ export interface SchemaForeignKey {
   column: string;
   table: string;
   references: string;
-  onDelete: DeleteRule;
+  /** SQL schemas only. */
+  onDelete?: DeleteRule;
+  /** TypeScript models: how the link was found (by id-field name, nested type or `extends`). */
+  relation?: 'reference' | 'contains' | 'extends';
 }
 
 export interface SchemaKey {
@@ -69,16 +72,35 @@ export interface SchemaTable {
 }
 
 export interface Schema {
+  /** 'sql' (tables/columns) by default; 'typescript' for interface-based models (entities/fields). */
+  kind?: 'sql' | 'typescript';
   source: string;
   tables: SchemaTable[];
 }
 
 // Testing Playground
+export interface NavItemRule {
+  id: string;
+  label: string;
+  /** Role names allowed to see the item, or "all". */
+  roles: string[];
+}
+
+export interface RegistrationFixtures {
+  /** IDs of staff profiles an admin has pre-created. */
+  teacherIds: string[];
+  referralCodes: { code: string; status: 'active' | 'used'; forRole: string }[];
+  /** Student access codes on the class roster. */
+  accessCodes: string[];
+}
+
 export type TestRule =
   | { kind: 'enum'; table: string; column: string; value: string }
   | { kind: 'unique'; table: string; existing: Record<string, string | number>; candidate: Record<string, string | number> }
   | { kind: 'onDelete'; table: string; column: string }
-  | { kind: 'column'; table: string; column: string };
+  | { kind: 'column'; table: string; column: string }
+  | { kind: 'navAccess'; table: string; role: string; view: string }
+  | { kind: 'registration'; table: string; role: 'TEACHER' | 'PARENT'; code: string; fixtures: RegistrationFixtures };
 
 export interface TestScenario {
   id: string;
@@ -93,7 +115,21 @@ export interface TestScenario {
 
 export interface TestSuite {
   note: string;
+  /** Role-based navigation rules, for navAccess scenarios. */
+  navigation?: NavItemRule[];
   scenarios: TestScenario[];
+}
+
+/** Everything the Lab shows for one project. */
+export interface LabProject {
+  id: string;
+  name: string;
+  /** One line shown under the project switcher. */
+  blurb: string;
+  architecture: Architecture;
+  schema: Schema;
+  testSuite: TestSuite;
+  decisions: Decision[];
 }
 
 // Engineering Decision Journal

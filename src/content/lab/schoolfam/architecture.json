@@ -1,0 +1,158 @@
+{
+  "system": "SchoolFam",
+  "note": "Simplified view of the SchoolFam prototype (github.com/abigailsadom1903/SchoolFam). It is a single-page React app: all logic runs in the browser and data is kept in browser storage, seeded with sample data.",
+  "layers": [
+    { "id": "client", "label": "Interface" },
+    { "id": "application", "label": "App logic & state" },
+    { "id": "data", "label": "Data & services" }
+  ],
+  "nodes": [
+    {
+      "id": "ui",
+      "layer": "client",
+      "title": "React interface",
+      "tech": ["React 19", "TypeScript", "Vite"],
+      "summary": "A single-page app with one screen per feature, built with React and TypeScript.",
+      "details": [
+        "21 feature components cover the daily feed, attendance, homework, pickup, health, chat, calendar, billing, shop, feedback and documents.",
+        "Charts for attendance and health use Recharts; icons use Lucide."
+      ],
+      "files": ["components/", "index.tsx"]
+    },
+    {
+      "id": "layout",
+      "layer": "client",
+      "title": "Role-based navigation",
+      "tech": ["React"],
+      "summary": "One navigation list decides which screens each role sees: parent, teacher, admin or super admin.",
+      "details": [
+        "Each menu item lists the roles allowed to see it, or 'all'.",
+        "For example, Classes is only for admins, while Homework and Moments are only for teachers and parents."
+      ],
+      "files": ["components/Layout.tsx"]
+    },
+    {
+      "id": "auth",
+      "layer": "application",
+      "title": "Sign-up & onboarding rules",
+      "tech": ["TypeScript"],
+      "summary": "Controls who can join and how accounts are linked to students.",
+      "details": [
+        "Teachers join with their staff ID (claiming a profile an admin created) or an active invite code for the teacher role; invite codes become 'used' after one sign-up.",
+        "Parents join with a student access code, which links their account to that child."
+      ],
+      "files": ["components/Auth.tsx", "App.tsx (handleLogin)"]
+    },
+    {
+      "id": "state",
+      "layer": "application",
+      "title": "App state",
+      "tech": ["React useState"],
+      "summary": "The top-level App component holds the app's data in React state and passes it down to each screen.",
+      "details": [
+        "App.tsx uses 35 useState hooks for users, students, activities, invoices, messages and more.",
+        "Updates made on one screen, such as attendance, flow to the screens that display them."
+      ],
+      "files": ["App.tsx"]
+    },
+    {
+      "id": "ai-service",
+      "layer": "application",
+      "title": "AI service",
+      "tech": ["@google/genai"],
+      "summary": "Builds a prompt from a child's recorded activities and asks Gemini for a parent-friendly daily summary.",
+      "details": [
+        "Returns a friendly message instead of failing when the API key is missing or the request errors."
+      ],
+      "files": ["services/geminiService.ts", "components/SmartSummary.tsx"]
+    },
+    {
+      "id": "storage",
+      "layer": "data",
+      "title": "Browser storage",
+      "tech": ["localStorage"],
+      "summary": "Users, the class roster and invite codes are saved in the browser so they survive a page refresh.",
+      "details": [
+        "Stored under three keys: schoolfam_users, schoolfam_roster and schoolfam_referral_codes.",
+        "Data stays on the device that created it; there is no server or shared database in the prototype."
+      ],
+      "files": ["App.tsx"]
+    },
+    {
+      "id": "sample-data",
+      "layer": "data",
+      "title": "Sample data",
+      "tech": ["TypeScript"],
+      "summary": "Realistic demo records seed every feature so the prototype can be explored immediately.",
+      "details": [
+        "constants.ts exports sample users, classes, students, activities, invoices, events, messages and more."
+      ],
+      "files": ["constants.ts"]
+    },
+    {
+      "id": "gemini",
+      "layer": "data",
+      "title": "Gemini API",
+      "tech": ["gemini-2.5-flash"],
+      "summary": "Generates the Smart Daily Summary for parents.",
+      "details": [
+        "Called directly from the browser; the key is injected at build time from GEMINI_API_KEY."
+      ],
+      "files": ["vite.config.ts", "services/geminiService.ts"]
+    },
+    {
+      "id": "signature",
+      "layer": "data",
+      "title": "Pickup verification",
+      "tech": ["Canvas", "Data URLs"],
+      "summary": "Captures a guardian's signature (and photo) when a child is collected.",
+      "details": [
+        "The signature is drawn on a canvas and saved as a data URL on the pickup record, with the verifying teacher's name."
+      ],
+      "files": ["components/PickupManager.tsx"]
+    }
+  ],
+  "flows": [
+    {
+      "id": "parent-signup",
+      "title": "Parent signs up with an access code",
+      "steps": [
+        { "node": "ui", "text": "A parent enters their details and the student access code from the school." },
+        { "node": "auth", "text": "The code is looked up in the class roster; an unknown code is refused." },
+        { "node": "state", "text": "The matching student is linked to the new parent account." },
+        { "node": "storage", "text": "Users and roster are saved to browser storage." },
+        { "node": "layout", "text": "The parent sees the screens allowed for their role." }
+      ]
+    },
+    {
+      "id": "teacher-signup",
+      "title": "Teacher joins with an enrolment code",
+      "steps": [
+        { "node": "ui", "text": "A teacher enters their staff ID or an invite code." },
+        { "node": "auth", "text": "A staff ID claims the matching profile; otherwise the code must be an active teacher invite." },
+        { "node": "state", "text": "The invite code is marked as used so it cannot be reused." },
+        { "node": "storage", "text": "Users and invite codes are saved to browser storage." }
+      ]
+    },
+    {
+      "id": "smart-summary",
+      "title": "Parent reads the AI daily summary",
+      "steps": [
+        { "node": "ui", "text": "The parent opens their child's Smart Summary." },
+        { "node": "state", "text": "Today's activities for that child are collected." },
+        { "node": "ai-service", "text": "A prompt is built from the child's class and activities." },
+        { "node": "gemini", "text": "gemini-2.5-flash returns a summary in Markdown." },
+        { "node": "ui", "text": "The summary is rendered with react-markdown." }
+      ]
+    },
+    {
+      "id": "pickup",
+      "title": "Teacher verifies a pickup",
+      "steps": [
+        { "node": "ui", "text": "A teacher opens Pickup and chooses the child and guardian." },
+        { "node": "signature", "text": "The guardian signs on screen; the signature is saved as an image." },
+        { "node": "state", "text": "The pickup status changes to picked_up, with the verifying teacher's name." }
+      ]
+    }
+  ]
+}

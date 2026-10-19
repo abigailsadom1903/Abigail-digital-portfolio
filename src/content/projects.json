@@ -4,27 +4,31 @@
       "title": "Web-Based Church Management System",
       "category": "Web application",
       "context": "Archdiocese of Kota Kinabalu · Final Year Project",
-      "summary": "A web-based management system that centralises church information, digital bulletins, announcements, sacramental services, donation management and catechesis for the 23 churches in Kota Kinabalu.",
+      "summary": "A web-based system that brings church information, announcements, bulletins, events, sacraments, pastoral care, catechesis and donations for the 23 churches in Kota Kinabalu into one place, with separate access for members, church admins and a super admin.",
       "featured": true,
       "year": "2026",
       "role": "Full-stack developer",
       "problem": "Church information, bulletins, announcements and services across the 23 churches in Kota Kinabalu needed a single, central web platform.",
-      "approach": "Following the Waterfall methodology, the project covers system analysis, database design, implementation and software testing, with three distinct user roles.",
+      "approach": "Following the Waterfall methodology: requirements analysis, database design, implementation and testing. Built in plain PHP with PDO and MySQL, with three roles: member, church admin and super admin.",
       "features": [
-        "Church information",
-        "Digital bulletins and announcements",
-        "Sacramental services",
-        "Donation management",
-        "Catechesis",
-        "AI chatbot"
+        "Church directory with priests, mass times and contact details",
+        "Announcements and digital bulletins, with email notifications to subscribers",
+        "Event registration with capacity limits and email reminders",
+        "Sacrament applications, schedules and confession slot booking",
+        "Pastoral care requests with admin review",
+        "Catechesis enrolment and attendance tracking",
+        "Donations with receipt upload, admin review and reports",
+        "AI assistant and AI-assisted announcement writing (Gemini API)"
       ],
       "stack": [
+        "PHP",
+        "PDO",
+        "MySQL",
         "HTML",
         "CSS",
         "JavaScript",
-        "PHP",
-        "Laravel",
-        "MySQL"
+        "PHPMailer",
+        "Gemini API"
       ],
       "testing": [
         "System testing",
@@ -32,7 +36,12 @@
         "Usability evaluation"
       ],
       "outcome": "Currently in development as my Final Year Project.",
-      "links": [],
+      "links": [
+        {
+          "label": "Explore it in the Engineering Lab",
+          "url": "#lab-church"
+        }
+      ],
       "screenshots": [
         {
           "image": "",
@@ -50,20 +59,45 @@
     {
       "title": "SchoolFam",
       "category": "Communication app",
-      "context": "Parent–teacher communication application",
-      "summary": "A collaborative project: a parent–teacher communication application designed to improve information sharing between parents and teachers.",
+      "context": "Parent–teacher communication app · Team project",
+      "summary": "An AI-powered parent–school communication platform that brings classroom updates, attendance, pickup, health, billing and messaging together for parents, teachers and school admins.",
       "featured": false,
       "year": "2025",
       "role": "Team member (collaborative project)",
-      "problem": "",
-      "approach": "",
-      "features": [],
+      "problem": "Parents and schools communicate through scattered channels, so daily updates, absences, pickups, fees and incidents are easy to miss.",
+      "approach": "Built as a browser-based React and TypeScript prototype in Google AI Studio, with role-based screens for parents, teachers, admins and a super admin, realistic sample data, and a Gemini-powered daily summary for parents.",
+      "features": [
+        "Daily activity feed and photo moments",
+        "AI Smart Daily Summary for parents (Gemini)",
+        "Attendance tracking and absence requests",
+        "Pickup management with guardian verification and on-screen signature",
+        "Health records and incident reports with parent acknowledgement",
+        "Chat, announcements and notifications",
+        "Calendar with RSVPs",
+        "Billing with proof-of-payment verification, and a school shop",
+        "Feedback tickets, homework and signed documents",
+        "Invite and access codes for teacher and parent sign-up"
+      ],
       "stack": [
+        "React",
+        "TypeScript",
+        "Vite",
+        "Gemini API",
+        "Recharts",
         "Google AI Studio"
       ],
       "testing": [],
       "outcome": "Received Overall Best Project recognition and achieved first runner-up in a Technopreneurship Business Idea Pitching competition.",
-      "links": [],
+      "links": [
+        {
+          "label": "View code on GitHub",
+          "url": "https://github.com/abigailsadom1903/SchoolFam"
+        },
+        {
+          "label": "Explore it in the Engineering Lab",
+          "url": "#lab-schoolfam"
+        }
+      ],
       "screenshots": [
         {
           "image": "",

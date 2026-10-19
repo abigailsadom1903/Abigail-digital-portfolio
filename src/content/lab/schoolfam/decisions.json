@@ -1,0 +1,109 @@
+{
+  "decisions": [
+    {
+      "id": "sf-client-prototype",
+      "project": "SchoolFam",
+      "title": "Build a browser-only prototype first",
+      "problem": "The team needed a working, demonstrable parent–teacher app quickly, covering many features, for a technopreneurship pitch.",
+      "alternatives": [
+        "Build a backend and database from the start",
+        "Use a hosted backend service"
+      ],
+      "decision": "Keep all logic in the React app, seed it with realistic sample data, and save key records in browser storage so the demo survives a refresh.",
+      "tradeoffs": [
+        "Very fast to build and easy to demo, with no server to run",
+        "Data stays on one device, so parents and teachers cannot share it in real time",
+        "Security is simulated: sign-in matches accounts in browser storage without verifying passwords, so a production version needs a backend with real authentication"
+      ],
+      "evidence": [
+        "App.tsx holds the app's data in 35 useState hooks",
+        "Three localStorage keys: schoolfam_users, schoolfam_roster, schoolfam_referral_codes",
+        "No network calls other than the Gemini API"
+      ],
+      "lessons": ""
+    },
+    {
+      "id": "sf-role-navigation",
+      "project": "SchoolFam",
+      "title": "Drive role access from one navigation list",
+      "problem": "Four kinds of users (parents, teachers, admins and the super admin) need different screens, and hard-coding checks in every screen would be easy to get wrong.",
+      "alternatives": [
+        "Separate apps or layouts per role",
+        "Permission checks inside each screen"
+      ],
+      "decision": "Each menu item declares the roles that may see it, and the layout filters the list for the signed-in user.",
+      "tradeoffs": [
+        "Access rules are easy to read and change in one place",
+        "In a browser-only app this hides screens but cannot protect data; a backend would need to enforce the same rules"
+      ],
+      "evidence": [
+        "components/Layout.tsx: 17 menu items, each with a roles list or 'all'",
+        "Classes is limited to admins; Homework, Moments and Health to teachers and parents"
+      ],
+      "lessons": ""
+    },
+    {
+      "id": "sf-onboarding-codes",
+      "project": "SchoolFam",
+      "title": "Use codes to control who can join",
+      "problem": "Anyone could otherwise sign up as a teacher, or as the parent of any child.",
+      "alternatives": [
+        "Open sign-up with manual approval by an admin",
+        "Email-based invitations"
+      ],
+      "decision": "Teachers need a staff ID or an active, single-use invite for the teacher role; parents need the access code of their child.",
+      "tradeoffs": [
+        "Simple for schools to hand out on paper or by message",
+        "Codes are checked in the browser in this prototype; the super admin sign-up uses a key stored in the front-end code, which should move to a server before real use"
+      ],
+      "evidence": [
+        "ReferralCode has status 'active' | 'used' and forRole",
+        "Invite codes are marked 'used' after a successful sign-up",
+        "Parent sign-up looks up Child.accessCode in the class roster"
+      ],
+      "lessons": ""
+    },
+    {
+      "id": "sf-ai-summary",
+      "project": "SchoolFam",
+      "title": "Summarise a child's day with AI",
+      "problem": "Teachers record many small activities a day; parents want a quick, warm overview and something to talk about at home.",
+      "alternatives": [
+        "Show the raw activity list only",
+        "Template-based summaries without AI"
+      ],
+      "decision": "Send the child's class and the day's activities to gemini-2.5-flash with a structured prompt (skills, mood, a conversation starter) and render the Markdown reply.",
+      "tradeoffs": [
+        "Personal, readable summaries with little extra work for teachers",
+        "The API key is injected into the browser build, so it is visible to users; a production version should call Gemini through a server",
+        "AI output needs review because the mood observation is inferred"
+      ],
+      "evidence": [
+        "services/geminiService.ts builds the prompt and calls gemini-2.5-flash",
+        "vite.config.ts injects GEMINI_API_KEY at build time",
+        "Friendly fallback messages when the key is missing or the request fails"
+      ],
+      "lessons": ""
+    },
+    {
+      "id": "sf-typed-model",
+      "project": "SchoolFam",
+      "title": "Model every feature with TypeScript types",
+      "problem": "With 21 feature screens sharing data, mismatched field names or invalid statuses would cause hard-to-find bugs.",
+      "alternatives": [
+        "Plain JavaScript objects",
+        "Runtime validation only"
+      ],
+      "decision": "Define every record as a TypeScript interface, with union types for statuses such as invoice, pickup and feedback states.",
+      "tradeoffs": [
+        "Mistakes are caught by the compiler while coding",
+        "Types are not checked at runtime, so stored data from older versions could still be invalid"
+      ],
+      "evidence": [
+        "types.ts defines 27 interfaces and a UserRole enum",
+        "Statuses are unions, e.g. Invoice.status: 'paid' | 'pending' | 'overdue' | 'verifying'"
+      ],
+      "lessons": ""
+    }
+  ]
+}

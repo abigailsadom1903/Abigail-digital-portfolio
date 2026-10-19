@@ -1,5 +1,5 @@
 {
-  "source": "database/schema.sql (structure only; no data, no default values)",
+  "source": "database/schema.sql",
   "tables": [
     {
       "name": "admin",
