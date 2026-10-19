@@ -245,6 +245,46 @@
       "screenshots": [
         {}
       ]
+    },
+    {
+      "title": "Cover Letter Editor",
+      "category": "Web tool",
+      "cover": "/images/projects/cover-letter-editor.webp",
+      "context": "Personal tool · Internship applications",
+      "summary": "A browser-based tool that tailors my internship cover letter to each company: type the company’s name and address, check a live A4 preview, and download a one-page PDF or Word file.",
+      "featured": false,
+      "year": "2026",
+      "role": "Personal project",
+      "problem": "Sending the same cover letter to many companies meant re-editing the company details, date and wording by hand for every application.",
+      "approach": "A single offline web page with a live A4 preview. The PDF is generated in the browser with jsPDF, so nothing is uploaded, and personal details are kept out of the public code in git-ignored local files.",
+      "features": [
+        "Live A4 preview while typing",
+        "One-click PDF download, automatically fitted to one page",
+        "Word download and copy as plain text",
+        "Date filled in automatically (e.g. 19th October 2026)",
+        "Company name inserted into the letter text",
+        "Required-field checks before downloading",
+        "Personal details and signature kept in local, git-ignored files"
+      ],
+      "stack": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "jsPDF"
+      ],
+      "links": [
+        {
+          "label": "View code on GitHub",
+          "url": "https://github.com/abigailsadom1903/Cover-Letter-Internship-Editor"
+        }
+      ],
+      "screenshots": [
+        {
+          "image": "/images/projects/cover-letter-editor.webp",
+          "caption": "Editor with sample details",
+          "alt": "Cover Letter Editor showing the company form and a live A4 letter preview"
+        }
+      ]
     }
   ]
 }
