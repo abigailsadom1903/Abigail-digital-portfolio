@@ -10,13 +10,11 @@ interface NavbarProps {
   items: NavItem[];
   brand: string;
   initials: string;
-  /** Small round photo shown instead of the initials when available. */
-  photoSrc?: string | null;
 }
 
 const DESKTOP_QUERY = '(min-width: 48rem)';
 
-export function Navbar({ items, brand, initials, photoSrc }: NavbarProps) {
+export function Navbar({ items, brand, initials }: NavbarProps) {
   const [open, setOpen] = useState(false);
   const { scrolled, hidden } = useHideOnScroll();
   const active = useActiveSection(items.map((item) => item.id));
@@ -58,8 +56,8 @@ export function Navbar({ items, brand, initials, photoSrc }: NavbarProps) {
     <header ref={headerRef} className={classes}>
       <Container className="site-header__inner">
         <a className="brand" href="#top" onClick={() => setOpen(false)}>
-          <span className={`brand__mark${photoSrc ? ' brand__mark--photo' : ''}`} aria-hidden="true">
-            {photoSrc ? <img src={photoSrc} alt="" width={36} height={36} decoding="async" /> : initials}
+          <span className="brand__mark" aria-hidden="true">
+            {initials}
           </span>
           <span className="brand__name">{brand}</span>
         </a>

@@ -21,7 +21,7 @@ export default function App() {
       <a className="skip-link" href="#main">
         Skip to main content
       </a>
-      <Navbar items={navItems} brand={profile.shortName} initials={profile.initials} photoSrc={profile.photo?.src} />
+      <Navbar items={navItems} brand={profile.shortName} initials={profile.initials} />
       <main id="main" tabIndex={-1}>
         <Hero profile={profile} />
         <Work projects={projects} />
