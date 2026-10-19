@@ -44,12 +44,10 @@
       ],
       "screenshots": [
         {
-          "image": "",
           "caption": "Main screen (sample data)",
           "alt": "Church Management System main screen"
         },
         {
-          "image": "",
           "caption": "Secondary screen (sample data)",
           "alt": "Church Management System secondary screen"
         }
@@ -86,7 +84,6 @@
         "Recharts",
         "Google AI Studio"
       ],
-      "testing": [],
       "outcome": "Received Overall Best Project recognition and achieved first runner-up in a Technopreneurship Business Idea Pitching competition.",
       "links": [
         {
@@ -100,12 +97,10 @@
       ],
       "screenshots": [
         {
-          "image": "",
           "caption": "Application screen",
           "alt": "SchoolFam application screen"
         }
-      ],
-      "privacyNote": ""
+      ]
     },
     {
       "title": "Smart Street Light System",
@@ -114,9 +109,6 @@
       "summary": "A solar-powered smart street light with automated motion and light detection, ESP32-CAM surveillance and Telegram alerts for remote monitoring.",
       "featured": false,
       "year": "2025",
-      "role": "",
-      "problem": "",
-      "approach": "",
       "features": [
         "Solar-powered operation",
         "Automated motion detection (PIR sensor)",
@@ -139,15 +131,12 @@
         "Field testing"
       ],
       "outcome": "Achieved an estimated 80% energy reduction.",
-      "links": [],
       "screenshots": [
         {
-          "image": "",
           "caption": "Prototype photo",
           "alt": "Smart Street Light System prototype"
         }
-      ],
-      "privacyNote": ""
+      ]
     },
     {
       "title": "StudyUsia",
@@ -155,23 +144,18 @@
       "context": "College study-room booking management system",
       "summary": "A system for managing study-room bookings in a college.",
       "featured": false,
-      "year": "",
-      "role": "",
-      "problem": "",
-      "approach": "",
-      "features": [],
-      "stack": [],
-      "testing": [],
-      "outcome": "",
-      "links": [],
       "screenshots": [
         {
-          "image": "",
           "caption": "Booking screen",
           "alt": "StudyUsia booking screen"
         }
-      ],
-      "privacyNote": ""
+      ]
+    },
+    {
+      "title": "FYP System For UMS",
+      "category": "UI/UX",
+      "featured": false,
+      "role": "UI Design"
     }
   ]
 }
