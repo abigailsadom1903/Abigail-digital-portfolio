@@ -1,37 +1,64 @@
-import { ArrowDown, Download } from 'lucide-react';
+import { ArrowDown, Download, FolderGit2, GraduationCap } from 'lucide-react';
+import type { CSSProperties } from 'react';
 import { BrandIcon, type Brand } from '../components/BrandIcon';
 import { ButtonLink } from '../components/Button';
 import { Container } from '../components/Container';
 import type { Profile } from '../data/types';
 import './Hero.css';
 
-interface HeroProps {
-  profile: Profile;
+interface HeroStats {
+  cgpa: string | null;
+  projects: number;
+  honours: number;
 }
 
-export function Hero({ profile }: HeroProps) {
-  const email = profile.contact.find((c) => c.kind === 'email' && c.href);
+interface HeroProps {
+  profile: Profile;
+  /** Figures for the cards beside the portrait; worked out from the content. */
+  stats?: HeroStats;
+}
+
+export function Hero({ profile, stats }: HeroProps) {
   // LinkedIn first, then GitHub, whichever have links in Pages CMS.
   const socials = (['linkedin', 'github'] as const)
     .map((kind) => profile.contact.find((c) => c.kind === kind && c.href))
     .filter((c): c is NonNullable<typeof c> => Boolean(c));
 
+  const workLine = stats
+    ? [stats.projects > 0 && `${stats.projects} projects`, stats.honours > 0 && `${stats.honours} honours`]
+        .filter(Boolean)
+        .join(' · ')
+    : '';
+
   return (
     <section className="hero" aria-labelledby="hero-heading">
+      <div className="hero__backdrop" aria-hidden="true" />
       <Container className="hero__grid">
         <div className="hero__main">
-          <p className="hero__eyebrow">
+          {profile.availability && (
+            <p className="hero__badge hero__reveal" style={{ '--d': 0 } as CSSProperties}>
+              <span className="hero__pulse" aria-hidden="true" />
+              <span>
+                Available for a {profile.availability.charAt(0).toLowerCase() + profile.availability.slice(1)}
+              </span>
+            </p>
+          )}
+          <p className="hero__eyebrow hero__reveal" style={{ '--d': 1 } as CSSProperties}>
             <span className="hero__role">{profile.role}</span>
             <span aria-hidden="true"> · </span>
             {profile.university}
           </p>
-          <h1 id="hero-heading" className="hero__name">
+          <h1 id="hero-heading" className="hero__name hero__reveal" style={{ '--d': 2 } as CSSProperties}>
             {profile.name}
           </h1>
-          <p className="hero__headline">{profile.headline}</p>
-          <p className="hero__intro">{profile.intro}</p>
+          <p className="hero__headline hero__reveal" style={{ '--d': 3 } as CSSProperties}>
+            {profile.headline}
+          </p>
+          <p className="hero__intro hero__reveal" style={{ '--d': 4 } as CSSProperties}>
+            {profile.intro}
+          </p>
 
-          <div className="hero__actions">
+          <div className="hero__actions hero__reveal" style={{ '--d': 5 } as CSSProperties}>
             <ButtonLink href="#work" icon={ArrowDown}>
               View projects
             </ButtonLink>
@@ -41,7 +68,7 @@ export function Hero({ profile }: HeroProps) {
           </div>
 
           {socials.length > 0 && (
-            <ul className="hero__social" role="list" aria-label="Profiles">
+            <ul className="hero__social hero__reveal" role="list" aria-label="Profiles" style={{ '--d': 6 } as CSSProperties}>
               {socials.map((link) => (
                 <li key={link.kind}>
                   <a
@@ -58,34 +85,43 @@ export function Hero({ profile }: HeroProps) {
               ))}
             </ul>
           )}
-
-          {profile.lookingFor && (
-            <p className="hero__status">
-              <span className="hero__status-dot" aria-hidden="true" />
-              <span>
-                Open to {profile.lookingFor.charAt(0).toLowerCase() + profile.lookingFor.slice(1)}.
-                {email?.href && (
-                  <>
-                    {' '}
-                    <a href={email.href}>{email.display}</a>
-                  </>
-                )}
-              </span>
-            </p>
-          )}
         </div>
 
         {profile.photo && (
-          <figure className="hero__portrait">
-            <img
-              src={profile.photo.src}
-              alt={profile.photo.alt}
-              width={640}
-              height={831}
-              fetchPriority="high"
-              decoding="async"
-            />
-          </figure>
+          <div className="hero__visual hero__reveal" style={{ '--d': 2 } as CSSProperties}>
+            <figure className="hero__portrait">
+              <img
+                src={profile.photo.src}
+                alt={profile.photo.alt}
+                width={640}
+                height={831}
+                fetchPriority="high"
+                decoding="async"
+              />
+            </figure>
+            {stats?.cgpa && (
+              <p className="hero__card hero__card--cgpa">
+                <span className="hero__card-icon" aria-hidden="true">
+                  <GraduationCap size={18} strokeWidth={1.8} />
+                </span>
+                <span>
+                  <strong>{stats.cgpa}</strong>
+                  <span className="hero__card-label">CGPA · Software Engineering</span>
+                </span>
+              </p>
+            )}
+            {workLine && (
+              <p className="hero__card hero__card--work">
+                <span className="hero__card-icon" aria-hidden="true">
+                  <FolderGit2 size={18} strokeWidth={1.8} />
+                </span>
+                <span>
+                  <strong>{workLine}</strong>
+                  <span className="hero__card-label">Built and recognised</span>
+                </span>
+              </p>
+            )}
+          </div>
         )}
       </Container>
     </section>

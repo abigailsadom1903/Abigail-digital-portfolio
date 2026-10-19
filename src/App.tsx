@@ -1,5 +1,5 @@
 import { Navbar } from './components/Navbar';
-import { achievements, activities, education, experience, training } from './data/education';
+import { achievements, activities, cgpaFrom, education, experience, training } from './data/education';
 import { navItems, profile } from './data/profile';
 import { projects } from './data/projects';
 import { skillCategories } from './data/skills';
@@ -28,7 +28,10 @@ export default function App() {
         socials={profile.contact.filter((c) => (c.kind === 'linkedin' || c.kind === 'github') && c.href)}
       />
       <main id="main" tabIndex={-1}>
-        <Hero profile={profile} />
+        <Hero
+          profile={profile}
+          stats={{ cgpa: cgpaFrom(education), projects: projects.length, honours: achievements.length }}
+        />
         <Work projects={projects} />
         <Lab />
         <About
