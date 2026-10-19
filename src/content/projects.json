@@ -147,6 +147,7 @@
     {
       "title": "StudyUsia",
       "category": "Booking system",
+      "cover": "/images/Screenshot 2026-10-19 212341.png",
       "context": "College study-room booking management system",
       "summary": "An Android app for booking college study rooms: students check which rooms are free for a date and time, reserve them without clashes, manage their bookings and rate the rooms they used.",
       "featured": false,
