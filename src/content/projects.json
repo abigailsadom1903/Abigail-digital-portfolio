@@ -144,6 +144,8 @@
       "context": "College study-room booking management system",
       "summary": "An Android app for booking college study rooms: students check which rooms are free for a date and time, reserve them without clashes, manage their bookings and rate the rooms they used.",
       "featured": false,
+      "year": "2026",
+      "role": "Developer",
       "problem": "Students need a simple way to find a free study room and reserve it without two people booking the same room at the same time.",
       "approach": "Built as a native Android app in Kotlin with Jetpack Compose. All data is stored on the device in SQLite, and every booking is checked against the room's opening hours, available dates and existing bookings before it is saved.",
       "features": [
