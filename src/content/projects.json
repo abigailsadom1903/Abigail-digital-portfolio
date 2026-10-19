@@ -111,6 +111,7 @@
     {
       "title": "Smart Street Light System",
       "category": "IoT",
+      "cover": "/images/photo_2026-10-19_21-27-40.jpg",
       "context": "IoT project · Solar-powered smart street light",
       "summary": "A solar-powered smart street light with automated motion and light detection, ESP32-CAM surveillance and Telegram alerts for remote monitoring.",
       "featured": false,
