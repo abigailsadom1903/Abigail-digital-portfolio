@@ -58,6 +58,7 @@
     {
       "title": "SchoolFam",
       "category": "Communication app",
+      "cover": "/images/photo_2025-11-22_02-22-54.jpg",
       "context": "Parent–teacher communication app · Team project",
       "summary": "An AI-powered parent–school communication platform that brings classroom updates, attendance, pickup, health, billing and messaging together for parents, teachers and school admins.",
       "featured": false,
