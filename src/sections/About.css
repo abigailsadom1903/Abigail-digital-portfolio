@@ -1,0 +1,52 @@
+.about {
+  display: grid;
+  gap: var(--space-7);
+}
+
+@media (min-width: 56rem) {
+  .about {
+    grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr);
+    gap: var(--space-9);
+  }
+}
+
+.about__prose {
+  display: grid;
+  gap: var(--space-5);
+  max-width: 62ch;
+  color: var(--color-text-muted);
+  font-size: var(--text-md);
+}
+
+.about__lead {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  line-height: var(--leading-snug);
+  color: var(--color-text);
+}
+
+.about__aside {
+  align-self: start;
+  padding-top: var(--space-4);
+  border-top: var(--border-width) solid var(--color-text);
+}
+
+.about__aside-heading {
+  margin-top: var(--space-6);
+}
+
+.about__seeking {
+  margin-top: var(--space-2);
+  font-family: var(--font-display);
+  font-size: var(--text-md);
+}
+
+.about__interests {
+  display: grid;
+  margin-top: var(--space-2);
+}
+
+.about__interests li {
+  padding: var(--space-2) 0;
+  border-bottom: var(--border-width) solid var(--color-border);
+}

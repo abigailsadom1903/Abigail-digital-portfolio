@@ -1,0 +1,16 @@
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.tag {
+  padding: 0.25rem 0.625rem;
+  border: var(--border-width) solid var(--color-lavender-200);
+  border-radius: var(--radius-sm);
+  background: var(--color-lavender-50);
+  color: var(--color-primary-strong);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+  line-height: 1.5;
+}
