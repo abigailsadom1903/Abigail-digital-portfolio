@@ -11,6 +11,10 @@ import studyusiaArchitecture from '../../content/lab/studyusia/architecture.json
 import studyusiaDecisions from '../../content/lab/studyusia/decisions.json';
 import studyusiaModel from '../../content/lab/studyusia/model.json';
 import studyusiaTesting from '../../content/lab/studyusia/testing.json';
+import unifestArchitecture from '../../content/lab/unifest/architecture.json';
+import unifestDecisions from '../../content/lab/unifest/decisions.json';
+import unifestModel from '../../content/lab/unifest/model.json';
+import unifestTesting from '../../content/lab/unifest/testing.json';
 import type { Architecture, Decision, LabProject, Schema, TestSuite } from './types';
 
 /*
@@ -48,5 +52,14 @@ export const labProjects: LabProject[] = [
     schema: studyusiaModel as Schema,
     testSuite: studyusiaTesting as TestSuite,
     decisions: [...decisionsOf(studyusiaDecisions), ...shared],
+  },
+  {
+    id: 'unifest',
+    name: 'UniFest',
+    blurb: 'Team project · PHP, PDO and MySQL',
+    architecture: unifestArchitecture as Architecture,
+    schema: unifestModel as Schema,
+    testSuite: unifestTesting as TestSuite,
+    decisions: [...decisionsOf(unifestDecisions), ...shared],
   },
 ];

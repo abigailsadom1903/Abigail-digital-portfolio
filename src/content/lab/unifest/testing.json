@@ -1,0 +1,152 @@
+{
+  "note": "These scenarios run in your browser against an in-memory model of UniFest's rules: the allowed values, unique keys and delete rules in its MySQL schema export, and the dashboard's role checks. They do not connect to the real system or its data.",
+  "navigation": [
+    { "id": "create-event", "label": "+ Create Event", "roles": ["admin", "staff", "student"] },
+    { "id": "manage-users", "label": "Manage Users", "roles": ["admin"] },
+    { "id": "reports", "label": "Reports", "roles": ["admin"] },
+    { "id": "approve-events", "label": "Approve / Reject", "roles": ["admin"] },
+    { "id": "joined-events", "label": "Events I Have Joined", "roles": ["all"] }
+  ],
+  "scenarios": [
+    {
+      "id": "EVT-01",
+      "title": "An admin can approve a pending event",
+      "area": "Events",
+      "type": "Validation",
+      "steps": ["A student submits an event, which starts as 'pending'.", "An admin approves it, setting the status to 'approved'."],
+      "rule": { "kind": "enum", "table": "events", "column": "status", "value": "approved" },
+      "expect": "accepted"
+    },
+    {
+      "id": "EVT-02",
+      "title": "There is no 'rejected' status; rejected events are archived",
+      "area": "Events",
+      "type": "Negative",
+      "steps": ["An event status is set to 'rejected'.", "The workflow only defines pending, approved and archived, so Reject stores 'archived' instead."],
+      "rule": { "kind": "enum", "table": "events", "column": "status", "value": "rejected" },
+      "expect": "rejected"
+    },
+    {
+      "id": "EVT-03",
+      "title": "An event can be limited to university members",
+      "area": "Events",
+      "type": "Validation",
+      "steps": ["An organiser sets an event's visibility to 'university', so only signed-in users can see it."],
+      "rule": { "kind": "enum", "table": "events", "column": "visibility", "value": "university" },
+      "expect": "accepted"
+    },
+    {
+      "id": "EVT-04",
+      "title": "An unsupported event mode is rejected",
+      "area": "Events",
+      "type": "Negative",
+      "steps": ["An event's mode is set to 'Recorded', which is not one of Physical, Online or Hybrid."],
+      "rule": { "kind": "enum", "table": "events", "column": "mode", "value": "Recorded" },
+      "expect": "rejected"
+    },
+    {
+      "id": "ACC-01",
+      "title": "Two accounts cannot share an email",
+      "area": "Accounts",
+      "type": "Negative",
+      "steps": ["An account exists for student@example.com.", "Someone registers again with the same email."],
+      "rule": {
+        "kind": "unique",
+        "table": "users",
+        "existing": { "id": 3, "email": "student@example.com" },
+        "candidate": { "id": 4, "email": "student@example.com" }
+      },
+      "expect": "rejected"
+    },
+    {
+      "id": "ACC-02",
+      "title": "There is no separate organiser role",
+      "area": "Accounts",
+      "type": "Negative",
+      "steps": ["A user's role is set to 'organizer'.", "Roles are admin, staff, student and public; staff and students organise events with their normal role."],
+      "rule": { "kind": "enum", "table": "users", "column": "role", "value": "organizer" },
+      "expect": "rejected"
+    },
+    {
+      "id": "REG-01",
+      "title": "The schema alone does not stop duplicate registrations",
+      "area": "Registrations",
+      "type": "Integrity",
+      "steps": [
+        "User 3 is registered for event 1.",
+        "A second registration row for user 3 and event 1 is inserted.",
+        "There is no unique key on user and event, so the event page's check for an existing registration is what prevents this."
+      ],
+      "rule": {
+        "kind": "unique",
+        "table": "registrations",
+        "existing": { "id": 1, "user_id": 3, "event_id": 1 },
+        "candidate": { "id": 2, "user_id": 3, "event_id": 1 }
+      },
+      "expect": "accepted"
+    },
+    {
+      "id": "DEL-01",
+      "title": "Deleting an organiser removes their events",
+      "area": "Data integrity",
+      "type": "Integrity",
+      "steps": ["A staff member has created events.", "An admin deletes the staff member's account."],
+      "rule": { "kind": "onDelete", "table": "events", "column": "organizer_id" },
+      "expect": "CASCADE"
+    },
+    {
+      "id": "DEL-02",
+      "title": "An event with registrations cannot be deleted",
+      "area": "Data integrity",
+      "type": "Integrity",
+      "steps": ["An event has registered participants.", "The organiser deletes the event.", "The registrations foreign key has no ON DELETE rule, so MySQL blocks the delete."],
+      "rule": { "kind": "onDelete", "table": "registrations", "column": "event_id" },
+      "expect": "RESTRICT"
+    },
+    {
+      "id": "DEL-03",
+      "title": "Deleting an event removes its feedback",
+      "area": "Data integrity",
+      "type": "Integrity",
+      "steps": ["An event has ratings and reviews.", "The event is deleted."],
+      "rule": { "kind": "onDelete", "table": "feedback", "column": "event_id" },
+      "expect": "CASCADE"
+    },
+    {
+      "id": "NAV-01",
+      "title": "A public user cannot create events",
+      "area": "Access control",
+      "type": "Security",
+      "steps": ["A public (guest) user opens the dashboard."],
+      "rule": { "kind": "navAccess", "table": "dashboard.php", "role": "public", "view": "create-event" },
+      "expect": "hidden"
+    },
+    {
+      "id": "NAV-02",
+      "title": "A student can create events",
+      "area": "Access control",
+      "type": "Validation",
+      "steps": ["A student opens the dashboard."],
+      "rule": { "kind": "navAccess", "table": "dashboard.php", "role": "student", "view": "create-event" },
+      "expect": "visible"
+    },
+    {
+      "id": "NAV-03",
+      "title": "Only admins can manage users",
+      "area": "Access control",
+      "type": "Security",
+      "steps": ["A staff member opens the dashboard."],
+      "rule": { "kind": "navAccess", "table": "dashboard.php", "role": "staff", "view": "manage-users" },
+      "expect": "hidden"
+    },
+    {
+      "id": "NAV-04",
+      "title": "Every user sees the events they joined",
+      "area": "Access control",
+      "type": "Validation",
+      "steps": ["A public user who registered for an event opens the dashboard."],
+      "rule": { "kind": "navAccess", "table": "dashboard.php", "role": "public", "view": "joined-events" },
+      "expect": "visible"
+    }
+  ]
+}

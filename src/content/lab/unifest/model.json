@@ -1,0 +1,490 @@
+{
+  "source": "unifest_db.sql",
+  "tables": [
+    {
+      "name": "events",
+      "module": "Events",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INT(11)",
+          "nullable": false,
+          "primaryKey": true,
+          "unique": false,
+          "autoIncrement": true
+        },
+        {
+          "name": "event_name",
+          "type": "VARCHAR(255)",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "description",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "organizer_id",
+          "type": "INT(11)",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "contact_person",
+          "type": "VARCHAR(100)",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "contact_no",
+          "type": "VARCHAR(20)",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "type",
+          "type": "ENUM('Workshop','Seminar','Competition','Festival','Sport','Course')",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "venue",
+          "type": "VARCHAR(255)",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "event_date",
+          "type": "DATE",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "event_time",
+          "type": "TIME",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "mode",
+          "type": "ENUM('Physical','Online','Hybrid')",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "registration_close_date",
+          "type": "DATE",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "max_participants",
+          "type": "INT(11)",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "fee",
+          "type": "DECIMAL(10,2)",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "remarks",
+          "type": "TEXT",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "poster",
+          "type": "VARCHAR(255)",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "status",
+          "type": "ENUM('pending','approved','archived')",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "visibility",
+          "type": "ENUM('public','university')",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        }
+      ],
+      "foreignKeys": [
+        {
+          "column": "organizer_id",
+          "table": "users",
+          "references": "id",
+          "onDelete": "CASCADE"
+        }
+      ],
+      "uniqueKeys": [],
+      "indexes": [
+        {
+          "name": "organizer_id",
+          "columns": [
+            "organizer_id"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "feedback",
+      "module": "Engagement",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INT(11)",
+          "nullable": false,
+          "primaryKey": true,
+          "unique": false,
+          "autoIncrement": true
+        },
+        {
+          "name": "event_id",
+          "type": "INT(11)",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "user_id",
+          "type": "INT(11)",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "rating",
+          "type": "INT(11)",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "comment",
+          "type": "TEXT",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "created_at",
+          "type": "TIMESTAMP",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        }
+      ],
+      "foreignKeys": [
+        {
+          "column": "event_id",
+          "table": "events",
+          "references": "id",
+          "onDelete": "CASCADE"
+        },
+        {
+          "column": "user_id",
+          "table": "users",
+          "references": "id",
+          "onDelete": "CASCADE"
+        }
+      ],
+      "uniqueKeys": [],
+      "indexes": [
+        {
+          "name": "event_id",
+          "columns": [
+            "event_id"
+          ]
+        },
+        {
+          "name": "user_id",
+          "columns": [
+            "user_id"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "notifications",
+      "module": "Engagement",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INT(11)",
+          "nullable": false,
+          "primaryKey": true,
+          "unique": false,
+          "autoIncrement": true
+        },
+        {
+          "name": "user_id",
+          "type": "INT(11)",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "message",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "is_read",
+          "type": "TINYINT(1)",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "created_at",
+          "type": "TIMESTAMP",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        }
+      ],
+      "foreignKeys": [
+        {
+          "column": "user_id",
+          "table": "users",
+          "references": "id",
+          "onDelete": "CASCADE"
+        }
+      ],
+      "uniqueKeys": [],
+      "indexes": [
+        {
+          "name": "user_id",
+          "columns": [
+            "user_id"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "registrations",
+      "module": "Events",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INT(11)",
+          "nullable": false,
+          "primaryKey": true,
+          "unique": false,
+          "autoIncrement": true
+        },
+        {
+          "name": "user_id",
+          "type": "INT(11)",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "event_id",
+          "type": "INT(11)",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "registration_date",
+          "type": "TIMESTAMP",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "status",
+          "type": "ENUM('confirmed','cancelled')",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        }
+      ],
+      "foreignKeys": [
+        {
+          "column": "user_id",
+          "table": "users",
+          "references": "id",
+          "onDelete": "RESTRICT"
+        },
+        {
+          "column": "event_id",
+          "table": "events",
+          "references": "id",
+          "onDelete": "RESTRICT"
+        }
+      ],
+      "uniqueKeys": [],
+      "indexes": [
+        {
+          "name": "user_id",
+          "columns": [
+            "user_id"
+          ]
+        },
+        {
+          "name": "event_id",
+          "columns": [
+            "event_id"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "users",
+      "module": "Accounts",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INT(11)",
+          "nullable": false,
+          "primaryKey": true,
+          "unique": false,
+          "autoIncrement": true
+        },
+        {
+          "name": "category",
+          "type": "ENUM('Staff','Student','Public','Admin')",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "name",
+          "type": "VARCHAR(100)",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "email",
+          "type": "VARCHAR(100)",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": true,
+          "autoIncrement": false
+        },
+        {
+          "name": "phone",
+          "type": "VARCHAR(20)",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "organization",
+          "type": "VARCHAR(100)",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "interested_categories",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "password",
+          "type": "VARCHAR(255)",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "role",
+          "type": "ENUM('admin','staff','student','public')",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "created_at",
+          "type": "TIMESTAMP",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "status",
+          "type": "ENUM('active','suspended')",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        }
+      ],
+      "foreignKeys": [],
+      "uniqueKeys": [],
+      "indexes": []
+    }
+  ]
+}

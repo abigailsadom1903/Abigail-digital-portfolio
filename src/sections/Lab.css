@@ -4,29 +4,20 @@
   margin-bottom: var(--space-6);
 }
 
-@media (min-width: 64rem) {
-  .lab__head {
-    grid-template-columns: minmax(0, 1fr) auto;
-    align-items: end;
-    gap: var(--space-8);
-  }
-}
-
 .lab__intro {
   max-width: 40rem;
   color: var(--color-text-muted);
 }
 
-/* Project switcher */
+/* Project switcher: the intro sits above, so any number of projects fits. */
 .lab__projects {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr));
   gap: var(--space-2);
 }
 
 .lab__project {
   display: grid;
-  flex: 1 1 13rem;
   gap: 0.125rem;
   padding: var(--space-3) var(--space-4);
   border: var(--border-width) solid var(--color-border-strong);

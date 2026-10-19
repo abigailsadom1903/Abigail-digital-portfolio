@@ -1,0 +1,90 @@
+{
+  "decisions": [
+    {
+      "id": "uf-approval",
+      "project": "UniFest",
+      "title": "Require admin approval before events are listed",
+      "problem": "Any student or staff member can create an event, so without a check, inaccurate or inappropriate events could appear on the public site straight away.",
+      "alternatives": [
+        "Publish events immediately and let admins remove problems later",
+        "Only let admins create events"
+      ],
+      "decision": "New events are saved as 'pending'. The catalogue shows only 'approved' events, and an admin approves or archives each one from the dashboard.",
+      "tradeoffs": [
+        "Organisers wait for an admin before their event is visible",
+        "Admins carry the review workload",
+        "Students and staff can still run their own events without needing an admin account"
+      ],
+      "evidence": [
+        "events.status ENUM('pending','approved','archived') DEFAULT 'pending'",
+        "index.php lists only events WHERE status = 'approved'",
+        "admin_action.php notifies the organiser on approve or reject"
+      ],
+      "lessons": ""
+    },
+    {
+      "id": "uf-visibility",
+      "project": "UniFest",
+      "title": "Let organisers choose public or university-only events",
+      "problem": "Some events are open to anyone, while others are only for students and staff, but both kinds belong in the same catalogue.",
+      "alternatives": [
+        "Make every event public",
+        "Hide the whole catalogue behind a login"
+      ],
+      "decision": "Each event has a visibility of 'public' or 'university'. Signed-out visitors only see public events, and opening a university-only event sends them to the login page.",
+      "tradeoffs": [
+        "Public visitors can still discover open events without an account",
+        "The check has to be repeated on every page that shows events"
+      ],
+      "evidence": [
+        "events.visibility ENUM('public','university')",
+        "index.php adds AND visibility = 'public' when no one is signed in",
+        "event_details.php redirects signed-out visitors away from university events"
+      ],
+      "lessons": ""
+    },
+    {
+      "id": "uf-simulated-email",
+      "project": "UniFest",
+      "title": "Simulate emails with a log file",
+      "problem": "The system should email participants about registrations and event updates, but a local XAMPP setup has no mail server.",
+      "alternatives": [
+        "Configure SMTP with a library such as PHPMailer",
+        "Leave email out"
+      ],
+      "decision": "Every email goes through one sendEmail function, which writes the recipient, subject and body to email_log.txt. In-app notifications are stored in the database alongside it.",
+      "tradeoffs": [
+        "The email flow can be demonstrated and checked on any machine",
+        "No real emails are sent; switching to SMTP later only means changing one function",
+        "The log contains recipients' addresses, so it must be kept out of version control"
+      ],
+      "evidence": [
+        "includes/functions.php: sendEmail appends to email_log.txt",
+        "addNotification writes to the notifications table",
+        "email_log.txt is listed in .gitignore"
+      ],
+      "lessons": ""
+    },
+    {
+      "id": "uf-delete-rules",
+      "project": "UniFest",
+      "title": "Decide what deleting a user or event removes",
+      "problem": "Events, feedback, notifications and registrations all depend on users and events, so deleting either has to be handled.",
+      "alternatives": [
+        "Cascade every delete",
+        "Block every delete that has related rows"
+      ],
+      "decision": "Events, feedback and notifications are deleted with their user or event. Registrations have no delete rule, so MySQL blocks deleting a user or event that still has registrations.",
+      "tradeoffs": [
+        "Deleting an organiser also removes their events, which keeps the catalogue clean but loses history",
+        "Registrations protect attendance records, but an event with participants cannot be deleted until they are removed"
+      ],
+      "evidence": [
+        "events.organizer_id → users: ON DELETE CASCADE",
+        "feedback and notifications: ON DELETE CASCADE",
+        "registrations.user_id and registrations.event_id: no ON DELETE rule (RESTRICT)"
+      ],
+      "lessons": ""
+    }
+  ]
+}

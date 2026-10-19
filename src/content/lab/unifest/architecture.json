@@ -1,0 +1,179 @@
+{
+  "system": "UniFest",
+  "note": "Simplified view of UniFest (github.com/abigailsadom1903/UniFest), a five-person team project. Component names match real files; the admin/, user_dashboard/ and feedback/ folders are separate prototypes and are not shown.",
+  "layers": [
+    { "id": "client", "label": "Client" },
+    { "id": "application", "label": "PHP application" },
+    { "id": "data", "label": "Data & services" }
+  ],
+  "nodes": [
+    {
+      "id": "browser",
+      "layer": "client",
+      "title": "Browser",
+      "tech": ["HTML", "CSS"],
+      "summary": "Students, staff, public visitors and admins use UniFest through server-rendered pages.",
+      "details": [
+        "A shared header shows the navigation and a bell with the number of unread notifications.",
+        "Login and registration pages have their own full-screen design."
+      ],
+      "files": ["includes/header.php", "assets/style.css"]
+    },
+    {
+      "id": "public-pages",
+      "layer": "application",
+      "title": "Event catalogue",
+      "tech": ["PHP"],
+      "summary": "The home page lists approved events, with search by name and a filter by category.",
+      "details": [
+        "Visitors who are not signed in see only public events; university-only events appear after signing in.",
+        "Opening a university-only event while signed out redirects to the login page."
+      ],
+      "files": ["index.php", "event_details.php"]
+    },
+    {
+      "id": "auth",
+      "layer": "application",
+      "title": "Accounts & roles",
+      "tech": ["PHP sessions", "password_hash"],
+      "summary": "Registration, sign-in and four roles: admin, staff, student and public.",
+      "details": [
+        "Passwords are hashed with bcrypt on registration and checked with password_verify on sign-in.",
+        "Suspended accounts cannot sign in.",
+        "The user's ID, name and role are kept in the PHP session and checked on every protected page."
+      ],
+      "files": ["register.php", "login.php", "profile.php"]
+    },
+    {
+      "id": "dashboard",
+      "layer": "application",
+      "title": "Role-based dashboard",
+      "tech": ["PHP"],
+      "summary": "One dashboard that changes with the user's role.",
+      "details": [
+        "Admins see system totals, every event, and links to Manage Users and Reports.",
+        "Staff and students see the events they organise; everyone sees the events they joined."
+      ],
+      "files": ["dashboard.php"]
+    },
+    {
+      "id": "events",
+      "layer": "application",
+      "title": "Event management",
+      "tech": ["PHP"],
+      "summary": "Organisers create, edit and delete their events; admins approve or archive them.",
+      "details": [
+        "New events start as 'pending' and appear in the catalogue only after an admin approves them.",
+        "Edit and delete check that the user is the event's organiser or an admin.",
+        "Posters are uploaded as JPG, PNG or GIF files."
+      ],
+      "files": ["create_event.php", "edit_event.php", "delete_event.php", "admin_action.php"]
+    },
+    {
+      "id": "participants",
+      "layer": "application",
+      "title": "Registrations & participants",
+      "tech": ["PHP", "CSV"],
+      "summary": "Users join or cancel events; organisers view participants, take attendance and send updates.",
+      "details": [
+        "The event page checks for an existing registration before adding a new one.",
+        "Organisers can mark participants present, export the list as CSV, and broadcast a message to everyone registered."
+      ],
+      "files": ["event_details.php", "view_participants.php", "export_participants.php"]
+    },
+    {
+      "id": "admin",
+      "layer": "application",
+      "title": "Administration",
+      "tech": ["PHP"],
+      "summary": "Admins manage users and produce event reports.",
+      "details": [
+        "Users can be suspended, reactivated, deleted, or (for staff) promoted to admin.",
+        "Reports filter events by month and category."
+      ],
+      "files": ["manage_users.php", "promote_user.php", "admin_reports.php"]
+    },
+    {
+      "id": "pdo",
+      "layer": "application",
+      "title": "Data access (PDO)",
+      "tech": ["PDO", "Prepared statements"],
+      "summary": "Pages query MySQL through one shared PDO connection.",
+      "details": [
+        "Queries that include user input use prepared statements with ? parameters, including search and report filters.",
+        "PDO is set to throw exceptions on database errors."
+      ],
+      "files": ["config/db.php"]
+    },
+    {
+      "id": "mysql",
+      "layer": "data",
+      "title": "MySQL database",
+      "tech": ["MySQL", "InnoDB"],
+      "summary": "Five tables for users, events, registrations, feedback and notifications.",
+      "details": [
+        "Event type, mode, status and visibility, and user role and status, are ENUM columns.",
+        "Foreign keys decide what happens on delete: events and feedback cascade, registrations block the delete.",
+        "Explore every table in the Data model tab."
+      ],
+      "files": ["unifest_db.sql"]
+    },
+    {
+      "id": "notify",
+      "layer": "data",
+      "title": "Notifications & email",
+      "tech": ["PHP"],
+      "summary": "In-app notifications are stored in the database; emails are simulated by writing them to a log file.",
+      "details": [
+        "addNotification saves a message for a user; opening the notifications page marks them as read.",
+        "sendEmail writes each email to email_log.txt, so the flow can be demonstrated without a mail server."
+      ],
+      "files": ["includes/functions.php", "notifications.php"]
+    },
+    {
+      "id": "uploads",
+      "layer": "data",
+      "title": "Poster storage",
+      "tech": ["Server file system"],
+      "summary": "Uploaded posters are saved in assets/uploads with a timestamped file name; the database stores the name.",
+      "details": ["events.poster holds the file name, and event pages fall back to a placeholder when it is empty."],
+      "files": ["assets/uploads/"]
+    }
+  ],
+  "flows": [
+    {
+      "id": "publish-event",
+      "title": "Publish an event",
+      "steps": [
+        { "node": "events", "text": "A student or staff member fills in the event form and uploads a poster." },
+        { "node": "uploads", "text": "The poster is checked for an image type and saved with a timestamped name." },
+        { "node": "mysql", "text": "The event is stored with status 'pending'." },
+        { "node": "dashboard", "text": "The admin sees the pending event with Approve and Reject links." },
+        { "node": "events", "text": "Approving sets the status to 'approved'." },
+        { "node": "notify", "text": "The organiser gets a notification that the event was approved." },
+        { "node": "public-pages", "text": "The event now appears in the catalogue." }
+      ]
+    },
+    {
+      "id": "join-event",
+      "title": "Join an event",
+      "steps": [
+        { "node": "browser", "text": "A signed-in user opens an event and clicks to join." },
+        { "node": "participants", "text": "The page checks the user is not already registered." },
+        { "node": "pdo", "text": "A prepared INSERT adds the registration." },
+        { "node": "mysql", "text": "The registration is saved as 'confirmed'." },
+        { "node": "notify", "text": "The participant and the organiser both get a notification, and a confirmation email is logged." }
+      ]
+    },
+    {
+      "id": "sign-in",
+      "title": "Sign in",
+      "steps": [
+        { "node": "browser", "text": "The user enters their email and password." },
+        { "node": "pdo", "text": "The account is looked up by email with a prepared statement." },
+        { "node": "auth", "text": "password_verify checks the password, and suspended accounts are refused." },
+        { "node": "dashboard", "text": "The session stores the user's role and the dashboard opens." }
+      ]
+    }
+  ]
+}

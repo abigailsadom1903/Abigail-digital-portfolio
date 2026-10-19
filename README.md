@@ -78,6 +78,7 @@ node scripts/types-to-json.mjs path/to/SchoolFam/types.ts
 
 StudyUsia's model (`src/content/lab/studyusia/model.json`) comes from the `CREATE TABLE` statements in its
 `DatabaseHelper.kt`. Its foreign keys carry no delete rule because the app's SQLite database does not enable them.
+UniFest's model (`src/content/lab/unifest/model.json`) comes from its `unifest_db.sql` phpMyAdmin export.
 
 The Testing Playground runs scenarios in the browser against these rules and is labelled as a
 simulation; it never connects to the real systems.
