@@ -1,0 +1,210 @@
+{
+  "note": "These scenarios run in your browser against an in-memory copy of StudyUsia's rules: the availability check in DatabaseHelper.isRoomAvailable and the keys in its SQLite schema. They use sample rooms and bookings, and never touch the app or a real device.",
+  "scenarios": [
+    {
+      "id": "AV-01",
+      "title": "A free slot on an open day can be booked",
+      "area": "Availability",
+      "type": "Validation",
+      "steps": [
+        "The General Study Hall is open 08:00–22:00 throughout 2026.",
+        "It already has a confirmed booking on 2026-11-10 from 10:00 to 12:00.",
+        "A student searches for 14:00–16:00 on the same day."
+      ],
+      "rule": {
+        "kind": "availability",
+        "table": "bookings",
+        "request": { "date": "2026-11-10", "startTime": "14:00", "endTime": "16:00" },
+        "fixtures": {
+          "room": { "startDate": "2026-01-01", "endDate": "2026-12-31", "openTime": "08:00", "closeTime": "22:00" },
+          "bookings": [{ "date": "2026-11-10", "startTime": "10:00", "endTime": "12:00", "status": "confirmed" }]
+        }
+      },
+      "expect": "available"
+    },
+    {
+      "id": "AV-02",
+      "title": "An overlapping booking is blocked",
+      "area": "Availability",
+      "type": "Negative",
+      "steps": [
+        "The room has a confirmed booking on 2026-11-10 from 10:00 to 12:00.",
+        "A student searches for 11:00–13:00 on the same day."
+      ],
+      "rule": {
+        "kind": "availability",
+        "table": "bookings",
+        "request": { "date": "2026-11-10", "startTime": "11:00", "endTime": "13:00" },
+        "fixtures": {
+          "room": { "startDate": "2026-01-01", "endDate": "2026-12-31", "openTime": "08:00", "closeTime": "22:00" },
+          "bookings": [{ "date": "2026-11-10", "startTime": "10:00", "endTime": "12:00", "status": "confirmed" }]
+        }
+      },
+      "expect": "unavailable"
+    },
+    {
+      "id": "AV-03",
+      "title": "A booking inside an existing one is blocked",
+      "area": "Availability",
+      "type": "Negative",
+      "steps": [
+        "The room has a confirmed booking on 2026-11-10 from 10:00 to 12:00.",
+        "A student searches for 10:30–11:30, entirely inside it."
+      ],
+      "rule": {
+        "kind": "availability",
+        "table": "bookings",
+        "request": { "date": "2026-11-10", "startTime": "10:30", "endTime": "11:30" },
+        "fixtures": {
+          "room": { "startDate": "2026-01-01", "endDate": "2026-12-31", "openTime": "08:00", "closeTime": "22:00" },
+          "bookings": [{ "date": "2026-11-10", "startTime": "10:00", "endTime": "12:00", "status": "confirmed" }]
+        }
+      },
+      "expect": "unavailable"
+    },
+    {
+      "id": "AV-04",
+      "title": "A back-to-back booking is treated as a clash",
+      "area": "Availability",
+      "type": "Edge case",
+      "steps": [
+        "The room has a confirmed booking on 2026-11-10 from 10:00 to 12:00.",
+        "A student searches for 12:00–14:00, starting exactly when it ends.",
+        "The overlap check compares end times with >=, so touching slots count as overlapping."
+      ],
+      "rule": {
+        "kind": "availability",
+        "table": "bookings",
+        "request": { "date": "2026-11-10", "startTime": "12:00", "endTime": "14:00" },
+        "fixtures": {
+          "room": { "startDate": "2026-01-01", "endDate": "2026-12-31", "openTime": "08:00", "closeTime": "22:00" },
+          "bookings": [{ "date": "2026-11-10", "startTime": "10:00", "endTime": "12:00", "status": "confirmed" }]
+        }
+      },
+      "expect": "unavailable"
+    },
+    {
+      "id": "AV-05",
+      "title": "The same time on another day is free",
+      "area": "Availability",
+      "type": "Validation",
+      "steps": [
+        "The room has a confirmed booking on 2026-11-10 from 10:00 to 12:00.",
+        "A student searches for 10:00–12:00 on 2026-11-11."
+      ],
+      "rule": {
+        "kind": "availability",
+        "table": "bookings",
+        "request": { "date": "2026-11-11", "startTime": "10:00", "endTime": "12:00" },
+        "fixtures": {
+          "room": { "startDate": "2026-01-01", "endDate": "2026-12-31", "openTime": "08:00", "closeTime": "22:00" },
+          "bookings": [{ "date": "2026-11-10", "startTime": "10:00", "endTime": "12:00", "status": "confirmed" }]
+        }
+      },
+      "expect": "available"
+    },
+    {
+      "id": "AV-06",
+      "title": "A slot before opening time is refused",
+      "area": "Availability",
+      "type": "Negative",
+      "steps": ["The room opens at 08:00.", "A student searches for 07:00–09:00."],
+      "rule": {
+        "kind": "availability",
+        "table": "study_rooms",
+        "request": { "date": "2026-11-10", "startTime": "07:00", "endTime": "09:00" },
+        "fixtures": {
+          "room": { "startDate": "2026-01-01", "endDate": "2026-12-31", "openTime": "08:00", "closeTime": "22:00" },
+          "bookings": []
+        }
+      },
+      "expect": "unavailable"
+    },
+    {
+      "id": "AV-07",
+      "title": "A date outside the room's available period is refused",
+      "area": "Availability",
+      "type": "Negative",
+      "steps": ["The room is available from 2026-01-01 to 2026-12-31.", "A student searches for 2027-01-05."],
+      "rule": {
+        "kind": "availability",
+        "table": "study_rooms",
+        "request": { "date": "2027-01-05", "startTime": "10:00", "endTime": "12:00" },
+        "fixtures": {
+          "room": { "startDate": "2026-01-01", "endDate": "2026-12-31", "openTime": "08:00", "closeTime": "22:00" },
+          "bookings": []
+        }
+      },
+      "expect": "unavailable"
+    },
+    {
+      "id": "ACC-01",
+      "title": "Two accounts cannot share an email",
+      "area": "Accounts",
+      "type": "Negative",
+      "steps": ["An account exists for student@example.com.", "Someone registers again with the same email."],
+      "rule": {
+        "kind": "unique",
+        "table": "users",
+        "existing": { "user_id": "USR001", "email": "student@example.com" },
+        "candidate": { "user_id": "USR002", "email": "student@example.com" }
+      },
+      "expect": "rejected"
+    },
+    {
+      "id": "ACC-02",
+      "title": "Email is stored as a unique column",
+      "area": "Accounts",
+      "type": "Integrity",
+      "steps": ["Inspect how the users table stores email addresses."],
+      "rule": { "kind": "column", "table": "users", "column": "email" },
+      "expect": "TEXT unique"
+    },
+    {
+      "id": "RM-01",
+      "title": "Two rooms cannot share a room ID",
+      "area": "Rooms",
+      "type": "Negative",
+      "steps": ["Room RM001 exists.", "An admin creates another room with ID RM001."],
+      "rule": {
+        "kind": "unique",
+        "table": "study_rooms",
+        "existing": { "room_id": "RM001", "room_name": "General Study Hall" },
+        "candidate": { "room_id": "RM001", "room_name": "Discussion Room A" }
+      },
+      "expect": "rejected"
+    },
+    {
+      "id": "BK-01",
+      "title": "The schema alone does not prevent double booking",
+      "area": "Bookings",
+      "type": "Integrity",
+      "steps": [
+        "Booking BK001 holds room RM001 on 2026-11-10 at 10:00.",
+        "A second row, BK002, is inserted for the same room, date and time.",
+        "The table has no unique key on room and time, so preventing this relies on the availability check above."
+      ],
+      "rule": {
+        "kind": "unique",
+        "table": "bookings",
+        "existing": { "booking_id": "BK001", "room_id": "RM001", "booking_date": "2026-11-10", "start_time": "10:00" },
+        "candidate": { "booking_id": "BK002", "room_id": "RM001", "booking_date": "2026-11-10", "start_time": "10:00" }
+      },
+      "expect": "accepted"
+    },
+    {
+      "id": "FB-01",
+      "title": "A student can review the same room more than once",
+      "area": "Feedback",
+      "type": "Validation",
+      "steps": ["USR001 has left feedback for RM001.", "After another visit, USR001 leaves a second review."],
+      "rule": {
+        "kind": "unique",
+        "table": "feedbacks",
+        "existing": { "feedback_id": "FB001", "user_id": "USR001", "room_id": "RM001" },
+        "candidate": { "feedback_id": "FB002", "user_id": "USR001", "room_id": "RM001" }
+      },
+      "expect": "accepted"
+    }
+  ]
+}

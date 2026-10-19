@@ -27,7 +27,8 @@ function linkDescription(fk: SchemaForeignKey): string {
   if (fk.onDelete) return `On delete: ${fk.onDelete}. ${describeDeleteRule(fk.onDelete)}`;
   if (fk.relation === 'contains') return 'Nested data of this type';
   if (fk.relation === 'extends') return 'Inherits all of its fields';
-  return 'Refers by id (inferred from the field name)';
+  if (fk.relation === 'reference') return 'Refers by id (inferred from the field name)';
+  return 'Foreign key with no delete rule';
 }
 
 /** Searchable view of a project's real data model with navigable relationships. */

@@ -1,0 +1,366 @@
+{
+  "source": "DatabaseHelper.kt (SQLite)",
+  "tables": [
+    {
+      "name": "users",
+      "module": "Accounts",
+      "columns": [
+        {
+          "name": "user_id",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": true,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "full_name",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "email",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": true,
+          "autoIncrement": false
+        },
+        {
+          "name": "password",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "phone",
+          "type": "TEXT",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "created_at",
+          "type": "DATETIME",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        }
+      ],
+      "foreignKeys": [],
+      "uniqueKeys": [],
+      "indexes": []
+    },
+    {
+      "name": "study_rooms",
+      "module": "Rooms",
+      "columns": [
+        {
+          "name": "room_id",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": true,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "room_name",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "capacity",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "location",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "facilities",
+          "type": "TEXT",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "details",
+          "type": "TEXT",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "image_path",
+          "type": "TEXT",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "available_start_date",
+          "type": "TEXT",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "available_end_date",
+          "type": "TEXT",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "available_start_time",
+          "type": "TEXT",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "available_end_time",
+          "type": "TEXT",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        }
+      ],
+      "foreignKeys": [],
+      "uniqueKeys": [],
+      "indexes": []
+    },
+    {
+      "name": "bookings",
+      "module": "Bookings",
+      "columns": [
+        {
+          "name": "booking_id",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": true,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "user_id",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "room_id",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "booking_date",
+          "type": "DATE",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "start_time",
+          "type": "TIME",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "end_time",
+          "type": "TIME",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "status",
+          "type": "TEXT",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        }
+      ],
+      "foreignKeys": [
+        {
+          "column": "user_id",
+          "table": "users",
+          "references": "user_id"
+        },
+        {
+          "column": "room_id",
+          "table": "study_rooms",
+          "references": "room_id"
+        }
+      ],
+      "uniqueKeys": [],
+      "indexes": []
+    },
+    {
+      "name": "schedules",
+      "module": "Rooms",
+      "columns": [
+        {
+          "name": "schedule_id",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": true,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "room_id",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "date",
+          "type": "DATE",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "start_time",
+          "type": "TIME",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "end_time",
+          "type": "TIME",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "is_available",
+          "type": "INTEGER",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        }
+      ],
+      "foreignKeys": [
+        {
+          "column": "room_id",
+          "table": "study_rooms",
+          "references": "room_id"
+        }
+      ],
+      "uniqueKeys": [],
+      "indexes": []
+    },
+    {
+      "name": "feedbacks",
+      "module": "Feedback",
+      "columns": [
+        {
+          "name": "feedback_id",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": true,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "user_id",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "room_id",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "rating",
+          "type": "INTEGER",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "comment",
+          "type": "TEXT",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "created_at",
+          "type": "DATETIME",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        }
+      ],
+      "foreignKeys": [
+        {
+          "column": "user_id",
+          "table": "users",
+          "references": "user_id"
+        },
+        {
+          "column": "room_id",
+          "table": "study_rooms",
+          "references": "room_id"
+        }
+      ],
+      "uniqueKeys": [],
+      "indexes": []
+    }
+  ]
+}

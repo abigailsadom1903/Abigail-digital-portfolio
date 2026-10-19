@@ -94,13 +94,27 @@ export interface RegistrationFixtures {
   accessCodes: string[];
 }
 
+/** A study room's bookable window and its existing bookings, for availability scenarios. */
+export interface AvailabilityFixtures {
+  /** Dates as YYYY-MM-DD, times as HH:MM; empty dates mean no date limit. */
+  room: { startDate: string; endDate: string; openTime: string; closeTime: string };
+  bookings: { date: string; startTime: string; endTime: string; status: string }[];
+}
+
+export interface BookingRequest {
+  date: string;
+  startTime: string;
+  endTime: string;
+}
+
 export type TestRule =
   | { kind: 'enum'; table: string; column: string; value: string }
   | { kind: 'unique'; table: string; existing: Record<string, string | number>; candidate: Record<string, string | number> }
   | { kind: 'onDelete'; table: string; column: string }
   | { kind: 'column'; table: string; column: string }
   | { kind: 'navAccess'; table: string; role: string; view: string }
-  | { kind: 'registration'; table: string; role: 'TEACHER' | 'PARENT'; code: string; fixtures: RegistrationFixtures };
+  | { kind: 'registration'; table: string; role: 'TEACHER' | 'PARENT'; code: string; fixtures: RegistrationFixtures }
+  | { kind: 'availability'; table: string; request: BookingRequest; fixtures: AvailabilityFixtures };
 
 export interface TestScenario {
   id: string;

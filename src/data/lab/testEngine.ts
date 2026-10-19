@@ -1,4 +1,13 @@
-import type { NavItemRule, RegistrationFixtures, Schema, SchemaTable, TestRule, TestScenario } from './types';
+import type {
+  AvailabilityFixtures,
+  BookingRequest,
+  NavItemRule,
+  RegistrationFixtures,
+  Schema,
+  SchemaTable,
+  TestRule,
+  TestScenario,
+} from './types';
 
 /*
  * Evaluates Testing Playground scenarios against an in-memory model of a
@@ -76,6 +85,29 @@ export function registrationAllowed(role: 'TEACHER' | 'PARENT', rawCode: string,
   return f.accessCodes.includes(code);
 }
 
+/**
+ * StudyUsia's availability check (DatabaseHelper.isRoomAvailable), including its
+ * plain string comparison of dates and times. A room is free when the request falls
+ * inside its date range and opening hours and overlaps no confirmed booking.
+ */
+export function roomAvailable(req: BookingRequest, f: AvailabilityFixtures): boolean {
+  const { room } = f;
+  if (room.startDate && room.endDate) {
+    if (req.date < room.startDate || req.date > room.endDate) return false;
+  } else if (room.startDate && req.date !== room.startDate) {
+    return false;
+  }
+  if (req.startTime < room.openTime || req.endTime > room.closeTime) return false;
+  return !f.bookings.some(
+    (b) =>
+      b.date === req.date &&
+      b.status === 'confirmed' &&
+      ((b.startTime <= req.endTime && b.endTime > req.startTime) ||
+        (b.startTime < req.endTime && b.endTime >= req.startTime) ||
+        (b.startTime >= req.startTime && b.endTime <= req.endTime)),
+  );
+}
+
 /** Human-readable text for an outcome code. */
 export function describeOutcome(rule: TestRule, code: string): string {
   switch (rule.kind) {
@@ -95,6 +127,8 @@ export function describeOutcome(rule: TestRule, code: string): string {
       return code === 'visible' ? `${rule.role.toLowerCase()} sees "${rule.view}"` : `"${rule.view}" is hidden from ${rule.role.toLowerCase()}`;
     case 'registration':
       return code === 'accepted' ? 'Sign-up is allowed' : 'Sign-up is refused';
+    case 'availability':
+      return code === 'available' ? 'The room can be booked' : 'The room is shown as not available';
   }
 }
 
@@ -130,6 +164,8 @@ function evaluateRule(ctx: EngineContext, rule: TestRule, regression: boolean): 
     }
     case 'registration':
       return regression || registrationAllowed(rule.role, rule.code, rule.fixtures) ? 'accepted' : 'rejected';
+    case 'availability':
+      return regression || roomAvailable(rule.request, rule.fixtures) ? 'available' : 'unavailable';
   }
 }
 

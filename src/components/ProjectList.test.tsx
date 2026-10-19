@@ -27,7 +27,7 @@ describe('ProjectList', () => {
     const lab = screen.getAllByRole('link', { name: /Explore it in the Engineering Lab/ })[0];
     expect(lab).toHaveAttribute('href', '#lab-church');
     expect(lab).not.toHaveAttribute('target');
-    const github = screen.getByRole('link', { name: /View code on GitHub/ });
+    const github = screen.getAllByRole('link', { name: /View code on GitHub/ })[0];
     expect(github).toHaveAttribute('target', '_blank');
     expect(github).toHaveAttribute('rel', 'noopener noreferrer');
   });

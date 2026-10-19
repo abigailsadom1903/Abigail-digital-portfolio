@@ -142,8 +142,39 @@
       "title": "StudyUsia",
       "category": "Booking system",
       "context": "College study-room booking management system",
-      "summary": "A system for managing study-room bookings in a college.",
+      "summary": "An Android app for booking college study rooms: students check which rooms are free for a date and time, reserve them without clashes, manage their bookings and rate the rooms they used.",
       "featured": false,
+      "problem": "Students need a simple way to find a free study room and reserve it without two people booking the same room at the same time.",
+      "approach": "Built as a native Android app in Kotlin with Jetpack Compose. All data is stored on the device in SQLite, and every booking is checked against the room's opening hours, available dates and existing bookings before it is saved.",
+      "features": [
+        "Student registration and sign-in that remembers the user on the device",
+        "Study room list with photos, capacity, location and facilities",
+        "Availability search by date and time across all rooms",
+        "Clash-free booking that respects each room's opening hours and dates",
+        "View, edit and cancel your own bookings",
+        "1–5 star ratings and comments for rooms",
+        "Admin-protected screens to add, edit and delete rooms",
+        "Profile editing"
+      ],
+      "stack": [
+        "Kotlin",
+        "Jetpack Compose",
+        "Material 3",
+        "Navigation Compose",
+        "SQLite",
+        "Coil",
+        "Android Studio"
+      ],
+      "links": [
+        {
+          "label": "View code on GitHub",
+          "url": "https://github.com/abigailsadom1903/Usia-Study-Room-Booking-App"
+        },
+        {
+          "label": "Explore it in the Engineering Lab",
+          "url": "#lab-studyusia"
+        }
+      ],
       "screenshots": [
         {
           "caption": "Booking screen",

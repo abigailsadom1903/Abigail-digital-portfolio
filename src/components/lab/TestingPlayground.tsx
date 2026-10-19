@@ -28,6 +28,8 @@ function checkTarget(rule: TestRule): string[] {
       return ['App.tsx sign-up', rule.role];
     case 'unique':
       return [rule.table];
+    case 'availability':
+      return ['isRoomAvailable', `${rule.request.date} ${rule.request.startTime}–${rule.request.endTime}`];
     default:
       return [rule.table, rule.column];
   }

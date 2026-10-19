@@ -7,6 +7,10 @@ import schoolfamArchitecture from '../../content/lab/schoolfam/architecture.json
 import schoolfamDecisions from '../../content/lab/schoolfam/decisions.json';
 import schoolfamModel from '../../content/lab/schoolfam/model.json';
 import schoolfamTesting from '../../content/lab/schoolfam/testing.json';
+import studyusiaArchitecture from '../../content/lab/studyusia/architecture.json';
+import studyusiaDecisions from '../../content/lab/studyusia/decisions.json';
+import studyusiaModel from '../../content/lab/studyusia/model.json';
+import studyusiaTesting from '../../content/lab/studyusia/testing.json';
 import type { Architecture, Decision, LabProject, Schema, TestSuite } from './types';
 
 /*
@@ -35,5 +39,14 @@ export const labProjects: LabProject[] = [
     schema: schoolfamModel as Schema,
     testSuite: schoolfamTesting as TestSuite,
     decisions: [...decisionsOf(schoolfamDecisions), ...shared],
+  },
+  {
+    id: 'studyusia',
+    name: 'StudyUsia',
+    blurb: 'Android app · Kotlin, Jetpack Compose and SQLite',
+    architecture: studyusiaArchitecture as Architecture,
+    schema: studyusiaModel as Schema,
+    testSuite: studyusiaTesting as TestSuite,
+    decisions: [...decisionsOf(studyusiaDecisions), ...shared],
   },
 ];

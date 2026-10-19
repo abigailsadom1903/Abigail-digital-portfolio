@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { labProjects } from './index';
-import { canSee, enumValues, registrationAllowed, runScenario, uniqueColumnSets } from './testEngine';
+import { canSee, enumValues, registrationAllowed, roomAvailable, runScenario, uniqueColumnSets } from './testEngine';
 import type { TestScenario } from './types';
 
 const church = labProjects.find((p) => p.id === 'church')!;
@@ -42,6 +42,26 @@ describe('testEngine helpers', () => {
     expect(registrationAllowed('PARENT', 'STU-1', fixtures)).toBe(true);
     expect(registrationAllowed('PARENT', 'INV-1', fixtures)).toBe(false);
     expect(registrationAllowed('PARENT', '', fixtures)).toBe(false);
+  });
+
+  it("models StudyUsia's room availability check", () => {
+    const fixtures = {
+      room: { startDate: '2026-01-01', endDate: '2026-12-31', openTime: '08:00', closeTime: '22:00' },
+      bookings: [
+        { date: '2026-11-10', startTime: '10:00', endTime: '12:00', status: 'confirmed' },
+        { date: '2026-11-10', startTime: '15:00', endTime: '17:00', status: 'cancelled' },
+      ],
+    };
+    const at = (date: string, startTime: string, endTime: string) => roomAvailable({ date, startTime, endTime }, fixtures);
+    expect(at('2026-11-10', '13:00', '14:00')).toBe(true);
+    expect(at('2026-11-10', '09:00', '13:00')).toBe(false); // covers the booking
+    expect(at('2026-11-10', '08:00', '10:00')).toBe(false); // touching slots clash
+    expect(at('2026-11-10', '15:00', '17:00')).toBe(true); // only confirmed bookings count
+    expect(at('2026-11-10', '21:00', '22:30')).toBe(false); // after closing
+    expect(at('2025-12-31', '10:00', '12:00')).toBe(false); // before the available period
+    const singleDay = { ...fixtures, room: { ...fixtures.room, endDate: '' } };
+    expect(roomAvailable({ date: '2026-01-01', startTime: '13:00', endTime: '14:00' }, singleDay)).toBe(true);
+    expect(roomAvailable({ date: '2026-01-02', startTime: '13:00', endTime: '14:00' }, singleDay)).toBe(false);
   });
 });
 

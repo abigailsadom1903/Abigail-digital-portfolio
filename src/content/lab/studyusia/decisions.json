@@ -1,0 +1,91 @@
+{
+  "decisions": [
+    {
+      "id": "su-on-device",
+      "project": "StudyUsia",
+      "title": "Keep all data on the phone with SQLite",
+      "problem": "The app needed working accounts, rooms, bookings and feedback that survive closing the app, without setting up and paying for a server.",
+      "alternatives": [
+        "A cloud backend such as Firebase",
+        "Android's Room persistence library on top of SQLite"
+      ],
+      "decision": "All data lives in a local SQLite database, accessed through one SQLiteOpenHelper class with hand-written SQL.",
+      "tradeoffs": [
+        "Works offline and needs no server, accounts or network permission",
+        "Writing the SQL by hand shows exactly how tables and queries work, but needs more code than Room",
+        "Each phone has its own database, so students on different phones do not see each other's bookings; a real deployment needs a shared backend"
+      ],
+      "evidence": [
+        "DatabaseHelper extends SQLiteOpenHelper and creates studyusia.db",
+        "The manifest requests no permissions, including internet access",
+        "Schema upgrades drop and recreate the tables (database version 9)"
+      ],
+      "lessons": ""
+    },
+    {
+      "id": "su-availability",
+      "project": "StudyUsia",
+      "title": "Check for clashes before a booking is saved",
+      "problem": "Two students must not hold the same room at the same time, and rooms can only be booked during their opening hours and available dates.",
+      "alternatives": [
+        "A unique key on room, date and start time (only catches identical start times, not partial overlaps)",
+        "Pre-generated time slots in the schedules table"
+      ],
+      "decision": "Before a booking is made, isRoomAvailable checks the room's date range and opening hours, then queries for any confirmed booking that overlaps the requested time.",
+      "tradeoffs": [
+        "Students can choose any start and end time instead of fixed slots",
+        "The rule lives in app code, not the schema, so every path that saves a booking must call it",
+        "Touching bookings count as a clash, so 12:00–14:00 cannot follow 10:00–12:00",
+        "Dates and times are compared as text, which works because the pickers always save zero-padded YYYY-MM-DD and HH:MM"
+      ],
+      "evidence": [
+        "DatabaseHelper.isRoomAvailable: three overlap conditions on start_time and end_time",
+        "Called from NewBookingScreen and from the Room Availability search",
+        "Run the AV scenarios in the Testing tab"
+      ],
+      "lessons": ""
+    },
+    {
+      "id": "su-admin-key",
+      "project": "StudyUsia",
+      "title": "Protect room management with an admin key",
+      "problem": "Students should book rooms, but only staff should be able to create, change or delete them.",
+      "alternatives": [
+        "An admin role stored on each user account",
+        "A separate admin app or web dashboard"
+      ],
+      "decision": "Create, update and delete room screens ask for an admin access key before saving.",
+      "tradeoffs": [
+        "Simple to build and easy to demonstrate",
+        "The key is shared and built into the app, so anyone who learns it can manage rooms",
+        "Like sign-in, this is prototype-level security: a production version needs admin roles on accounts and hashed passwords"
+      ],
+      "evidence": [
+        "CreateRoom.kt and UpdateRoom.kt check the key before addRoom, updateRoom and deleteRoom",
+        "The users table has no role column"
+      ],
+      "lessons": ""
+    },
+    {
+      "id": "su-readable-ids",
+      "project": "StudyUsia",
+      "title": "Use readable IDs such as BK001",
+      "problem": "Bookings, rooms and users needed identifiers that are easy to read on screen and when checking the database.",
+      "alternatives": [
+        "SQLite INTEGER PRIMARY KEY AUTOINCREMENT",
+        "Random UUIDs"
+      ],
+      "decision": "Each table uses a text primary key made of a prefix and a three-digit number (USR001, RM001, BK001, FB001). generateId reads the highest existing ID and adds one.",
+      "tradeoffs": [
+        "IDs are easy to read and to quote, for example when talking about a booking",
+        "Creating a record needs an extra query first",
+        "The number is read from the fourth character onwards, which fits three-letter prefixes such as USR; for two-letter prefixes such as RM and BK, the ID after BK100 would come out as BK001 again and clash"
+      ],
+      "evidence": [
+        "DatabaseHelper.generateId(prefix)",
+        "All five tables use TEXT PRIMARY KEY columns"
+      ],
+      "lessons": ""
+    }
+  ]
+}
