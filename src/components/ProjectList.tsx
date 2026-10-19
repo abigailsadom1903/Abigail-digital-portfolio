@@ -1,5 +1,5 @@
 import { ArrowLeft, ArrowRight, ArrowUpRight, Expand, FileText, Plus, ShieldCheck } from 'lucide-react';
-import { useRef, useState, type PointerEvent, type ReactNode } from 'react';
+import { useEffect, useRef, useState, type PointerEvent, type ReactNode } from 'react';
 import type { Project, ProjectMedia } from '../data/types';
 import { ButtonLink } from './Button';
 import { ImageLightbox, type LightboxImage } from './ImageLightbox';
@@ -178,18 +178,28 @@ function ProjectPanel({ project, previous, next }: PanelProps) {
   );
 }
 
-const PREVIEW_WIDTH = 320;
-const PREVIEW_GAP = 28;
+/** Wait before showing the preview, so it doesn't flash while the mouse passes over. */
+const PREVIEW_DELAY = 250;
 
 /**
  * Numbered, collapsible project list. The featured project starts open;
  * the rest show a single tidy row until expanded. Rows with a cover photo show
- * a thumbnail, and on mouse devices a larger preview floats beside the cursor
- * while hovering a closed row.
+ * a thumbnail; resting the mouse on a thumbnail grows a larger preview out of it.
  */
 export function ProjectList({ projects }: ProjectListProps) {
   const [previewId, setPreviewId] = useState<string | null>(null);
   const previewRef = useRef<HTMLDivElement>(null);
+  const timer = useRef<number | undefined>(undefined);
+
+  // The preview is anchored to the thumbnail's position on screen, so close it when the page scrolls.
+  useEffect(() => {
+    if (!previewId) return;
+    const close = () => setPreviewId(null);
+    window.addEventListener('scroll', close, { passive: true });
+    return () => window.removeEventListener('scroll', close);
+  }, [previewId]);
+
+  useEffect(() => () => window.clearTimeout(timer.current), []);
 
   if (projects.length === 0) {
     return <p className="project__empty">Projects will appear here soon.</p>;
@@ -199,41 +209,41 @@ export function ProjectList({ projects }: ProjectListProps) {
   // Once any project has a cover, every row gets a thumbnail slot so titles stay aligned.
   const hasCovers = projects.some((p) => p.cover);
 
-  /** Places the floating preview beside the cursor, flipping to the left near the right edge. */
-  const movePreview = (x: number, y: number) => {
-    const el = previewRef.current;
-    if (!el) return;
-    const left = x + PREVIEW_GAP + PREVIEW_WIDTH > window.innerWidth ? x - PREVIEW_GAP - PREVIEW_WIDTH : x + PREVIEW_GAP;
-    el.style.setProperty('--preview-x', `${Math.max(8, left)}px`);
-    el.style.setProperty('--preview-y', `${y}px`);
+  const hidePreview = () => {
+    window.clearTimeout(timer.current);
+    setPreviewId(null);
   };
 
-  const onRowEnter = (event: PointerEvent<HTMLElement>, project: Project) => {
+  /** Shows the preview after a short pause, grown out of the thumbnail it belongs to. */
+  const onThumbEnter = (event: PointerEvent<HTMLElement>, project: Project) => {
     if (event.pointerType !== 'mouse' || !project.cover) return;
-    if ((event.currentTarget.parentElement as HTMLDetailsElement | null)?.open) return;
-    movePreview(event.clientX, event.clientY);
-    setPreviewId(project.id);
+    const thumb = event.currentTarget;
+    window.clearTimeout(timer.current);
+    timer.current = window.setTimeout(() => {
+      if ((thumb.closest('details') as HTMLDetailsElement | null)?.open) return;
+      const rect = thumb.getBoundingClientRect();
+      const el = previewRef.current;
+      if (!el) return;
+      el.style.setProperty('--preview-x', `${rect.left}px`);
+      el.style.setProperty('--preview-y', `${rect.top + rect.height / 2}px`);
+      setPreviewId(project.id);
+    }, PREVIEW_DELAY);
   };
 
   return (
     <>
-      <ol
-        className="projects"
-        role="list"
-        onPointerMove={(e) => previewId && movePreview(e.clientX, e.clientY)}
-        onPointerLeave={() => setPreviewId(null)}
-      >
+      <ol className="projects" role="list">
         {projects.map((project, i) => (
           <li key={project.id} id={project.id} className="project" data-reveal>
-            <details open={project.featured} onToggle={() => setPreviewId(null)}>
-              <summary
-                className={`project__row${hasCovers ? ' project__row--cover' : ''}`}
-                onPointerEnter={(e) => onRowEnter(e, project)}
-                onPointerLeave={() => setPreviewId(null)}
-              >
+            <details open={project.featured} onToggle={hidePreview}>
+              <summary className={`project__row${hasCovers ? ' project__row--cover' : ''}`}>
                 <span className="project__num">{String(i + 1).padStart(2, '0')}</span>
                 {hasCovers && (
-                  <span className="project__thumb">
+                  <span
+                    className="project__thumb"
+                    onPointerEnter={(e) => onThumbEnter(e, project)}
+                    onPointerLeave={hidePreview}
+                  >
                     {project.cover ? (
                       <img src={project.cover} alt="" loading="lazy" decoding="async" width={96} height={72} />
                     ) : (
@@ -267,7 +277,6 @@ export function ProjectList({ projects }: ProjectListProps) {
         data-testid="project-preview"
       >
         {previewProject?.cover && <img src={previewProject.cover} alt="" />}
-        {previewProject && <span className="project-preview__label">{previewProject.title}</span>}
       </div>
     </>
   );

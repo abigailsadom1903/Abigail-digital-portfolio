@@ -395,52 +395,58 @@ details[open] > .project__row .project__toggle {
   color: var(--color-primary);
 }
 
-/* ---- Floating preview beside the cursor (mouse devices only) ---- */
+/* ---- Preview that grows out of a thumbnail (mouse devices only) ---- */
 .project-preview {
   position: fixed;
   top: 0;
   left: 0;
   z-index: 40;
-  width: 320px;
-  max-width: calc(100vw - 16px);
+  width: 260px;
+  max-width: calc(100vw - 32px);
   overflow: hidden;
-  border: 1px solid var(--color-lavender-300);
+  border: 1px solid var(--color-border-strong);
   border-radius: var(--radius-md);
-  background: var(--color-lavender-100);
-  box-shadow: 0 24px 48px -18px rgb(45 20 70 / 0.45);
+  background: var(--color-lavender-50);
+  box-shadow: 0 18px 40px -20px rgb(45 20 70 / 0.35);
   pointer-events: none;
   opacity: 0;
-  transform: translate(var(--preview-x, 0), calc(var(--preview-y, 0) - 50%)) scale(0.92) rotate(-2deg);
+  visibility: hidden;
+  transform-origin: left center;
+  transform: translate(var(--preview-x, 0), calc(var(--preview-y, 0) - 50%)) scale(0.32);
   transition:
-    opacity var(--duration-base) var(--ease-out),
-    transform 160ms var(--ease-out);
+    opacity 180ms var(--ease-out),
+    transform 220ms var(--ease-out),
+    visibility 0s linear 220ms;
 }
 
 .project-preview.is-visible {
   opacity: 1;
-  transform: translate(var(--preview-x, 0), calc(var(--preview-y, 0) - 50%)) scale(1) rotate(-1deg);
+  visibility: visible;
+  transform: translate(var(--preview-x, 0), calc(var(--preview-y, 0) - 50%)) scale(1);
+  transition:
+    opacity 180ms var(--ease-out),
+    transform 220ms var(--ease-out),
+    visibility 0s;
 }
 
 .project-preview img {
   display: block;
   width: 100%;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 4 / 3;
   object-fit: cover;
 }
 
-.project-preview__label {
-  display: block;
-  padding: var(--space-2) var(--space-3);
-  background: var(--color-primary);
-  color: var(--color-on-primary);
-  font-size: var(--text-xs);
-  font-weight: var(--weight-semibold);
-  letter-spacing: 0.02em;
+.project__thumb {
+  cursor: zoom-in;
 }
 
 @media (hover: none), (pointer: coarse) {
   .project-preview {
     display: none;
+  }
+
+  .project__thumb {
+    cursor: pointer;
   }
 }
 
@@ -448,6 +454,5 @@ details[open] > .project__row .project__toggle {
   .project-preview,
   .project-preview.is-visible {
     transform: translate(var(--preview-x, 0), calc(var(--preview-y, 0) - 50%));
-    transition: opacity var(--duration-base) linear;
   }
 }

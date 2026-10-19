@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it } from 'vitest';
 import { projects } from '../data/projects';
@@ -53,15 +53,30 @@ describe('ProjectList', () => {
     expect(container.querySelector(`#${withCovers[1].id} .project__thumb img`)).toHaveAttribute('src', '/images/schoolfam.jpg');
 
     const preview = screen.getByTestId('project-preview');
-    expect(preview).not.toHaveClass('is-visible');
-    await user.hover(container.querySelector(`#${withCovers[1].id} summary`)!);
-    expect(preview).toHaveClass('is-visible');
-    expect(preview.querySelector('img')).toHaveAttribute('src', '/images/schoolfam.jpg');
-    await user.unhover(container.querySelector(`#${withCovers[1].id} summary`)!);
+    const thumb = (id: string) => container.querySelector(`#${id} .project__thumb`)!;
     expect(preview).not.toHaveClass('is-visible');
 
-    // Rows without a cover never show the preview.
-    await user.hover(container.querySelector(`#${withCovers[0].id} summary`)!);
+    // Hovering the row's text does nothing; only resting on the photo opens the preview.
+    await user.hover(container.querySelector(`#${withCovers[1].id} .project__title`)!);
+    await new Promise((r) => setTimeout(r, 300));
+    expect(preview).not.toHaveClass('is-visible');
+
+    await user.hover(thumb(withCovers[1].id));
+    expect(preview).not.toHaveClass('is-visible'); // short delay first
+    await waitFor(() => expect(preview).toHaveClass('is-visible'));
+    expect(preview.querySelector('img')).toHaveAttribute('src', '/images/schoolfam.jpg');
+    await user.unhover(thumb(withCovers[1].id));
+    expect(preview).not.toHaveClass('is-visible');
+
+    // Passing quickly over a photo doesn't flash the preview.
+    await user.hover(thumb(withCovers[1].id));
+    await user.unhover(thumb(withCovers[1].id));
+    await new Promise((r) => setTimeout(r, 300));
+    expect(preview).not.toHaveClass('is-visible');
+
+    // Lettered tiles (no photo) never show the preview.
+    await user.hover(thumb(withCovers[0].id));
+    await new Promise((r) => setTimeout(r, 300));
     expect(preview).not.toHaveClass('is-visible');
   });
 
