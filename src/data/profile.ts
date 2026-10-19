@@ -14,9 +14,7 @@ export const profile: Profile = {
   expectedGraduation: '2027',
   interests: ['Web development', 'Software testing & QA'],
 
-  // The resume PDF includes a phone number, photo and a referee's email, so it is not
-  // published as-is. Place a web-safe version at public/cv/ and set e.g. '/cv/Abigail-Sadom-CV.pdf'.
-  cvUrl: null,
+  cvUrl: '/cv/Abigail-Sadom-CV.pdf',
 
   contact: [
     {
