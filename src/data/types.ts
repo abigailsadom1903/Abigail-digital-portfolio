@@ -112,6 +112,8 @@ export interface Achievement {
   credentialUrl?: string;
   /** Uploaded certificate (PDF or image), resolved URL. */
   certificate?: string;
+  /** Button text for the uploaded document, e.g. "Transcript". Defaults to "Certificate". */
+  certificateLabel?: string;
   /** Uploaded photo, resolved URL. */
   photo?: string;
 }
@@ -125,6 +127,8 @@ export interface Activity {
   /** What Abigail did, as short bullet points. */
   highlights?: string[];
   certificate?: string;
+  /** Button text for the uploaded document, e.g. "Transcript". Defaults to "Certificate". */
+  certificateLabel?: string;
   photo?: string;
 }
 

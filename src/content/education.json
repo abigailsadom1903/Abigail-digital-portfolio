@@ -78,7 +78,26 @@
     {
       "role": "Digital Systems Feedback Contributor",
       "organisation": "Archdiocese of Kota Kinabalu",
+      "area": "Science and Technology",
+      "highlights": [
+        "Contributed a youth perspective and Software Engineering knowledge by providing feedback on digital systems and technology initiatives.",
+        "Shared insights on usability, user experience and potential improvements to support user needs.",
+        "Supported community-focused digital innovation through collaboration, idea-sharing and constructive feedback."
+      ],
       "photo": "/images/photo_2026-10-19_22-57-24.jpg"
+    },
+    {
+      "role": "Student Activity Transcript",
+      "organisation": "Universiti Malaysia Sabah",
+      "period": "2023 – 2026",
+      "area": "Co-curricular merit",
+      "highlights": [
+        "Rated Cemerlang (Excellent) for overall student involvement.",
+        "Took part in 28 programmes: 4 international, 7 national, 4 state, 9 university and 4 faculty or college programmes.",
+        "Earned 574 merit points, including career programmes such as Crafting Career: Resume and Interview Prep, and Career Mapping: From Campus to Career."
+      ],
+      "certificate": "/certificates/UMS-Student-Activity-Transcript.pdf",
+      "certificateLabel": "Transcript"
     },
     {
       "role": "Committee Member",

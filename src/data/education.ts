@@ -24,6 +24,7 @@ const toAchievement = (a: Record<string, unknown>): Achievement[] => {
       description: text(a.description) ?? undefined,
       credentialUrl: text(a.credentialUrl) ?? undefined,
       certificate: upload(a.certificate),
+      certificateLabel: text(a.certificateLabel) ?? undefined,
       photo: upload(a.photo),
     },
   ];
@@ -40,6 +41,7 @@ const toActivity = (a: Record<string, unknown>): Activity[] => {
       area: text(a.area) ?? undefined,
       highlights: texts(a.highlights),
       certificate: upload(a.certificate),
+      certificateLabel: text(a.certificateLabel) ?? undefined,
       photo: upload(a.photo),
     },
   ];

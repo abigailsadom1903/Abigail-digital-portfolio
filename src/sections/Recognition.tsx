@@ -24,6 +24,7 @@ interface Entry {
   highlights?: string[];
   credentialUrl?: string;
   certificate?: string;
+  certificateLabel?: string;
   photo?: string;
 }
 
@@ -35,6 +36,7 @@ const fromAchievement = (a: Achievement, group: string): Entry => ({
   description: a.description,
   credentialUrl: a.credentialUrl,
   certificate: a.certificate,
+  certificateLabel: a.certificateLabel,
   photo: a.photo,
 });
 
@@ -46,6 +48,7 @@ const fromActivity = (a: Activity): Entry => ({
   area: a.area,
   highlights: a.highlights,
   certificate: a.certificate,
+  certificateLabel: a.certificateLabel,
   photo: a.photo,
 });
 
@@ -59,10 +62,10 @@ function FileLinks({ entry }: { entry: Entry }) {
           href={entry.certificate}
           target="_blank"
           rel="noopener noreferrer"
-          aria-label={`Certificate for ${entry.title} (opens in a new tab)`}
+          aria-label={`${entry.certificateLabel ?? 'Certificate'} for ${entry.title} (opens in a new tab)`}
         >
           <FileText size={14} aria-hidden="true" />
-          Certificate
+          {entry.certificateLabel ?? 'Certificate'}
         </a>
       )}
       {entry.credentialUrl && (
