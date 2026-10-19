@@ -1,0 +1,8 @@
+# Netlify build settings. Netlify rebuilds the site on every push to main,
+# including saves made through Pages CMS.
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"

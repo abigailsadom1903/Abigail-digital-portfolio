@@ -4,7 +4,7 @@ import { defineConfig } from 'vite'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
-  // Served from https://abigailsadom1903.github.io/Abigail-digital-portfolio/
-  // Must match the GitHub repository name exactly (case-sensitive).
-  base: '/Abigail-digital-portfolio/',
+  // URL path the site is served from. Netlify and local dev serve it at the root ("/").
+  // The GitHub Pages workflow sets BASE_PATH=/Abigail-digital-portfolio/ (the repository name).
+  base: process.env.BASE_PATH || '/',
 })

@@ -27,6 +27,16 @@ git push
 
 Progress is shown under the repository's **Actions** tab; the site updates about a minute later.
 
+### Netlify (optional)
+
+The site can also be hosted on Netlify, which serves it at the root of its own address.
+`netlify.toml` already holds the build settings. In Netlify: **Add new site → Import an existing
+project → GitHub → Abigail-digital-portfolio**, keep the detected settings, and deploy. Netlify then
+rebuilds on every push to `main`, including Pages CMS saves.
+
+The URL path is set by the `BASE_PATH` environment variable (default `/`). The GitHub Pages
+workflow sets it to `/Abigail-digital-portfolio/`; Netlify and local development use `/`.
+
 ## Editing content
 
 **Easiest: Pages CMS.** Sign in at https://app.pagescms.org with GitHub, open this repository,
