@@ -1,4 +1,5 @@
 import { ArrowDown, Download } from 'lucide-react';
+import { BrandIcon, type Brand } from '../components/BrandIcon';
 import { ButtonLink } from '../components/Button';
 import { Container } from '../components/Container';
 import type { Profile } from '../data/types';
@@ -10,6 +11,10 @@ interface HeroProps {
 
 export function Hero({ profile }: HeroProps) {
   const email = profile.contact.find((c) => c.kind === 'email' && c.href);
+  // LinkedIn first, then GitHub, whichever have links in Pages CMS.
+  const socials = (['linkedin', 'github'] as const)
+    .map((kind) => profile.contact.find((c) => c.kind === kind && c.href))
+    .filter((c): c is NonNullable<typeof c> => Boolean(c));
 
   return (
     <section className="hero" aria-labelledby="hero-heading">
@@ -34,6 +39,25 @@ export function Hero({ profile }: HeroProps) {
               Download CV
             </ButtonLink>
           </div>
+
+          {socials.length > 0 && (
+            <ul className="hero__social" role="list" aria-label="Profiles">
+              {socials.map((link) => (
+                <li key={link.kind}>
+                  <a
+                    className="hero__social-link"
+                    href={link.href!}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`${link.label} (opens in a new tab)`}
+                  >
+                    <BrandIcon brand={link.kind as Brand} />
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          )}
 
           {profile.lookingFor && (
             <p className="hero__status">
