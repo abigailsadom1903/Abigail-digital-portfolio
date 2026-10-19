@@ -29,5 +29,3 @@ dist-ssr
 /blob-report/
 /playwright/.cache/
 
-# Cover letter editor: personal details and signature stay on this computer
-tools/cover-letter-editor/*.local.js
