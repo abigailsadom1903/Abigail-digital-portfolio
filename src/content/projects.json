@@ -193,6 +193,7 @@
     {
       "title": "UniFest",
       "category": "Web application",
+      "cover": "/images/Screenshot 2026-10-19 212202.png",
       "context": "Campus event management system · Team project",
       "summary": "A web-based campus event system where students, staff and the public browse and register for university events, organisers manage their events and participants, and admins approve events and manage users.",
       "featured": false,
