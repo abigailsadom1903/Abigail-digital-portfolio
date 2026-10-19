@@ -4,30 +4,27 @@ import './Section.css';
 
 interface SectionProps {
   id: string;
-  /** Section number shown in the header, e.g. "01". */
-  index?: string;
-  eyebrow: string;
+  /** Section number shown before the title, e.g. "01". */
+  index: string;
   title: string;
-  intro?: ReactNode;
+  /** Optional element aligned to the right of the heading, e.g. a count or a link. */
+  aside?: ReactNode;
   tone?: 'plain' | 'tinted';
   children: ReactNode;
 }
 
-/** Standard page section with an editorial header and a labelled landmark. */
-export function Section({ id, index, eyebrow, title, intro, tone = 'plain', children }: SectionProps) {
+/** Page section with a compact numbered heading ("01 Selected work") and a labelled landmark. */
+export function Section({ id, index, title, aside, tone = 'plain', children }: SectionProps) {
   const headingId = `${id}-heading`;
   return (
     <section id={id} className={`section section--${tone}`} aria-labelledby={headingId}>
       <Container>
         <header className="section__header" data-reveal>
-          <p className="eyebrow section__eyebrow">
-            {index && <span className="section__index">{index}</span>}
-            {eyebrow}
-          </p>
           <h2 id={headingId} className="section__title">
+            <span className="section__index">{index}</span>
             {title}
           </h2>
-          {intro && <div className="section__intro">{intro}</div>}
+          {aside && <div className="section__aside">{aside}</div>}
         </header>
         {children}
       </Container>

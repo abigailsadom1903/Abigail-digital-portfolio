@@ -1,37 +1,74 @@
 import { Placeholder } from '../components/Placeholder';
 import { Section } from '../components/Section';
-import type { Profile } from '../data/types';
+import type { EducationEntry, Experience, Profile } from '../data/types';
 import './About.css';
 
 interface AboutProps {
   profile: Profile;
+  education: EducationEntry[];
+  experience: Experience[];
 }
 
-export function About({ profile }: AboutProps) {
-  const [lead, ...rest] = profile.about;
-
+export function About({ profile, education, experience }: AboutProps) {
   return (
-    <Section id="about" index="01" eyebrow="About" title="Software engineering, with an eye for quality.">
-      <div className="about" data-reveal>
-        <div className="about__prose">
-          {lead ? <p className="about__lead">{lead}</p> : <Placeholder label="Add an About paragraph" />}
-          {rest.map((paragraph) => (
-            <p key={paragraph}>{paragraph}</p>
-          ))}
+    <Section id="about" index="02" title="About">
+      <div className="split">
+        <div className="about__prose" data-reveal>
+          {profile.about.length > 0 ? (
+            profile.about.map((paragraph) => <p key={paragraph}>{paragraph}</p>)
+          ) : (
+            <Placeholder label="Add an About paragraph" />
+          )}
+
+          {profile.interests.length > 0 && (
+            <dl className="about__facts">
+              <div>
+                <dt>Interests</dt>
+                <dd>{profile.interests.join(' · ')}</dd>
+              </div>
+              {profile.lookingFor && (
+                <div>
+                  <dt>Looking for</dt>
+                  <dd>{profile.lookingFor}</dd>
+                </div>
+              )}
+            </dl>
+          )}
         </div>
 
-        <aside className="about__aside" aria-labelledby="about-seeking">
-          <h3 id="about-seeking" className="eyebrow">
-            Looking for
-          </h3>
-          <p className="about__seeking">{profile.lookingFor ?? 'Software engineering internship opportunities'}</p>
-          <h3 className="eyebrow about__aside-heading">Areas of interest</h3>
-          <ul className="about__interests" role="list">
-            {profile.interests.map((interest) => (
-              <li key={interest}>{interest}</li>
+        <div className="about__timeline" data-reveal>
+          <h3 className="subheading">Education</h3>
+          <ol className="rows" role="list">
+            {education.map((entry) => (
+              <li key={entry.qualification} className="row">
+                <p className="row__date">{entry.period}</p>
+                <div>
+                  <h4 className="row__title">{entry.qualification}</h4>
+                  <p className="row__meta">{entry.institution}</p>
+                  {entry.details.length > 0 && <p className="row__text">{entry.details.join(' · ')}</p>}
+                </div>
+              </li>
             ))}
-          </ul>
-        </aside>
+          </ol>
+
+          {experience.length > 0 && (
+            <>
+              <h3 className="subheading about__subheading">Experience</h3>
+              <ol className="rows" role="list">
+                {experience.map((job) => (
+                  <li key={`${job.role}-${job.organisation}`} className="row">
+                    <p className="row__date">{job.period}</p>
+                    <div>
+                      <h4 className="row__title">{job.role}</h4>
+                      <p className="row__meta">{job.organisation}</p>
+                      {job.description && <p className="row__text">{job.description}</p>}
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            </>
+          )}
+        </div>
       </div>
     </Section>
   );

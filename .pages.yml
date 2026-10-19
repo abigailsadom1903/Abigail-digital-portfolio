@@ -11,6 +11,10 @@ media:
     input: public/cv
     output: /cv
     extensions: [pdf]
+  - name: certificates
+    input: public/certificates
+    output: /certificates
+    extensions: [pdf, jpg, jpeg, png, webp]
 
 content:
   - name: profile
@@ -61,6 +65,7 @@ content:
             summary: "{title}"
         fields:
           - { name: title, label: Title, type: string }
+          - { name: category, label: Category (short label e.g. Web application or IoT), type: string }
           - { name: context, label: Context (organisation or project type), type: string }
           - { name: summary, label: Summary, type: text }
           - { name: featured, label: Featured case study (larger layout), type: boolean }
@@ -112,7 +117,7 @@ content:
           - { name: items, label: Skills, type: string, list: true }
 
   - name: education
-    label: Education & Achievements
+    label: Education, Experience & Awards
     type: file
     path: src/content/education.json
     format: json
@@ -129,6 +134,18 @@ content:
           - { name: institution, label: Institution, type: string }
           - { name: period, label: Period (e.g. 2023 – 2027), type: string }
           - { name: details, label: Details (e.g. CGPA), type: string, list: true }
+      - name: experience
+        label: Work experience
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{role}"
+        fields:
+          - { name: role, label: Role, type: string }
+          - { name: organisation, label: Employer and location, type: string }
+          - { name: period, label: Period, type: string }
+          - { name: description, label: One-line summary, type: string }
       - name: achievements
         label: Honours & achievements
         type: object
@@ -142,6 +159,16 @@ content:
           - { name: date, label: Date or year, type: string }
           - { name: description, label: Description (optional), type: text }
           - { name: credentialUrl, label: Credential link (optional), type: string }
+          - name: certificate
+            label: Certificate (PDF or image upload)
+            type: file
+            options:
+              media: certificates
+          - name: photo
+            label: Photo (optional)
+            type: image
+            options:
+              media: images
       - name: training
         label: Training & programmes
         type: object
@@ -155,6 +182,16 @@ content:
           - { name: date, label: Date or year, type: string }
           - { name: description, label: Description (optional), type: text }
           - { name: credentialUrl, label: Certificate link (optional), type: string }
+          - name: certificate
+            label: Certificate (PDF or image upload)
+            type: file
+            options:
+              media: certificates
+          - name: photo
+            label: Photo (optional)
+            type: image
+            options:
+              media: images
       - name: activities
         label: Leadership & activities
         type: object
@@ -166,3 +203,13 @@ content:
           - { name: role, label: Role, type: string }
           - { name: organisation, label: Organisation / event, type: string }
           - { name: period, label: Period, type: string }
+          - name: certificate
+            label: Certificate (PDF or image upload)
+            type: file
+            options:
+              media: certificates
+          - name: photo
+            label: Photo (optional)
+            type: image
+            options:
+              media: images

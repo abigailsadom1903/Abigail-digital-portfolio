@@ -30,15 +30,17 @@ Progress is shown under the repository's **Actions** tab; the site updates about
 ## Editing content
 
 **Easiest: Pages CMS.** Sign in at https://app.pagescms.org with GitHub, open this repository,
-and edit with forms: Profile & About, Projects, Skills, Education & Achievements.
-Upload buttons handle the profile photo, CV (PDF) and project screenshots. Each save
-publishes automatically. The forms are defined in `.pages.yml`.
+and edit with forms: Profile & About, Projects, Skills, Education, Experience & Awards.
+Upload buttons handle the profile photo, CV (PDF), project screenshots, and a certificate
+and photo for each award, training programme or activity. Each save publishes automatically.
+The forms are defined in `.pages.yml`.
 
 **By hand:** the same content lives in JSON files in `src/content/`
 (`profile.json`, `projects.json`, `skills.json`, `education.json`).
-Uploaded files go in `public/images/` and `public/cv/`; reference them as `/images/...` or `/cv/...`.
+Uploaded files go in `public/images/`, `public/cv/` and `public/certificates/`; reference them as `/images/...`, `/cv/...` or `/certificates/...`.
 
-Blank fields render as a clearly labelled **Placeholder**, so fill in real, verified details only.
+Blank fields are hidden on the published site; when running locally (`npm run dev`) they show
+as clearly labelled **Placeholders**. Fill in real, verified details only.
 **Church Management System screenshots must use sample data only.**
 
 ## Structure
@@ -48,7 +50,7 @@ src/
   styles/     tokens.css (design tokens), global.css (reset, base, focus, motion)
   content/    editable content (JSON, used by Pages CMS)
   data/       loaders that turn content into typed data
-  components/ reusable UI: Container, Section, ButtonLink, Placeholder, TagList, CaseStudy, Navbar
-  sections/   page sections: Hero, About, Work, Skills, Education, Contact, Footer
+  components/ reusable UI: Container, Section, ButtonLink, Placeholder, ProjectList, Navbar
+  sections/   page sections: Hero, Work, About, Skills, Recognition (awards), Contact, Footer
   hooks/      useActiveSection, useHideOnScroll, useReveal
 ```

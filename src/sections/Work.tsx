@@ -1,4 +1,4 @@
-import { CaseStudy } from '../components/CaseStudy';
+import { ProjectList } from '../components/ProjectList';
 import { Section } from '../components/Section';
 import type { Project } from '../data/types';
 
@@ -8,16 +8,8 @@ interface WorkProps {
 
 export function Work({ projects }: WorkProps) {
   return (
-    <Section
-      id="work"
-      index="02"
-      eyebrow="Selected work"
-      title="Projects and case studies"
-      intro={<p>Systems I have worked on, from requirements through to a working product.</p>}
-    >
-      {projects.map((project, i) => (
-        <CaseStudy key={project.id} project={project} index={i} />
-      ))}
+    <Section id="work" index="01" title="Selected work" aside={`${projects.length} projects`}>
+      <ProjectList projects={projects} />
     </Section>
   );
 }

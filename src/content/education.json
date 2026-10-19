@@ -4,25 +4,63 @@
       "qualification": "Bachelor of Computer Science (Hons.), Software Engineering",
       "institution": "Universiti Malaysia Sabah",
       "period": "2023 – 2027",
-      "details": ["CGPA 3.58", "BKNS Scholar"]
+      "details": [
+        "CGPA 3.58",
+        "BKNS Scholar"
+      ]
     },
     {
       "qualification": "Module III, Science Technology",
       "institution": "Labuan Matriculation College",
       "period": "2022 – 2023",
-      "details": ["CGPA 3.21", "MUET Band 4.0"]
+      "details": [
+        "CGPA 3.21",
+        "MUET Band 4.0"
+      ]
+    }
+  ],
+  "experience": [
+    {
+      "role": "Part-Time Florist Assistant",
+      "organisation": "Garden Florist, Buhavan Square, Penampang",
+      "period": "2025",
+      "description": "Customer service, floral arrangements and bouquet preparation, and daily shop operations."
+    },
+    {
+      "role": "Part-Time Shop Assistant",
+      "organisation": "Petronas Station, Sipitang",
+      "period": "2023",
+      "description": "Customer service, cashier duties and payment transactions, and daily shop operations."
     }
   ],
   "achievements": [
-    { "title": "Overall Best Project: SchoolFam", "issuer": "", "date": "2025", "description": "", "credentialUrl": "" },
+    {
+      "title": "Overall Best Project: SchoolFam",
+      "issuer": "",
+      "date": "2025",
+      "description": "",
+      "credentialUrl": "",
+      "certificate": "",
+      "photo": ""
+    },
     {
       "title": "First runner-up, Technopreneurship Business Idea Pitching competition (SchoolFam)",
       "issuer": "",
       "date": "2025",
       "description": "",
-      "credentialUrl": ""
+      "credentialUrl": "",
+      "certificate": "",
+      "photo": ""
     },
-    { "title": "Dean's List", "issuer": "Universiti Malaysia Sabah", "date": "", "description": "", "credentialUrl": "" }
+    {
+      "title": "Dean's List",
+      "issuer": "Universiti Malaysia Sabah",
+      "date": "",
+      "description": "",
+      "credentialUrl": "",
+      "certificate": "",
+      "photo": ""
+    }
   ],
   "training": [
     {
@@ -30,26 +68,50 @@
       "issuer": "Sponsored by Yayasan Peneraju",
       "date": "2026",
       "description": "Two-day programme on generative AI tools for workplace productivity and workflow optimisation.",
-      "credentialUrl": ""
+      "credentialUrl": "",
+      "certificate": "",
+      "photo": ""
     },
     {
       "title": "Gemini No-Code Hackathon",
       "issuer": "",
       "date": "2026",
       "description": "Building a no-code application prototype with Google AppSheet and Gemini AI.",
-      "credentialUrl": ""
+      "credentialUrl": "",
+      "certificate": "",
+      "photo": ""
     },
     {
       "title": "PETRONAS BeDigital Bootcamp",
       "issuer": "PETRONAS",
       "date": "2025",
       "description": "Two-day bootcamp on digital innovation, technology applications and digital transformation.",
-      "credentialUrl": ""
+      "credentialUrl": "",
+      "certificate": "",
+      "photo": ""
     }
   ],
   "activities": [
-    { "role": "Committee Member", "organisation": "Anti-Drug Prevention Club", "period": "2023 – present" },
-    { "role": "AJK Food and Gift", "organisation": "SULAM Project at Masjid Al-Huda, Kg. Unggun Jaya", "period": "2026" },
-    { "role": "Treasurer", "organisation": "Program Kembara Jati Diri UMS", "period": "2024" }
+    {
+      "role": "Committee Member",
+      "organisation": "Anti-Drug Prevention Club",
+      "period": "2023 – present",
+      "certificate": "",
+      "photo": ""
+    },
+    {
+      "role": "AJK Food and Gift",
+      "organisation": "SULAM Project at Masjid Al-Huda, Kg. Unggun Jaya",
+      "period": "2026",
+      "certificate": "",
+      "photo": ""
+    },
+    {
+      "role": "Treasurer",
+      "organisation": "Program Kembara Jati Diri UMS",
+      "period": "2024",
+      "certificate": "",
+      "photo": ""
+    }
   ]
 }

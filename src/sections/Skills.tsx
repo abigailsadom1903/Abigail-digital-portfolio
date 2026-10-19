@@ -1,6 +1,5 @@
 import { Placeholder, SHOW_PLACEHOLDERS } from '../components/Placeholder';
 import { Section } from '../components/Section';
-import { TagList } from '../components/Tag';
 import type { SkillCategory } from '../data/types';
 import './Skills.css';
 
@@ -10,21 +9,24 @@ interface SkillsProps {
 
 export function Skills({ categories }: SkillsProps) {
   return (
-    <Section id="skills" index="03" eyebrow="Skills" title="Technical skills" tone="tinted">
+    <Section id="skills" index="03" title="Skills" tone="tinted">
       <ul className="skills" role="list">
         {categories
           .filter((category) => category.items.length > 0 || SHOW_PLACEHOLDERS)
           .map((category) => (
-          <li key={category.id} className="skills__group" data-reveal>
-            <h3 className="skills__title">{category.title}</h3>
-            <p className="skills__description">{category.description}</p>
-            {category.items.length > 0 ? (
-              <TagList items={category.items} label={category.title} />
-            ) : (
-              <Placeholder label={`Add ${category.title.toLowerCase()} you have used`} />
-            )}
-          </li>
-        ))}
+            <li key={category.id} className="skills__group" data-reveal>
+              <h3 className="subheading">{category.title}</h3>
+              {category.items.length > 0 ? (
+                <ul className="skills__list" role="list">
+                  {category.items.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              ) : (
+                <Placeholder label={`Add ${category.title.toLowerCase()} you have used`} />
+              )}
+            </li>
+          ))}
       </ul>
     </Section>
   );

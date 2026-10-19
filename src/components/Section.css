@@ -1,6 +1,5 @@
 .section {
-  padding-block: var(--space-section);
-  border-top: var(--border-width) solid var(--color-border);
+  padding-block: clamp(4rem, 3rem + 4vw, 6.5rem);
 }
 
 .section--tinted {
@@ -8,38 +7,106 @@
 }
 
 .section__header {
-  display: grid;
-  gap: var(--space-4);
-  max-width: 44rem;
-  margin-bottom: clamp(var(--space-7), 2rem + 3vw, var(--space-9));
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-3) var(--space-5);
+  margin-bottom: clamp(var(--space-6), 1.5rem + 2vw, var(--space-7));
+  padding-bottom: var(--space-4);
+  border-bottom: var(--border-width) solid var(--color-border);
 }
 
-.section__eyebrow {
+.section__title {
   display: flex;
-  align-items: center;
-  gap: var(--space-3);
+  align-items: baseline;
+  gap: var(--space-4);
+  font-size: var(--text-xl);
 }
 
 .section__index {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+  color: var(--color-primary);
+}
+
+.section__aside {
+  font-size: var(--text-sm);
+  color: var(--color-text-subtle);
+}
+
+/* Shared two-column body used by About and Recognition. */
+.split {
+  display: grid;
+  gap: var(--space-7);
+}
+
+@media (min-width: 56rem) {
+  .split {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
+    gap: var(--space-8);
+  }
+}
+
+/* Shared small subheading, e.g. "Education" inside About. */
+.subheading {
+  margin-bottom: var(--space-2);
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--color-text);
+}
+
+/* Shared timeline rows: date | content. */
+.rows {
+  display: grid;
+}
+
+.row {
+  display: grid;
+  gap: var(--space-1) var(--space-5);
+  padding: var(--space-4) 0;
+  border-bottom: var(--border-width) solid var(--color-border);
+}
+
+.row:first-child {
+  border-top: var(--border-width) solid var(--color-border);
+}
+
+@media (min-width: 36rem) {
+  .row {
+    grid-template-columns: 7rem minmax(0, 1fr);
+  }
+}
+
+.row__date {
+  font-size: var(--text-sm);
   font-variant-numeric: tabular-nums;
   color: var(--color-text-subtle);
 }
 
-.section__index::after {
-  content: '';
-  display: inline-block;
-  width: 2rem;
-  height: 1px;
-  margin-left: var(--space-3);
-  vertical-align: middle;
-  background: var(--color-lavender-300);
+.row__title {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: var(--weight-semibold);
+  letter-spacing: 0;
+  line-height: var(--leading-snug);
+  color: var(--color-text);
 }
 
-.section__title {
-  font-size: var(--text-2xl);
+.row__meta {
+  margin-top: 0.125rem;
+  font-size: var(--text-sm);
+  color: var(--color-primary);
 }
 
-.section__intro {
-  font-size: var(--text-md);
+.row__text {
+  margin-top: var(--space-2);
+  font-size: var(--text-sm);
   color: var(--color-text-muted);
 }

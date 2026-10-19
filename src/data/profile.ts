@@ -41,9 +41,9 @@ export const profile: Profile = {
 };
 
 export const navItems: NavItem[] = [
-  { id: 'about', label: 'About' },
   { id: 'work', label: 'Work' },
+  { id: 'about', label: 'About' },
   { id: 'skills', label: 'Skills' },
-  { id: 'education', label: 'Education' },
+  { id: 'awards', label: 'Awards' },
   { id: 'contact', label: 'Contact' },
 ];

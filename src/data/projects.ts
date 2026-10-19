@@ -17,6 +17,7 @@ export const projects: Project[] = records(raw.projects).map((p, i) => {
   return {
     id: slugify(title) || `project-${i + 1}`,
     title,
+    category: text(p.category),
     context: text(p.context) ?? '',
     summary: text(p.summary) ?? '',
     featured: p.featured === true,

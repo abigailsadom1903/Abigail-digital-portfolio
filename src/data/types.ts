@@ -59,6 +59,8 @@ export interface ProjectMedia {
 export interface Project {
   id: string;
   title: string;
+  /** Short label shown in the project list, e.g. "Web application" or "IoT". */
+  category: string | null;
   /** Short descriptor shown under the title, e.g. the organisation or project type. */
   context: string;
   summary: string;
@@ -102,10 +104,20 @@ export interface Achievement {
   description?: string;
   /** Link to a verifiable record, e.g. a certificate URL. */
   credentialUrl?: string;
+  /** Uploaded certificate (PDF or image), resolved URL. */
+  certificate?: string;
+  /** Uploaded photo, resolved URL. */
+  photo?: string;
 }
 
 export interface Activity {
   role: string;
   organisation: string;
   period: string;
+  certificate?: string;
+  photo?: string;
+}
+
+export interface Experience extends Activity {
+  description: string | null;
 }
