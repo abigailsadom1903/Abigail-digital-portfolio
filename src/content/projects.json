@@ -155,7 +155,20 @@
       "title": "FYP System For UMS",
       "category": "UI/UX",
       "featured": false,
-      "role": "UI Design"
+      "role": "UI Design",
+      "links": [
+        {
+          "label": "Figma Walkthrough Design",
+          "url": "https://www.figma.com/design/mRtVK51PJffWGBEyWXCzUF/Untitled?node-id=0-1&t=CYXJKHzTFT3jFYvJ-1"
+        },
+        {
+          "label": "Slide deck",
+          "url": "https://www.canva.com/design/DAHNZkA9RZ0/x9uj5dsU8TBidXTkSJZLrA/edit"
+        }
+      ],
+      "screenshots": [
+        {}
+      ]
     }
   ]
 }
