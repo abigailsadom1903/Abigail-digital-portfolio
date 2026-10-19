@@ -5,7 +5,8 @@ import type { Project } from './types';
  * Anything still `null` or `[]` renders as a labelled placeholder — fill it with
  * real, verified details only.
  *
- * Screenshots: export them to public/images/projects/ and set `src`.
+ * Screenshots: export them to public/images/projects/ and set `src` with withBase,
+ * e.g. src: withBase('images/projects/church-dashboard.webp').
  * For the church system, use sample/demo data only — never real parishioner records.
  */
 export const projects: Project[] = [

@@ -1,4 +1,5 @@
 import type { NavItem, Profile } from './types';
+import { withBase } from './withBase';
 
 export const profile: Profile = {
   name: 'Abigail Alau R. Sadom',
@@ -14,7 +15,7 @@ export const profile: Profile = {
   expectedGraduation: '2027',
   interests: ['Web development', 'Software testing & QA'],
 
-  cvUrl: '/cv/Abigail-Sadom-CV.pdf',
+  cvUrl: withBase('cv/Abigail-Sadom-CV.pdf'),
 
   contact: [
     {
