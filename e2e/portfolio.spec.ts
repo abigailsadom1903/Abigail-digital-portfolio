@@ -39,12 +39,21 @@ test('CV, email, GitHub and LinkedIn links work', async ({ page, request }) => {
     'href',
     'mailto:abigailsadom1903@gmail.com',
   );
-  await expect(contact.getByRole('link', { name: /github\.com\/abigailsadom1903/ })).toHaveAttribute(
-    'href',
-    'https://github.com/abigailsadom1903',
-  );
-  const linkedin = contact.getByRole('link', { name: /linkedin\.com/ });
+  await expect(contact.getByRole('link', { name: /^GitHub/ })).toHaveAttribute('href', 'https://github.com/abigailsadom1903');
+  const linkedin = contact.getByRole('link', { name: /^LinkedIn/ });
   await expect(linkedin).toHaveAttribute('href', /^https:\/\/www\.linkedin\.com\/in\/[^?#]+$/);
+  await expect(contact.getByRole('link', { name: /Resume \(PDF\)/ })).toHaveAttribute('href', href!);
+});
+
+test('contact form validates before opening the email app', async ({ page }) => {
+  const form = page.getByRole('form', { name: 'Send a message' });
+  await form.getByRole('button', { name: /Send message/ }).click();
+  await expect(form.getByLabel('Name')).toHaveAttribute('aria-invalid', 'true');
+  await expect(form.getByLabel('Name')).toBeFocused();
+
+  await form.getByRole('radio', { name: 'Something else' }).check();
+  await form.getByLabel('Message').fill('Hello');
+  await expect(form.getByText('5/1500')).toBeVisible();
 });
 
 test('navigation reaches the Engineering Lab', async ({ page }) => {
