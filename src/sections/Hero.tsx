@@ -11,8 +11,8 @@ interface HeroProps {
 }
 
 export function Hero({ profile }: HeroProps) {
-  // LinkedIn first, then GitHub, whichever have links in Pages CMS.
-  const socials = (['linkedin', 'github'] as const)
+  // LinkedIn, GitHub, then WhatsApp, whichever are filled in Pages CMS.
+  const socials = (['linkedin', 'github', 'whatsapp'] as const)
     .map((kind) => profile.contact.find((c) => c.kind === kind && c.href))
     .filter((c): c is NonNullable<typeof c> => Boolean(c));
 

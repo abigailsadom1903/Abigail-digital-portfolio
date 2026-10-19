@@ -54,6 +54,7 @@ content:
       - { name: email, label: Email address, type: string }
       - { name: linkedin, label: LinkedIn URL (full https link), type: string }
       - { name: github, label: GitHub URL (full https link), type: string }
+      - { name: whatsapp, label: WhatsApp number (e.g. 0109377570), type: string }
 
   - name: projects
     label: Projects

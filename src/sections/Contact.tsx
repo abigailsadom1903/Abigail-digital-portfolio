@@ -115,6 +115,7 @@ export function Contact({ profile, openMailto = openInEmailApp }: ContactProps) 
                 <li key={link.kind}>
                   <a href={link.href!} target="_blank" rel="noopener noreferrer">
                     {link.label}
+                    {link.kind === 'whatsapp' && link.display ? ` · ${link.display}` : ''}
                     <span className="visually-hidden"> (opens in a new tab)</span>
                   </a>
                 </li>

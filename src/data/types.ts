@@ -11,7 +11,7 @@ export interface NavItem {
   label: string;
 }
 
-export type ContactKind = 'email' | 'linkedin' | 'github' | 'other';
+export type ContactKind = 'email' | 'linkedin' | 'github' | 'whatsapp' | 'other';
 
 export interface ContactLink {
   kind: ContactKind;

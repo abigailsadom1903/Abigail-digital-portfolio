@@ -25,7 +25,7 @@ export default function App() {
         items={navItems}
         brand={profile.shortName}
         initials={profile.initials}
-        socials={profile.contact.filter((c) => (c.kind === 'linkedin' || c.kind === 'github') && c.href)}
+        socials={profile.contact.filter((c) => ['linkedin', 'github', 'whatsapp'].includes(c.kind) && c.href)}
       />
       <main id="main" tabIndex={-1}>
         <Hero profile={profile} />

@@ -21,3 +21,21 @@ describe('profile', () => {
     expect(profile.cvUrl).toMatch(/\/cv\/.+\.pdf$/);
   });
 });
+
+describe('whatsappNumber', () => {
+  it('turns Malaysian local numbers into international digits', async () => {
+    const { whatsappNumber } = await import('./profile');
+    expect(whatsappNumber('0109377570')).toBe('60109377570');
+    expect(whatsappNumber('010-937 7570')).toBe('60109377570');
+    expect(whatsappNumber('+60 10-937 7570')).toBe('60109377570');
+    expect(whatsappNumber('123')).toBeNull();
+    expect(whatsappNumber(null)).toBeNull();
+  });
+
+  it('links WhatsApp with wa.me and a readable number', async () => {
+    const { profile } = await import('./profile');
+    const wa = profile.contact.find((c) => c.kind === 'whatsapp');
+    expect(wa?.href).toBe('https://wa.me/60109377570');
+    expect(wa?.display).toBe('+60 10-937 7570');
+  });
+});
