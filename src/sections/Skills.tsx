@@ -1,4 +1,4 @@
-import { Placeholder } from '../components/Placeholder';
+import { Placeholder, SHOW_PLACEHOLDERS } from '../components/Placeholder';
 import { Section } from '../components/Section';
 import { TagList } from '../components/Tag';
 import type { SkillCategory } from '../data/types';
@@ -12,7 +12,9 @@ export function Skills({ categories }: SkillsProps) {
   return (
     <Section id="skills" index="03" eyebrow="Skills" title="Technical skills" tone="tinted">
       <ul className="skills" role="list">
-        {categories.map((category) => (
+        {categories
+          .filter((category) => category.items.length > 0 || SHOW_PLACEHOLDERS)
+          .map((category) => (
           <li key={category.id} className="skills__group" data-reveal>
             <h3 className="skills__title">{category.title}</h3>
             <p className="skills__description">{category.description}</p>

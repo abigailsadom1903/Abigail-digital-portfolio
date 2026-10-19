@@ -1,6 +1,7 @@
 import { ArrowUpRight, Mail, Download } from 'lucide-react';
 import { ButtonLink } from '../components/Button';
 import { Container } from '../components/Container';
+import { SHOW_PLACEHOLDERS } from '../components/Placeholder';
 import type { ContactLink, Profile } from '../data/types';
 import './Contact.css';
 
@@ -10,6 +11,7 @@ interface ContactProps {
 
 function ContactRow({ link }: { link: ContactLink }) {
   if (!link.href) {
+    if (!SHOW_PLACEHOLDERS) return null;
     return (
       <li className="contact__row contact__row--pending">
         <span className="contact__label">{link.label}</span>
@@ -54,7 +56,7 @@ export function Contact({ profile }: ContactProps) {
               href={profile.cvUrl}
               variant="secondary"
               icon={Download}
-              download="Abigail-Sadom-CV.pdf"
+              download
               unavailableNote="CV coming soon"
             >
               Download CV

@@ -190,3 +190,18 @@
   flex-wrap: wrap;
   gap: var(--space-2) var(--space-5);
 }
+
+/* Header without a meta column (nothing to show yet). */
+@media (min-width: 56rem) {
+  .case__header--solo {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* A single screenshot in a featured case study spans one comfortable column. */
+@media (min-width: 48rem) {
+  .case--featured .case__gallery--1 {
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 52rem;
+  }
+}

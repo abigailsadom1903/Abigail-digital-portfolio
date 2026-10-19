@@ -1,5 +1,6 @@
 import type { LucideIcon } from 'lucide-react';
 import type { ReactNode } from 'react';
+import { SHOW_PLACEHOLDERS } from './Placeholder';
 import './Button.css';
 
 type Variant = 'primary' | 'secondary' | 'text';
@@ -37,6 +38,7 @@ export function ButtonLink({
   const classes = ['btn', `btn--${variant}`, className].filter(Boolean).join(' ');
 
   if (href === null) {
+    if (!SHOW_PLACEHOLDERS) return null;
     return (
       <span className={`${classes} btn--unavailable`} aria-disabled="true">
         {Icon && <Icon className="btn__icon" size={18} aria-hidden="true" />}

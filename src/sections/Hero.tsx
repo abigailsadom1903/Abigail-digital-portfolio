@@ -42,7 +42,7 @@ export function Hero({ profile, projects }: HeroProps) {
               href={profile.cvUrl}
               variant="secondary"
               icon={Download}
-              download="Abigail-Sadom-CV.pdf"
+              download
               unavailableNote="CV coming soon"
             >
               Download CV

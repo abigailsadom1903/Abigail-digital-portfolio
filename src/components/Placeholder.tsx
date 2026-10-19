@@ -10,10 +10,18 @@ interface PlaceholderProps {
 }
 
 /**
+ * Placeholders are a drafting aid: shown while developing locally (`npm run dev`)
+ * and omitted from the published site, so visitors only ever see finished content.
+ */
+export const SHOW_PLACEHOLDERS = import.meta.env.DEV;
+
+/**
  * Marks content that has not been supplied yet. Deliberately styled so it can
- * never be mistaken for real content.
+ * never be mistaken for real content. Renders nothing on the published site.
  */
 export function Placeholder({ label, variant = 'text', aspectRatio = '16 / 10' }: PlaceholderProps) {
+  if (!SHOW_PLACEHOLDERS) return null;
+
   if (variant === 'media') {
     return (
       <div className="placeholder placeholder--media" style={{ aspectRatio }} role="img" aria-label={`Placeholder: ${label}`}>
