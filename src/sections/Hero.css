@@ -17,17 +17,78 @@
   z-index: -1;
 }
 
+/* Phone: portrait, then intro, then the work index. Desktop: intro left; portrait above the index on the right. */
 .hero__grid {
   display: grid;
-  gap: var(--space-8);
+  grid-template-areas:
+    'portrait'
+    'main'
+    'index';
+  gap: var(--space-6);
+}
+
+.hero__main {
+  grid-area: main;
+}
+
+.hero__index {
+  grid-area: index;
+  margin-top: var(--space-5);
 }
 
 @media (min-width: 64rem) {
   .hero__grid {
     grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
-    align-items: end;
-    gap: var(--space-9);
+    grid-template-areas:
+      'main portrait'
+      'main index';
+    column-gap: var(--space-9);
+    row-gap: var(--space-7);
   }
+
+  .hero__main {
+    align-self: end;
+  }
+
+  .hero__index {
+    margin-top: 0;
+  }
+}
+
+/* Portrait: a thin lavender offset frame gives the white photo background an edge. */
+.hero__portrait {
+  grid-area: portrait;
+  position: relative;
+  width: min(9rem, 40vw);
+  margin: 0 0 var(--space-2);
+}
+
+@media (min-width: 64rem) {
+  .hero__portrait {
+    width: min(100%, 15.5rem);
+    margin-bottom: 0;
+  }
+}
+
+.hero__portrait::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translate(10px, 10px);
+  border: var(--border-width) solid var(--color-lavender-300);
+  border-radius: var(--radius-sm);
+  background: var(--color-lavender-100);
+}
+
+.hero__portrait img {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: 50% 30%;
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-lavender-50);
 }
 
 .hero__eyebrow {

@@ -15,6 +15,12 @@ export const profile: Profile = {
   expectedGraduation: '2027',
   interests: ['Web development', 'Software testing & QA'],
 
+  // To change the photo, replace public/images/profile/abigail-sadom.webp (portrait, about 640×830).
+  photo: {
+    src: withBase('images/profile/abigail-sadom.webp'),
+    alt: 'Portrait of Abigail Alau R. Sadom',
+  },
+
   cvUrl: withBase('cv/Abigail-Sadom-CV.pdf'),
 
   contact: [

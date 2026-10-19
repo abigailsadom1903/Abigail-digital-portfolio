@@ -13,6 +13,19 @@ export function Hero({ profile, projects }: HeroProps) {
   return (
     <section className="hero" aria-labelledby="hero-heading">
       <Container className="hero__grid">
+        {profile.photo && (
+          <figure className="hero__portrait">
+            <img
+              src={profile.photo.src}
+              alt={profile.photo.alt}
+              width={640}
+              height={831}
+              fetchPriority="high"
+              decoding="async"
+            />
+          </figure>
+        )}
+
         <div className="hero__main">
           <p className="eyebrow hero__eyebrow">{profile.role}</p>
           <h1 id="hero-heading" className="hero__name">
