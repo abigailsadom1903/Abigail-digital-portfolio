@@ -12,6 +12,21 @@ npm run preview   # serve the production build at http://localhost:4173
 npm run lint      # oxlint
 ```
 
+## Publishing
+
+The site is hosted on GitHub Pages at https://abigailsadom1903.github.io.
+Every push to `main` rebuilds and republishes it automatically (see `.github/workflows/deploy.yml`).
+
+To update the live site after editing:
+
+```bash
+git add -A
+git commit -m "Describe what you changed"
+git push
+```
+
+Progress is shown under the repository's **Actions** tab; the site updates about a minute later.
+
 ## Editing content
 
 All content lives in typed files in `src/data/`. A `null` value or empty array renders a
