@@ -63,7 +63,7 @@
       "summary": "An AI-powered parent–school communication platform that brings classroom updates, attendance, pickup, health, billing and messaging together for parents, teachers and school admins.",
       "featured": false,
       "year": "2025",
-      "role": "Team member (collaborative project)",
+      "role": "App Developer",
       "problem": "Parents and schools communicate through scattered channels, so daily updates, absences, pickups, fees and incidents are easy to miss.",
       "approach": "Built as a browser-based React and TypeScript prototype in Google AI Studio, with role-based screens for parents, teachers, admins and a super admin, realistic sample data, and a Gemini-powered daily summary for parents.",
       "features": [
@@ -193,7 +193,7 @@
       "summary": "A web-based campus event system where students, staff and the public browse and register for university events, organisers manage their events and participants, and admins approve events and manage users.",
       "featured": false,
       "year": "2026",
-      "role": "Developer (team of five)",
+      "role": "Web Developer ",
       "problem": "University events are announced in many places, so students miss them, and organisers have no single place to track registrations, participants and feedback.",
       "approach": "Built in PHP with PDO and MySQL, with role-based access for admins, staff, students and public users. Events go through an approval step before they are listed, and passwords are stored with password_hash.",
       "features": [
