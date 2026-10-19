@@ -11,7 +11,10 @@
   "degree": "Bachelor of Computer Science (Hons.), Software Engineering",
   "university": "Universiti Malaysia Sabah",
   "expectedGraduation": "2027",
-  "interests": ["Web development", "Software testing & QA"],
+  "interests": [
+    "Web development",
+    "Software testing & QA"
+  ],
   "about": [
     "I am studying for a Bachelor of Computer Science (Hons.), Software Engineering at Universiti Malaysia Sabah, with graduation expected in 2027.",
     "My interests sit in two places that belong together: building web applications people can rely on, and the software testing and quality assurance that makes that reliability possible.",
@@ -19,6 +22,6 @@
   ],
   "lookingFor": "Software engineering, web development or software testing internships",
   "email": "abigailsadom1903@gmail.com",
-  "linkedin": "",
+  "linkedin": "https://www.linkedin.com/in/abigail-s-4a44a1157?utm_source=share_via&utm_content=profile&utm_medium=member_ios",
   "github": "https://github.com/abigailsadom1903"
 }
