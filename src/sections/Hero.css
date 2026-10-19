@@ -11,6 +11,9 @@
 
 .hero__main {
   order: 2;
+  min-width: 0;
+  /* Lets the name size itself to this column. */
+  container-type: inline-size;
 }
 
 .hero__portrait {
@@ -41,9 +44,11 @@
   color: var(--color-primary);
 }
 
+/* The full name stays on one line: its size follows the column width (cqi), capped at the display size. */
 .hero__name {
-  font-size: var(--text-display);
+  font-size: min(var(--text-display), 9cqi);
   font-weight: 350;
+  white-space: nowrap;
 }
 
 .hero__headline {

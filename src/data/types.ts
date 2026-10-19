@@ -36,6 +36,8 @@ export interface Profile {
   /** About section paragraphs; the first is shown as the lead. */
   about: string[];
   lookingFor: string | null;
+  /** Internship dates as written by Abigail, e.g. "6-month internship · 22 February – 6 August 2027". */
+  availability: string | null;
   /** Portrait shown in the hero. `null` hides it. */
   photo: { src: string; alt: string } | null;
   /** Path to the CV inside /public, e.g. "/cv/Abigail-Sadom-CV.pdf". `null` until supplied. */

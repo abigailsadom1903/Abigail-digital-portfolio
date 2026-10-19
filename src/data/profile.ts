@@ -38,6 +38,7 @@ export const profile: Profile = {
   interests: texts(raw.interests),
   about: texts(raw.about),
   lookingFor: text(raw.lookingFor),
+  availability: text(raw.availability),
   photo: photo ? { src: withBase(photo), alt: text(raw.photoAlt) ?? `Portrait of ${text(raw.name) ?? ''}` } : null,
   cvUrl: cv && withBase(cv),
   contact,

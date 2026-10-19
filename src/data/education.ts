@@ -70,3 +70,14 @@ export const achievements: Achievement[] = records(raw.achievements).flatMap(toA
 export const training: Achievement[] = records(raw.training).flatMap(toAchievement);
 
 export const activities: Activity[] = records(raw.activities).flatMap(toActivity);
+
+/** First "CGPA x.xx" found in the education details, e.g. "3.58". */
+export function cgpaFrom(education: EducationEntry[]): string | null {
+  for (const entry of education) {
+    for (const detail of entry.details) {
+      const match = detail.match(/CGPA\s*([\d.]+)/i);
+      if (match) return match[1];
+    }
+  }
+  return null;
+}

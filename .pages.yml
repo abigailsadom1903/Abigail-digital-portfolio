@@ -50,6 +50,7 @@ content:
       - { name: interests, label: Areas of interest, type: string, list: true }
       - { name: about, label: About paragraphs (first one is shown larger), type: text, list: true }
       - { name: lookingFor, label: Looking for, type: string }
+      - { name: availability, label: Internship availability (e.g. 6-month internship · 22 February – 6 August 2027), type: string }
       - { name: email, label: Email address, type: string }
       - { name: linkedin, label: LinkedIn URL (full https link), type: string }
       - { name: github, label: GitHub URL (full https link), type: string }
