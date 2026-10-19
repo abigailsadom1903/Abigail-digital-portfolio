@@ -1,8 +1,9 @@
 import { Menu, X } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
-import type { NavItem } from '../data/types';
+import type { ContactLink, NavItem } from '../data/types';
 import { useActiveSection } from '../hooks/useActiveSection';
 import { useHideOnScroll } from '../hooks/useHideOnScroll';
+import { BrandIcon, type Brand } from './BrandIcon';
 import { Container } from './Container';
 import './Navbar.css';
 
@@ -10,11 +11,13 @@ interface NavbarProps {
   items: NavItem[];
   brand: string;
   initials: string;
+  /** LinkedIn / GitHub profile links, shown as logo buttons. */
+  socials?: ContactLink[];
 }
 
 const DESKTOP_QUERY = '(min-width: 48rem)';
 
-export function Navbar({ items, brand, initials }: NavbarProps) {
+export function Navbar({ items, brand, initials, socials = [] }: NavbarProps) {
   const [open, setOpen] = useState(false);
   const { scrolled, hidden } = useHideOnScroll();
   const active = useActiveSection(items.map((item) => item.id));
@@ -90,6 +93,27 @@ export function Navbar({ items, brand, initials }: NavbarProps) {
               </li>
             ))}
           </ul>
+          {socials.length > 0 && (
+            <ul className="nav__social" role="list" aria-label="Profiles">
+              {socials.map((link) => (
+                <li key={link.kind}>
+                  <a
+                    className="nav__social-link"
+                    href={link.href!}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`${link.label} (opens in a new tab)`}
+                    title={link.label}
+                  >
+                    <BrandIcon brand={link.kind as Brand} size={17} />
+                    <span className="nav__social-text" aria-hidden="true">
+                      {link.label}
+                    </span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          )}
         </nav>
       </Container>
     </header>

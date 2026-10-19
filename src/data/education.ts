@@ -37,6 +37,8 @@ const toActivity = (a: Record<string, unknown>): Activity[] => {
       role,
       organisation: text(a.organisation) ?? '',
       period: text(a.period) ?? '',
+      area: text(a.area) ?? undefined,
+      highlights: texts(a.highlights),
       certificate: upload(a.certificate),
       photo: upload(a.photo),
     },

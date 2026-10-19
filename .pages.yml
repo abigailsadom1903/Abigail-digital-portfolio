@@ -219,6 +219,8 @@ content:
           - { name: role, label: Role, type: string }
           - { name: organisation, label: Organisation / event, type: string }
           - { name: period, label: Period, type: string }
+          - { name: area, label: Area (optional e.g. Science and Technology), type: string }
+          - { name: highlights, label: What I did (bullet points), type: text, list: true }
           - name: certificate
             label: Certificate (PDF or image upload)
             type: file

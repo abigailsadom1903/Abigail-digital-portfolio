@@ -21,7 +21,12 @@ export default function App() {
       <a className="skip-link" href="#main">
         Skip to main content
       </a>
-      <Navbar items={navItems} brand={profile.shortName} initials={profile.initials} />
+      <Navbar
+        items={navItems}
+        brand={profile.shortName}
+        initials={profile.initials}
+        socials={profile.contact.filter((c) => (c.kind === 'linkedin' || c.kind === 'github') && c.href)}
+      />
       <main id="main" tabIndex={-1}>
         <Hero profile={profile} />
         <Work projects={projects} />

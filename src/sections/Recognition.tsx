@@ -19,6 +19,9 @@ interface Entry {
   meta: string | null;
   date: string | null;
   description?: string;
+  /** Small label above the title, e.g. "Science and Technology". */
+  area?: string;
+  highlights?: string[];
   credentialUrl?: string;
   certificate?: string;
   photo?: string;
@@ -40,6 +43,8 @@ const fromActivity = (a: Activity): Entry => ({
   title: a.role,
   meta: a.organisation || null,
   date: a.period || null,
+  area: a.area,
+  highlights: a.highlights,
   certificate: a.certificate,
   photo: a.photo,
 });
@@ -143,12 +148,20 @@ export function Recognition({ achievements, training, activities }: RecognitionP
         <li key={entry.key} className="rec-item">
           <Visual entry={entry} icon={icon} onOpen={() => open(entry)} className="rec-item__visual" />
           <div className="rec-item__body">
+            {entry.area && <p className="rec-item__area">{entry.area}</p>}
             <div className="rec-item__top">
               <p className="rec-item__title">{entry.title}</p>
               {entry.date && <span className="rec-date">{entry.date}</span>}
             </div>
             {entry.meta && <p className="rec-item__meta">{entry.meta}</p>}
             {entry.description && <p className="rec-item__desc">{entry.description}</p>}
+            {entry.highlights && entry.highlights.length > 0 && (
+              <ul className="rec-item__points">
+                {entry.highlights.map((point) => (
+                  <li key={point}>{point}</li>
+                ))}
+              </ul>
+            )}
             <FileLinks entry={entry} />
           </div>
         </li>

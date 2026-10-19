@@ -120,6 +120,10 @@ export interface Activity {
   role: string;
   organisation: string;
   period: string;
+  /** Field or theme, e.g. "Science and Technology". */
+  area?: string;
+  /** What Abigail did, as short bullet points. */
+  highlights?: string[];
   certificate?: string;
   photo?: string;
 }
