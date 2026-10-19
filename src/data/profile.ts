@@ -42,6 +42,7 @@ export const profile: Profile = {
 
 export const navItems: NavItem[] = [
   { id: 'work', label: 'Work' },
+  { id: 'lab', label: 'Lab' },
   { id: 'about', label: 'About' },
   { id: 'skills', label: 'Skills' },
   { id: 'awards', label: 'Awards' },

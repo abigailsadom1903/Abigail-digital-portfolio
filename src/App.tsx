@@ -8,6 +8,7 @@ import { About } from './sections/About';
 import { Contact } from './sections/Contact';
 import { Footer } from './sections/Footer';
 import { Hero } from './sections/Hero';
+import { Lab } from './sections/Lab';
 import { Recognition } from './sections/Recognition';
 import { Skills } from './sections/Skills';
 import { Work } from './sections/Work';
@@ -24,6 +25,7 @@ export default function App() {
       <main id="main" tabIndex={-1}>
         <Hero profile={profile} />
         <Work projects={projects} />
+        <Lab />
         <About profile={profile} education={education} experience={experience} />
         <Skills categories={skillCategories} />
         <Recognition achievements={achievements} training={training} activities={activities} />

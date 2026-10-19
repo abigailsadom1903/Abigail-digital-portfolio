@@ -70,7 +70,7 @@ function Group({ id, title, count, children }: { id: string; title: string; coun
 
 export function Recognition({ achievements, training, activities }: RecognitionProps) {
   return (
-    <Section id="awards" index="04" title="Awards & activities">
+    <Section id="awards" index="05" title="Awards & activities">
       <div className="recognition">
         {(achievements.length > 0 || SHOW_PLACEHOLDERS) && (
           <Group id="awards-honours" title="Honours & awards" count={achievements.length}>

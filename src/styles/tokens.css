@@ -29,12 +29,17 @@
 
   /* Colour: utility */
   --color-focus: #5b2c83;
+  --color-success: #1d6b43;
+  --color-success-bg: #e7f4ec;
+  --color-danger: #b3261e;
+  --color-danger-bg: #fcebea;
   --color-placeholder-bg: #fbf9fd;
   --color-placeholder-border: #b9a5d1;
 
   /* Typography */
   --font-display: 'Fraunces', 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
   --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: ui-monospace, 'Cascadia Code', 'SF Mono', Menlo, Consolas, monospace;
 
   --text-xs: 0.75rem;
   --text-sm: 0.875rem;

@@ -44,7 +44,7 @@ export function Contact({ profile }: ContactProps) {
     <section id="contact" className="contact" aria-labelledby="contact-heading">
       <Container className="contact__grid">
         <div data-reveal>
-          <p className="eyebrow contact__eyebrow">05 · Contact</p>
+          <p className="eyebrow contact__eyebrow">06 · Contact</p>
           <h2 id="contact-heading" className="contact__title">
             Open to software engineering internships.
           </h2>

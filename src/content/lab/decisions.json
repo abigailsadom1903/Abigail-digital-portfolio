@@ -1,0 +1,126 @@
+{
+  "decisions": [
+    {
+      "id": "prepared-statements",
+      "project": "Church Management System",
+      "title": "Use prepared statements for every database query",
+      "problem": "The system stores personal details, sacrament applications and donation records, and most pages take user input. Building SQL by joining strings with that input would open the door to SQL injection.",
+      "alternatives": [
+        "Build SQL strings and escape input manually",
+        "Adopt a full framework ORM"
+      ],
+      "decision": "All database access uses PDO prepared statements, so input is always passed as a parameter, never as part of the SQL text.",
+      "tradeoffs": [
+        "Slightly more code per query than string building",
+        "Keeps the project lightweight without a framework, but security depends on applying the pattern consistently"
+      ],
+      "evidence": [
+        "About 295 prepare() calls across the codebase",
+        "No uses of the older mysqli extension"
+      ],
+      "lessons": ""
+    },
+    {
+      "id": "hashed-tokens",
+      "project": "Church Management System",
+      "title": "Store one-time tokens as hashes with an expiry",
+      "problem": "Password resets, admin invitations and email verification all rely on secret links. If the raw tokens were stored and the database were ever exposed, those links could be used to take over accounts.",
+      "alternatives": [
+        "Store the raw token in the database",
+        "Use signed tokens that are never stored"
+      ],
+      "decision": "Only a hash of each token is stored, alongside an expiry time. The emailed link contains the raw token, which is hashed again and compared when used.",
+      "tradeoffs": [
+        "A lost link cannot be recovered; the user must request a new one",
+        "Expired rows need cleaning up over time"
+      ],
+      "evidence": [
+        "Tokens are generated with random_bytes and hashed with SHA-256",
+        "password_resets.token_hash CHAR(64), unique, with expires_at",
+        "admin.invite_token_hash with invite_expires",
+        "user.verify_token_hash for email verification"
+      ],
+      "lessons": ""
+    },
+    {
+      "id": "delete-rules",
+      "project": "Church Management System",
+      "title": "Choose what happens to related records on delete",
+      "problem": "Records depend on churches, admins and users. Deleting a parent row could either wipe out important history or leave broken references.",
+      "alternatives": [
+        "Cascade every delete",
+        "Block every delete that has related rows"
+      ],
+      "decision": "Each relationship has its own rule. Financial records block deletion, records created by an admin keep existing when that admin is removed, and purely dependent rows are removed with their parent.",
+      "tradeoffs": [
+        "More rules to understand and document",
+        "A church with donations cannot be deleted until those records are handled"
+      ],
+      "evidence": [
+        "donations.church_id → church_info: ON DELETE RESTRICT",
+        "announcements.created_by → admin: ON DELETE SET NULL",
+        "event_registrations.event_id → events: ON DELETE CASCADE"
+      ],
+      "lessons": ""
+    },
+    {
+      "id": "status-workflows",
+      "project": "Church Management System",
+      "title": "Model request workflows as explicit status values",
+      "problem": "Sacrament applications, pastoral requests, donations and catechesis enrolments all move through stages and need review by an admin.",
+      "alternatives": [
+        "Free-text status column",
+        "Separate table for status history"
+      ],
+      "decision": "Each workflow has a fixed set of statuses defined as an ENUM column, plus who reviewed it and when.",
+      "tradeoffs": [
+        "The database rejects invalid statuses, but adding a new stage needs a schema change",
+        "Only the current status is stored, not a full history"
+      ],
+      "evidence": [
+        "sacrament_applications.status: draft → submitted → verifying → review → approved / rejected / cancelled",
+        "pastoral_requests.status: draft, submitted, review, given, declined",
+        "donations.status: pending, approved, rejected, with reviewed_by and reviewed_at"
+      ],
+      "lessons": ""
+    },
+    {
+      "id": "portfolio-content",
+      "project": "This portfolio",
+      "title": "Separate content from code so it can be edited without coding",
+      "problem": "Portfolio content changes often (new projects, certificates, screenshots), and editing code files for every change is slow and error-prone.",
+      "alternatives": [
+        "Keep content inside React components",
+        "Use a hosted CMS with its own database"
+      ],
+      "decision": "All content lives in JSON files with typed loaders. Pages CMS provides forms and file uploads on top of the same files, and every save redeploys the site.",
+      "tradeoffs": [
+        "Content structure is limited to what the JSON files define",
+        "Edits made online must be pulled before editing locally"
+      ],
+      "evidence": [
+        "src/content/*.json read through typed loaders in src/data/",
+        ".pages.yml defines the editing forms and upload folders"
+      ],
+      "lessons": ""
+    },
+    {
+      "id": "portfolio-images",
+      "project": "This portfolio",
+      "title": "Optimise images before publishing",
+      "problem": "The original profile photo was a 970 KB PNG, which slows the first load, especially on mobile data.",
+      "alternatives": [
+        "Publish the original image",
+        "Add an image-processing build step"
+      ],
+      "decision": "Resize the photo to 640 px wide and convert it to WebP before adding it to the site.",
+      "tradeoffs": [
+        "New photos need the same treatment before upload"
+      ],
+      "evidence": [
+        "Profile photo reduced from 970 KB to 39 KB (about 96% smaller)"
+      ],
+      "lessons": ""
+    }
+  ]
+}

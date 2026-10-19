@@ -1,0 +1,2513 @@
+{
+  "source": "database/schema.sql (structure only; no data, no default values)",
+  "tables": [
+    {
+      "name": "admin",
+      "module": "Accounts & access",
+      "columns": [
+        {
+          "name": "admin_id",
+          "type": "INT",
+          "nullable": false,
+          "primaryKey": true,
+          "unique": false,
+          "autoIncrement": true
+        },
+        {
+          "name": "admin_name",
+          "type": "VARCHAR(100)",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "admin_address",
+          "type": "VARCHAR(255)",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "admin_contact",
+          "type": "VARCHAR(50)",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "admin_email",
+          "type": "VARCHAR(100)",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": true,
+          "autoIncrement": false
+        },
+        {
+          "name": "admin_password",
+          "type": "VARCHAR(255)",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "admin_role",
+          "type": "ENUM('super_admin','church_admin')",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "church_id",
+          "type": "INT",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "created_at",
+          "type": "TIMESTAMP",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "updated_at",
+          "type": "TIMESTAMP",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "admin_photo",
+          "type": "VARCHAR(100)",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "invite_token_hash",
+          "type": "CHAR(64)",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "invite_expires",
+          "type": "DATETIME",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        }
+      ],
+      "foreignKeys": [
+        {
+          "column": "church_id",
+          "table": "church_info",
+          "references": "church_info_id",
+          "onDelete": "SET NULL"
+        }
+      ],
+      "uniqueKeys": [],
+      "indexes": []
+    },
+    {
+      "name": "church_info",
+      "module": "Churches",
+      "columns": [
+        {
+          "name": "church_info_id",
+          "type": "INT",
+          "nullable": false,
+          "primaryKey": true,
+          "unique": false,
+          "autoIncrement": true
+        },
+        {
+          "name": "admin_id",
+          "type": "INT",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "church_name",
+          "type": "VARCHAR(100)",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "church_location",
+          "type": "VARCHAR(255)",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "church_address",
+          "type": "VARCHAR(255)",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "church_lat",
+          "type": "DECIMAL(10,7)",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "church_lng",
+          "type": "DECIMAL(10,7)",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "church_contact_details",
+          "type": "VARCHAR(50)",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "church_email",
+          "type": "VARCHAR(100)",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "church_website",
+          "type": "VARCHAR(150)",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "church_facebook",
+          "type": "VARCHAR(150)",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "church_whatsapp",
+          "type": "VARCHAR(255)",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "church_office_hours",
+          "type": "VARCHAR(255)",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "church_priest",
+          "type": "VARCHAR(100)",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "church_priest_title",
+          "type": "VARCHAR(50)",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "church_photo",
+          "type": "VARCHAR(100)",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "donation_bank_name",
+          "type": "VARCHAR(100)",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "donation_account_name",
+          "type": "VARCHAR(100)",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "donation_account_number",
+          "type": "VARCHAR(40)",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "donation_qr_image",
+          "type": "VARCHAR(100)",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "created_at",
+          "type": "TIMESTAMP",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "updated_at",
+          "type": "TIMESTAMP",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        }
+      ],
+      "foreignKeys": [
+        {
+          "column": "admin_id",
+          "table": "admin",
+          "references": "admin_id",
+          "onDelete": "SET NULL"
+        }
+      ],
+      "uniqueKeys": [],
+      "indexes": []
+    },
+    {
+      "name": "church_priests",
+      "module": "Churches",
+      "columns": [
+        {
+          "name": "priest_id",
+          "type": "INT",
+          "nullable": false,
+          "primaryKey": true,
+          "unique": false,
+          "autoIncrement": true
+        },
+        {
+          "name": "church_id",
+          "type": "INT",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "priest_name",
+          "type": "VARCHAR(100)",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "priest_title",
+          "type": "VARCHAR(50)",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "priest_photo",
+          "type": "VARCHAR(100)",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "priest_dob",
+          "type": "DATE",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "priest_ordained",
+          "type": "DATE",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "priest_details",
+          "type": "TEXT",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "sort_order",
+          "type": "SMALLINT",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "created_at",
+          "type": "TIMESTAMP",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "updated_at",
+          "type": "TIMESTAMP",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        }
+      ],
+      "foreignKeys": [
+        {
+          "column": "church_id",
+          "table": "church_info",
+          "references": "church_info_id",
+          "onDelete": "CASCADE"
+        }
+      ],
+      "uniqueKeys": [],
+      "indexes": [
+        {
+          "name": "idx_priest_church",
+          "columns": [
+            "church_id",
+            "sort_order"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "user",
+      "module": "Accounts & access",
+      "columns": [
+        {
+          "name": "user_id",
+          "type": "INT",
+          "nullable": false,
+          "primaryKey": true,
+          "unique": false,
+          "autoIncrement": true
+        },
+        {
+          "name": "admin_id",
+          "type": "INT",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "church_id",
+          "type": "INT",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "user_name",
+          "type": "VARCHAR(100)",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "user_email",
+          "type": "VARCHAR(100)",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": true,
+          "autoIncrement": false
+        },
+        {
+          "name": "user_password",
+          "type": "VARCHAR(255)",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "user_phone",
+          "type": "VARCHAR(20)",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "date_of_birth",
+          "type": "DATE",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "user_address",
+          "type": "VARCHAR(255)",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "user_photo",
+          "type": "VARCHAR(100)",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "user_role",
+          "type": "VARCHAR(50)",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "user_verified",
+          "type": "TINYINT(1)",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "verify_token_hash",
+          "type": "CHAR(64)",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "created_at",
+          "type": "TIMESTAMP",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "updated_at",
+          "type": "TIMESTAMP",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        }
+      ],
+      "foreignKeys": [
+        {
+          "column": "admin_id",
+          "table": "admin",
+          "references": "admin_id",
+          "onDelete": "SET NULL"
+        },
+        {
+          "column": "church_id",
+          "table": "church_info",
+          "references": "church_info_id",
+          "onDelete": "SET NULL"
+        }
+      ],
+      "uniqueKeys": [],
+      "indexes": []
+    },
+    {
+      "name": "password_resets",
+      "module": "Accounts & access",
+      "columns": [
+        {
+          "name": "reset_id",
+          "type": "INT",
+          "nullable": false,
+          "primaryKey": true,
+          "unique": false,
+          "autoIncrement": true
+        },
+        {
+          "name": "account_type",
+          "type": "ENUM('admin','user')",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "account_id",
+          "type": "INT",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "token_hash",
+          "type": "CHAR(64)",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": true,
+          "autoIncrement": false
+        },
+        {
+          "name": "expires_at",
+          "type": "DATETIME",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "created_at",
+          "type": "TIMESTAMP",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        }
+      ],
+      "foreignKeys": [],
+      "uniqueKeys": [],
+      "indexes": [
+        {
+          "name": "idx_reset_account",
+          "columns": [
+            "account_type",
+            "account_id"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "site_stats",
+      "module": "Site content",
+      "columns": [
+        {
+          "name": "stat_key",
+          "type": "VARCHAR(30)",
+          "nullable": false,
+          "primaryKey": true,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "stat_label",
+          "type": "VARCHAR(50)",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "stat_value",
+          "type": "INT UNSIGNED",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "sort_order",
+          "type": "TINYINT",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "updated_by",
+          "type": "INT",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "updated_at",
+          "type": "TIMESTAMP",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        }
+      ],
+      "foreignKeys": [
+        {
+          "column": "updated_by",
+          "table": "admin",
+          "references": "admin_id",
+          "onDelete": "SET NULL"
+        }
+      ],
+      "uniqueKeys": [],
+      "indexes": []
+    },
+    {
+      "name": "site_content",
+      "module": "Site content",
+      "columns": [
+        {
+          "name": "content_key",
+          "type": "VARCHAR(40)",
+          "nullable": false,
+          "primaryKey": true,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "content_value",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "updated_by",
+          "type": "INT",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "updated_at",
+          "type": "TIMESTAMP",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        }
+      ],
+      "foreignKeys": [
+        {
+          "column": "updated_by",
+          "table": "admin",
+          "references": "admin_id",
+          "onDelete": "SET NULL"
+        }
+      ],
+      "uniqueKeys": [],
+      "indexes": []
+    },
+    {
+      "name": "announcements",
+      "module": "Communication",
+      "columns": [
+        {
+          "name": "announcement_id",
+          "type": "INT",
+          "nullable": false,
+          "primaryKey": true,
+          "unique": false,
+          "autoIncrement": true
+        },
+        {
+          "name": "church_id",
+          "type": "INT",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "title",
+          "type": "VARCHAR(150)",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "body",
+          "type": "TEXT",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "category",
+          "type": "VARCHAR(50)",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "is_urgent",
+          "type": "TINYINT(1)",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "is_pinned",
+          "type": "TINYINT(1)",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "publish_date",
+          "type": "DATE",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "expires_date",
+          "type": "DATE",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "notified_at",
+          "type": "DATETIME",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "created_by",
+          "type": "INT",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "created_at",
+          "type": "TIMESTAMP",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "updated_at",
+          "type": "TIMESTAMP",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        }
+      ],
+      "foreignKeys": [
+        {
+          "column": "church_id",
+          "table": "church_info",
+          "references": "church_info_id",
+          "onDelete": "CASCADE"
+        },
+        {
+          "column": "created_by",
+          "table": "admin",
+          "references": "admin_id",
+          "onDelete": "SET NULL"
+        }
+      ],
+      "uniqueKeys": [],
+      "indexes": [
+        {
+          "name": "idx_ann_church_date",
+          "columns": [
+            "church_id",
+            "publish_date"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "bulletins",
+      "module": "Communication",
+      "columns": [
+        {
+          "name": "bulletin_id",
+          "type": "INT",
+          "nullable": false,
+          "primaryKey": true,
+          "unique": false,
+          "autoIncrement": true
+        },
+        {
+          "name": "church_id",
+          "type": "INT",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "title",
+          "type": "VARCHAR(150)",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "topic",
+          "type": "VARCHAR(100)",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "language",
+          "type": "VARCHAR(5)",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "bulletin_date",
+          "type": "DATE",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "file_name",
+          "type": "VARCHAR(150)",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "cover_image",
+          "type": "VARCHAR(150)",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "created_by",
+          "type": "INT",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "created_at",
+          "type": "TIMESTAMP",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        }
+      ],
+      "foreignKeys": [
+        {
+          "column": "church_id",
+          "table": "church_info",
+          "references": "church_info_id",
+          "onDelete": "CASCADE"
+        },
+        {
+          "column": "created_by",
+          "table": "admin",
+          "references": "admin_id",
+          "onDelete": "SET NULL"
+        }
+      ],
+      "uniqueKeys": [],
+      "indexes": [
+        {
+          "name": "idx_bul_church_date",
+          "columns": [
+            "church_id",
+            "bulletin_date"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "newsletter_subscribers",
+      "module": "Communication",
+      "columns": [
+        {
+          "name": "subscriber_id",
+          "type": "INT",
+          "nullable": false,
+          "primaryKey": true,
+          "unique": false,
+          "autoIncrement": true
+        },
+        {
+          "name": "email",
+          "type": "VARCHAR(100)",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "church_id",
+          "type": "INT",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "unsub_token",
+          "type": "CHAR(32)",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "created_at",
+          "type": "TIMESTAMP",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        }
+      ],
+      "foreignKeys": [
+        {
+          "column": "church_id",
+          "table": "church_info",
+          "references": "church_info_id",
+          "onDelete": "CASCADE"
+        }
+      ],
+      "uniqueKeys": [
+        {
+          "name": "uq_subscriber",
+          "columns": [
+            "email",
+            "church_id"
+          ]
+        },
+        {
+          "name": "uq_unsub_token",
+          "columns": [
+            "unsub_token"
+          ]
+        }
+      ],
+      "indexes": []
+    },
+    {
+      "name": "donations",
+      "module": "Donations",
+      "columns": [
+        {
+          "name": "donation_id",
+          "type": "INT",
+          "nullable": false,
+          "primaryKey": true,
+          "unique": false,
+          "autoIncrement": true
+        },
+        {
+          "name": "church_id",
+          "type": "INT",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "donor_user_id",
+          "type": "INT",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "donor_name",
+          "type": "VARCHAR(100)",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "donor_phone",
+          "type": "VARCHAR(30)",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "donor_email",
+          "type": "VARCHAR(100)",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "purpose",
+          "type": "VARCHAR(100)",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "message",
+          "type": "VARCHAR(500)",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "amount",
+          "type": "DECIMAL(12,2)",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "method",
+          "type": "ENUM('bank','qr')",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "receipt_file",
+          "type": "VARCHAR(150)",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "status",
+          "type": "ENUM('pending','approved','rejected')",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "reject_reason",
+          "type": "VARCHAR(255)",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "reviewed_by",
+          "type": "INT",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "reviewed_at",
+          "type": "DATETIME",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "email_sent_at",
+          "type": "DATETIME",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "created_at",
+          "type": "TIMESTAMP",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        }
+      ],
+      "foreignKeys": [
+        {
+          "column": "church_id",
+          "table": "church_info",
+          "references": "church_info_id",
+          "onDelete": "RESTRICT"
+        },
+        {
+          "column": "donor_user_id",
+          "table": "user",
+          "references": "user_id",
+          "onDelete": "SET NULL"
+        },
+        {
+          "column": "reviewed_by",
+          "table": "admin",
+          "references": "admin_id",
+          "onDelete": "SET NULL"
+        }
+      ],
+      "uniqueKeys": [],
+      "indexes": [
+        {
+          "name": "idx_don_church_status",
+          "columns": [
+            "church_id",
+            "status",
+            "created_at"
+          ]
+        },
+        {
+          "name": "idx_don_email_time",
+          "columns": [
+            "donor_email",
+            "created_at"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "weekly_collections",
+      "module": "Donations",
+      "columns": [
+        {
+          "name": "collection_id",
+          "type": "INT",
+          "nullable": false,
+          "primaryKey": true,
+          "unique": false,
+          "autoIncrement": true
+        },
+        {
+          "name": "church_id",
+          "type": "INT",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "week_date",
+          "type": "DATE",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "amount",
+          "type": "DECIMAL(12,2)",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "note",
+          "type": "VARCHAR(150)",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "created_by",
+          "type": "INT",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "created_at",
+          "type": "TIMESTAMP",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "updated_at",
+          "type": "TIMESTAMP",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        }
+      ],
+      "foreignKeys": [
+        {
+          "column": "church_id",
+          "table": "church_info",
+          "references": "church_info_id",
+          "onDelete": "CASCADE"
+        },
+        {
+          "column": "created_by",
+          "table": "admin",
+          "references": "admin_id",
+          "onDelete": "SET NULL"
+        }
+      ],
+      "uniqueKeys": [
+        {
+          "name": "uq_wc_church_week",
+          "columns": [
+            "church_id",
+            "week_date"
+          ]
+        }
+      ],
+      "indexes": []
+    },
+    {
+      "name": "events",
+      "module": "Events",
+      "columns": [
+        {
+          "name": "event_id",
+          "type": "INT",
+          "nullable": false,
+          "primaryKey": true,
+          "unique": false,
+          "autoIncrement": true
+        },
+        {
+          "name": "church_id",
+          "type": "INT",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "title",
+          "type": "VARCHAR(150)",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "category",
+          "type": "ENUM('mass','event')",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "event_type",
+          "type": "VARCHAR(50)",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "event_date",
+          "type": "DATE",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "start_time",
+          "type": "TIME",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "end_time",
+          "type": "TIME",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "is_all_day",
+          "type": "TINYINT(1)",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "location",
+          "type": "VARCHAR(150)",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "description",
+          "type": "TEXT",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "repeat_weekly",
+          "type": "TINYINT(1)",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "repeat_until",
+          "type": "DATE",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "registration_required",
+          "type": "TINYINT(1)",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "capacity",
+          "type": "INT UNSIGNED",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "created_by",
+          "type": "INT",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "created_at",
+          "type": "TIMESTAMP",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "updated_at",
+          "type": "TIMESTAMP",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        }
+      ],
+      "foreignKeys": [
+        {
+          "column": "church_id",
+          "table": "church_info",
+          "references": "church_info_id",
+          "onDelete": "CASCADE"
+        },
+        {
+          "column": "created_by",
+          "table": "admin",
+          "references": "admin_id",
+          "onDelete": "SET NULL"
+        }
+      ],
+      "uniqueKeys": [],
+      "indexes": [
+        {
+          "name": "idx_event_church_date",
+          "columns": [
+            "church_id",
+            "event_date"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "event_registrations",
+      "module": "Events",
+      "columns": [
+        {
+          "name": "registration_id",
+          "type": "INT",
+          "nullable": false,
+          "primaryKey": true,
+          "unique": false,
+          "autoIncrement": true
+        },
+        {
+          "name": "event_id",
+          "type": "INT",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "user_id",
+          "type": "INT",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "name",
+          "type": "VARCHAR(100)",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "email",
+          "type": "VARCHAR(100)",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "phone",
+          "type": "VARCHAR(30)",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "people",
+          "type": "TINYINT UNSIGNED",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "reminded_at",
+          "type": "DATETIME",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "created_at",
+          "type": "TIMESTAMP",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        }
+      ],
+      "foreignKeys": [
+        {
+          "column": "event_id",
+          "table": "events",
+          "references": "event_id",
+          "onDelete": "CASCADE"
+        },
+        {
+          "column": "user_id",
+          "table": "user",
+          "references": "user_id",
+          "onDelete": "SET NULL"
+        }
+      ],
+      "uniqueKeys": [
+        {
+          "name": "uq_event_email",
+          "columns": [
+            "event_id",
+            "email"
+          ]
+        }
+      ],
+      "indexes": []
+    },
+    {
+      "name": "sacrament_applications",
+      "module": "Sacraments",
+      "columns": [
+        {
+          "name": "application_id",
+          "type": "INT",
+          "nullable": false,
+          "primaryKey": true,
+          "unique": false,
+          "autoIncrement": true
+        },
+        {
+          "name": "user_id",
+          "type": "INT",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "church_id",
+          "type": "INT",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "sacrament",
+          "type": "VARCHAR(30)",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "status",
+          "type": "ENUM('draft', 'submitted', 'verifying', 'review', 'approved', 'rejected', 'cancelled')",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "details",
+          "type": "TEXT",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "files",
+          "type": "TEXT",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "admin_note",
+          "type": "VARCHAR(255)",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "submitted_at",
+          "type": "DATETIME",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "reviewed_by",
+          "type": "INT",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "reviewed_at",
+          "type": "DATETIME",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "created_at",
+          "type": "TIMESTAMP",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "updated_at",
+          "type": "TIMESTAMP",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        }
+      ],
+      "foreignKeys": [
+        {
+          "column": "user_id",
+          "table": "user",
+          "references": "user_id",
+          "onDelete": "CASCADE"
+        },
+        {
+          "column": "church_id",
+          "table": "church_info",
+          "references": "church_info_id",
+          "onDelete": "CASCADE"
+        }
+      ],
+      "uniqueKeys": [],
+      "indexes": [
+        {
+          "name": "idx_user",
+          "columns": [
+            "user_id"
+          ]
+        },
+        {
+          "name": "idx_church",
+          "columns": [
+            "church_id",
+            "status"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "sacrament_schedules",
+      "module": "Sacraments",
+      "columns": [
+        {
+          "name": "church_id",
+          "type": "INT",
+          "nullable": false,
+          "primaryKey": true,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "sacrament",
+          "type": "VARCHAR(30)",
+          "nullable": false,
+          "primaryKey": true,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "line_date",
+          "type": "VARCHAR(150)",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "line_brief",
+          "type": "VARCHAR(200)",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "line_close",
+          "type": "VARCHAR(150)",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "notes",
+          "type": "TEXT",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "apply_until",
+          "type": "DATE",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "is_open",
+          "type": "TINYINT(1)",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        }
+      ],
+      "foreignKeys": [
+        {
+          "column": "church_id",
+          "table": "church_info",
+          "references": "church_info_id",
+          "onDelete": "CASCADE"
+        }
+      ],
+      "uniqueKeys": [],
+      "indexes": []
+    },
+    {
+      "name": "confession_slots",
+      "module": "Sacraments",
+      "columns": [
+        {
+          "name": "slot_id",
+          "type": "INT",
+          "nullable": false,
+          "primaryKey": true,
+          "unique": false,
+          "autoIncrement": true
+        },
+        {
+          "name": "church_id",
+          "type": "INT",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "slot_date",
+          "type": "DATE",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "slot_time",
+          "type": "TIME",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "location",
+          "type": "VARCHAR(100)",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "max_bookings",
+          "type": "TINYINT UNSIGNED",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        }
+      ],
+      "foreignKeys": [
+        {
+          "column": "church_id",
+          "table": "church_info",
+          "references": "church_info_id",
+          "onDelete": "CASCADE"
+        }
+      ],
+      "uniqueKeys": [
+        {
+          "name": "uq_slot",
+          "columns": [
+            "church_id",
+            "slot_date",
+            "slot_time"
+          ]
+        }
+      ],
+      "indexes": []
+    },
+    {
+      "name": "pastoral_requests",
+      "module": "Pastoral care",
+      "columns": [
+        {
+          "name": "request_id",
+          "type": "INT",
+          "nullable": false,
+          "primaryKey": true,
+          "unique": false,
+          "autoIncrement": true
+        },
+        {
+          "name": "user_id",
+          "type": "INT",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "church_id",
+          "type": "INT",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "service",
+          "type": "VARCHAR(30)",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "details",
+          "type": "TEXT",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "files",
+          "type": "TEXT",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "submitted_at",
+          "type": "DATETIME",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "status",
+          "type": "ENUM('draft', 'submitted', 'review', 'given', 'declined')",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "admin_note",
+          "type": "VARCHAR(255)",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "reviewed_by",
+          "type": "INT",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "reviewed_at",
+          "type": "DATETIME",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "created_at",
+          "type": "TIMESTAMP",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "updated_at",
+          "type": "TIMESTAMP",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        }
+      ],
+      "foreignKeys": [
+        {
+          "column": "user_id",
+          "table": "user",
+          "references": "user_id",
+          "onDelete": "CASCADE"
+        },
+        {
+          "column": "church_id",
+          "table": "church_info",
+          "references": "church_info_id",
+          "onDelete": "CASCADE"
+        }
+      ],
+      "uniqueKeys": [],
+      "indexes": [
+        {
+          "name": "idx_user",
+          "columns": [
+            "user_id"
+          ]
+        },
+        {
+          "name": "idx_church",
+          "columns": [
+            "church_id",
+            "status"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "pastoral_services",
+      "module": "Pastoral care",
+      "columns": [
+        {
+          "name": "service_id",
+          "type": "INT",
+          "nullable": false,
+          "primaryKey": true,
+          "unique": false,
+          "autoIncrement": true
+        },
+        {
+          "name": "church_id",
+          "type": "INT",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "service_key",
+          "type": "VARCHAR(30)",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "title",
+          "type": "VARCHAR(60)",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "description",
+          "type": "VARCHAR(255)",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "photo",
+          "type": "VARCHAR(100)",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "is_open",
+          "type": "TINYINT(1)",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "sort_order",
+          "type": "SMALLINT",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "deleted_at",
+          "type": "DATETIME",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "created_at",
+          "type": "TIMESTAMP",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "updated_at",
+          "type": "TIMESTAMP",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        }
+      ],
+      "foreignKeys": [
+        {
+          "column": "church_id",
+          "table": "church_info",
+          "references": "church_info_id",
+          "onDelete": "CASCADE"
+        }
+      ],
+      "uniqueKeys": [
+        {
+          "name": "uq_church_service",
+          "columns": [
+            "church_id",
+            "service_key"
+          ]
+        }
+      ],
+      "indexes": []
+    },
+    {
+      "name": "catechesis_programs",
+      "module": "Catechesis",
+      "columns": [
+        {
+          "name": "program_id",
+          "type": "INT",
+          "nullable": false,
+          "primaryKey": true,
+          "unique": false,
+          "autoIncrement": true
+        },
+        {
+          "name": "church_id",
+          "type": "INT",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "title",
+          "type": "VARCHAR(100)",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "category",
+          "type": "VARCHAR(40)",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "description",
+          "type": "TEXT",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "photo",
+          "type": "VARCHAR(100)",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "frequency",
+          "type": "ENUM('weekly', 'monthly_last')",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "weekday",
+          "type": "TINYINT",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "start_time",
+          "type": "TIME",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "end_time",
+          "type": "TIME",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "location",
+          "type": "VARCHAR(120)",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "total_sessions",
+          "type": "SMALLINT UNSIGNED",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "term_label",
+          "type": "VARCHAR(30)",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "notes",
+          "type": "TEXT",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "notes_updated_at",
+          "type": "TIMESTAMP",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "created_at",
+          "type": "TIMESTAMP",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        }
+      ],
+      "foreignKeys": [
+        {
+          "column": "church_id",
+          "table": "church_info",
+          "references": "church_info_id",
+          "onDelete": "CASCADE"
+        }
+      ],
+      "uniqueKeys": [],
+      "indexes": [
+        {
+          "name": "idx_church",
+          "columns": [
+            "church_id"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "catechesis_enrolments",
+      "module": "Catechesis",
+      "columns": [
+        {
+          "name": "enrolment_id",
+          "type": "INT",
+          "nullable": false,
+          "primaryKey": true,
+          "unique": false,
+          "autoIncrement": true
+        },
+        {
+          "name": "program_id",
+          "type": "INT",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "user_id",
+          "type": "INT",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "church_id",
+          "type": "INT",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "status",
+          "type": "ENUM('draft', 'active', 'completed', 'dropped')",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "details",
+          "type": "TEXT",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "files",
+          "type": "TEXT",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "attendance",
+          "type": "SMALLINT UNSIGNED",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "attendance_undated",
+          "type": "SMALLINT UNSIGNED",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "joined_at",
+          "type": "DATETIME",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "created_at",
+          "type": "TIMESTAMP",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "updated_at",
+          "type": "TIMESTAMP",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        }
+      ],
+      "foreignKeys": [
+        {
+          "column": "program_id",
+          "table": "catechesis_programs",
+          "references": "program_id",
+          "onDelete": "CASCADE"
+        },
+        {
+          "column": "user_id",
+          "table": "user",
+          "references": "user_id",
+          "onDelete": "CASCADE"
+        }
+      ],
+      "uniqueKeys": [
+        {
+          "name": "uq_program_user",
+          "columns": [
+            "program_id",
+            "user_id"
+          ]
+        }
+      ],
+      "indexes": [
+        {
+          "name": "idx_church",
+          "columns": [
+            "church_id"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "catechesis_attendance",
+      "module": "Catechesis",
+      "columns": [
+        {
+          "name": "attendance_id",
+          "type": "INT",
+          "nullable": false,
+          "primaryKey": true,
+          "unique": false,
+          "autoIncrement": true
+        },
+        {
+          "name": "enrolment_id",
+          "type": "INT",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "session_date",
+          "type": "DATE",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "status",
+          "type": "ENUM('present', 'absent')",
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "marked_by",
+          "type": "INT",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        },
+        {
+          "name": "created_at",
+          "type": "TIMESTAMP",
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "autoIncrement": false
+        }
+      ],
+      "foreignKeys": [
+        {
+          "column": "enrolment_id",
+          "table": "catechesis_enrolments",
+          "references": "enrolment_id",
+          "onDelete": "CASCADE"
+        }
+      ],
+      "uniqueKeys": [
+        {
+          "name": "uq_enrolment_date",
+          "columns": [
+            "enrolment_id",
+            "session_date"
+          ]
+        }
+      ],
+      "indexes": []
+    }
+  ]
+}

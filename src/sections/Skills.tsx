@@ -9,7 +9,7 @@ interface SkillsProps {
 
 export function Skills({ categories }: SkillsProps) {
   return (
-    <Section id="skills" index="03" title="Skills" tone="tinted">
+    <Section id="skills" index="04" title="Skills" tone="tinted">
       <ul className="skills" role="list">
         {categories
           .filter((category) => category.items.length > 0 || SHOW_PLACEHOLDERS)

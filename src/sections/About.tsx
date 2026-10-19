@@ -11,7 +11,7 @@ interface AboutProps {
 
 export function About({ profile, education, experience }: AboutProps) {
   return (
-    <Section id="about" index="02" title="About">
+    <Section id="about" index="03" title="About">
       <div className="split">
         <div className="about__prose" data-reveal>
           {profile.about.length > 0 ? (

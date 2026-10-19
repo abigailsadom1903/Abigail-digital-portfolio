@@ -1,0 +1,155 @@
+{
+  "note": "These scenarios run in your browser against an in-memory model of the rules defined in the Church Management System's database schema (allowed statuses, unique keys and delete rules). They do not connect to the real system or its data.",
+  "scenarios": [
+    {
+      "id": "DON-01",
+      "title": "A pending donation can be approved",
+      "area": "Donations",
+      "type": "Validation",
+      "steps": ["A church admin opens a pending donation.", "The status is set to approved."],
+      "rule": { "kind": "enum", "table": "donations", "column": "status", "value": "approved" },
+      "expect": "accepted"
+    },
+    {
+      "id": "DON-02",
+      "title": "An unknown donation status is rejected",
+      "area": "Donations",
+      "type": "Negative",
+      "steps": ["A donation status is set to 'refunded', which the workflow does not define."],
+      "rule": { "kind": "enum", "table": "donations", "column": "status", "value": "refunded" },
+      "expect": "rejected"
+    },
+    {
+      "id": "SAC-01",
+      "title": "A sacrament application can move to verification",
+      "area": "Sacraments",
+      "type": "Validation",
+      "steps": ["An admin moves a submitted application to 'verifying'."],
+      "rule": { "kind": "enum", "table": "sacrament_applications", "column": "status", "value": "verifying" },
+      "expect": "accepted"
+    },
+    {
+      "id": "SAC-02",
+      "title": "A confession slot cannot be created twice",
+      "area": "Sacraments",
+      "type": "Negative",
+      "steps": [
+        "A slot exists for church 1 on 2026-11-01 at 10:00.",
+        "An admin creates another slot for the same church, date and time."
+      ],
+      "rule": {
+        "kind": "unique",
+        "table": "confession_slots",
+        "existing": { "church_id": 1, "slot_date": "2026-11-01", "slot_time": "10:00" },
+        "candidate": { "church_id": 1, "slot_date": "2026-11-01", "slot_time": "10:00" }
+      },
+      "expect": "rejected"
+    },
+    {
+      "id": "EVT-01",
+      "title": "The same email cannot register twice for one event",
+      "area": "Events",
+      "type": "Negative",
+      "steps": ["member@example.com registers for event 1.", "The same email registers for event 1 again."],
+      "rule": {
+        "kind": "unique",
+        "table": "event_registrations",
+        "existing": { "event_id": 1, "email": "member@example.com" },
+        "candidate": { "event_id": 1, "email": "member@example.com" }
+      },
+      "expect": "rejected"
+    },
+    {
+      "id": "EVT-02",
+      "title": "The same email can register for a different event",
+      "area": "Events",
+      "type": "Validation",
+      "steps": ["member@example.com is registered for event 1.", "The same email registers for event 2."],
+      "rule": {
+        "kind": "unique",
+        "table": "event_registrations",
+        "existing": { "event_id": 1, "email": "member@example.com" },
+        "candidate": { "event_id": 2, "email": "member@example.com" }
+      },
+      "expect": "accepted"
+    },
+    {
+      "id": "CAT-01",
+      "title": "Attendance is recorded once per session",
+      "area": "Catechesis",
+      "type": "Negative",
+      "steps": ["Attendance is marked for enrolment 7 on 2026-11-08.", "It is marked again for the same enrolment and date."],
+      "rule": {
+        "kind": "unique",
+        "table": "catechesis_attendance",
+        "existing": { "enrolment_id": 7, "session_date": "2026-11-08" },
+        "candidate": { "enrolment_id": 7, "session_date": "2026-11-08" }
+      },
+      "expect": "rejected"
+    },
+    {
+      "id": "COM-01",
+      "title": "One email can subscribe to two different churches",
+      "area": "Communication",
+      "type": "Validation",
+      "steps": ["reader@example.com subscribes to church 1.", "The same email subscribes to church 2."],
+      "rule": {
+        "kind": "unique",
+        "table": "newsletter_subscribers",
+        "existing": { "email": "reader@example.com", "church_id": 1 },
+        "candidate": { "email": "reader@example.com", "church_id": 2 }
+      },
+      "expect": "accepted"
+    },
+    {
+      "id": "ACC-01",
+      "title": "Two admin accounts cannot share an email",
+      "area": "Accounts",
+      "type": "Negative",
+      "steps": ["An admin account exists for admin@example.com.", "A second admin is created with the same email."],
+      "rule": {
+        "kind": "unique",
+        "table": "admin",
+        "existing": { "admin_email": "admin@example.com" },
+        "candidate": { "admin_email": "admin@example.com" }
+      },
+      "expect": "rejected"
+    },
+    {
+      "id": "DEL-01",
+      "title": "A church with donation records cannot be deleted",
+      "area": "Data integrity",
+      "type": "Integrity",
+      "steps": ["A church has donation records.", "Someone tries to delete the church."],
+      "rule": { "kind": "onDelete", "table": "donations", "column": "church_id" },
+      "expect": "RESTRICT"
+    },
+    {
+      "id": "DEL-02",
+      "title": "Deleting an event removes its registrations",
+      "area": "Data integrity",
+      "type": "Integrity",
+      "steps": ["An event has registrations.", "The event is deleted."],
+      "rule": { "kind": "onDelete", "table": "event_registrations", "column": "event_id" },
+      "expect": "CASCADE"
+    },
+    {
+      "id": "DEL-03",
+      "title": "Removing an admin keeps their announcements",
+      "area": "Data integrity",
+      "type": "Integrity",
+      "steps": ["An admin has published announcements.", "The admin account is removed."],
+      "rule": { "kind": "onDelete", "table": "announcements", "column": "created_by" },
+      "expect": "SET NULL"
+    },
+    {
+      "id": "SEC-01",
+      "title": "Password-reset tokens are stored as unique hashes",
+      "area": "Security",
+      "type": "Security",
+      "steps": ["Inspect how password-reset tokens are stored."],
+      "rule": { "kind": "column", "table": "password_resets", "column": "token_hash" },
+      "expect": "CHAR(64) unique"
+    }
+  ]
+}
