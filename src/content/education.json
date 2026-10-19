@@ -36,11 +36,13 @@
   "achievements": [
     {
       "title": "Overall Best Project: SchoolFam",
-      "date": "2025"
+      "date": "2025",
+      "photo": "/images/photo_2026-10-19_21-37-57.jpg"
     },
     {
       "title": "First runner-up, Technopreneurship Business Idea Pitching competition (SchoolFam)",
-      "date": "2025"
+      "date": "2025",
+      "photo": "/images/photo_2026-10-19_21-38-41.jpg"
     },
     {
       "title": "Dean's List",
@@ -53,8 +55,8 @@
       "issuer": "Sponsored by Yayasan Peneraju",
       "date": "2026",
       "description": "Two-day programme on generative AI tools for workplace productivity and workflow optimisation.",
-      "photo": "/images/photo_2026-10-19_18-30-41.jpg",
-      "certificate": "/certificates/MITE-Generative-AI-Tools-for-the-Workplace.pdf"
+      "certificate": "/certificates/MITE-Generative-AI-Tools-for-the-Workplace.pdf",
+      "photo": "/images/photo_2026-10-19_18-30-41.jpg"
     },
     {
       "title": "Gemini No-Code Hackathon",
