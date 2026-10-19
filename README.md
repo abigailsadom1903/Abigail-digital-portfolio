@@ -32,10 +32,11 @@ Progress is shown under the repository's **Actions** tab; the site updates about
 **Easiest: Pages CMS.** Sign in at https://app.pagescms.org with GitHub, open this repository,
 and edit with forms: Profile & About, Projects, Skills, Education & Achievements.
 Upload buttons handle the profile photo, CV (PDF) and project screenshots. Each save
-publishes automatically. The forms are defined in .
+publishes automatically. The forms are defined in `.pages.yml`.
 
-**By hand:** the same content lives in JSON files in (, , , ).
-Uploaded files go in  and ; reference them as  or .
+**By hand:** the same content lives in JSON files in `src/content/`
+(`profile.json`, `projects.json`, `skills.json`, `education.json`).
+Uploaded files go in `public/images/` and `public/cv/`; reference them as `/images/...` or `/cv/...`.
 
 Blank fields render as a clearly labelled **Placeholder**, so fill in real, verified details only.
 **Church Management System screenshots must use sample data only.**
