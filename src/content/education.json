@@ -60,18 +60,15 @@
       "photo": "/images/photo_2026-10-19_18-30-41.jpg"
     },
     {
-      "title": "Gemini No-Code Hackathon",
-      "date": "2026",
-      "description": "Building a no-code application prototype with Google AppSheet and Gemini AI.",
-      "photo": "/images/photo_2026-10-19_18-34-46.jpg"
-    },
-    {
       "title": "PETRONAS BeDigital Bootcamp",
       "issuer": "PETRONAS",
       "date": "2025",
       "description": "Two-day bootcamp on digital innovation, technology applications and digital transformation.",
       "certificate": "/certificates/Abigail Alau R.Sadom (2)-1.pdf",
       "photo": "/images/photo_2026-10-19_18-14-09-1.jpg"
+    },
+    {
+      "certificate": "/certificates/Abigail Alau R.Sadom (2)-1.pdf"
     }
   ],
   "activities": [
@@ -116,6 +113,13 @@
       "organisation": "Program Kembara Jati Diri UMS",
       "period": "2024",
       "photo": "/images/photo_2026-10-19_18-41-36.jpg"
+    },
+    {
+      "role": "Participant of AI in Action: Productivity Challenge Competition",
+      "organisation": "Yayasan Peneraju",
+      "period": "2026",
+      "area": "Artificial Intelligence (AI)",
+      "certificateLabel": "My Visual Story"
     }
   ]
 }
