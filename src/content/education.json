@@ -136,7 +136,12 @@
       "role": "Participant of AI in Action: Productivity Challenge Competition",
       "organisation": "Yayasan Peneraju",
       "period": "2026",
-      "area": "Artificial Intelligence (AI)"
+      "area": "Artificial Intelligence (AI)",
+      "files": [
+        {
+          "file": "/certificates/AI in action.pdf"
+        }
+      ]
     }
   ]
 }
