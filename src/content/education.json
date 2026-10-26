@@ -31,6 +31,11 @@
       "organisation": "Petronas Station, Sipitang",
       "period": "2023",
       "description": "Customer service, cashier duties and payment transactions, and daily shop operations."
+    },
+    {
+      "role": "Part-Time E-hailing UMS driver",
+      "organisation": "UMS",
+      "description": "* Provided transportation services to passengers safely and efficiently. * Managed trip schedules, navigation, and time management. * Maintained professional communication and good customer service."
     }
   ],
   "achievements": [
@@ -130,8 +135,7 @@
       "role": "Participant of AI in Action: Productivity Challenge Competition",
       "organisation": "Yayasan Peneraju",
       "period": "2026",
-      "area": "Artificial Intelligence (AI)",
-      "certificateLabel": "My Visual Story"
+      "area": "Artificial Intelligence (AI)"
     }
   ]
 }
