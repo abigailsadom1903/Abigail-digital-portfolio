@@ -54,6 +54,13 @@
       "title": "Dean's List",
       "issuer": "Universiti Malaysia Sabah",
       "photo": "/images/photo_2026-10-19_22-31-28.jpg"
+    },
+    {
+      "title": "Student Activity Transcript — Cemerlang (Excellent)",
+      "issuer": "Universiti Malaysia Sabah",
+      "date": "2023–2026",
+      "description": "Participated in 28 programmes across international, national, state, university and faculty levels.\n\nEarned 574 co-curricular merit points",
+      "certificate": "/certificates/UMS-Student-Activity-Transcript.pdf"
     }
   ],
   "training": [
@@ -86,26 +93,6 @@
       ],
       "photos": [
         "/images/photo_2026-10-19_22-57-24.jpg"
-      ]
-    },
-    {
-      "role": "Student Activity Transcript",
-      "organisation": "Universiti Malaysia Sabah",
-      "period": "2023 – 2026",
-      "area": "Co-curricular merit",
-      "highlights": [
-        "Rated Cemerlang (Excellent) for overall student involvement.",
-        "Took part in 28 programmes: 4 international, 7 national, 4 state, 9 university and 4 faculty or college programmes.",
-        "Earned 574 merit points, including career programmes such as Crafting Career: Resume and Interview Prep, and Career Mapping: From Campus to Career."
-      ],
-      "photos": [
-        "/images/Screenshot 2026-10-19 231408.png"
-      ],
-      "files": [
-        {
-          "file": "/certificates/UMS-Student-Activity-Transcript.pdf",
-          "label": "Transcript"
-        }
       ]
     },
     {
