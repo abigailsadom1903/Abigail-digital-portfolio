@@ -72,9 +72,6 @@
       "description": "Two-day bootcamp on digital innovation, technology applications and digital transformation.",
       "certificate": "/certificates/Abigail Alau R.Sadom (2)-1.pdf",
       "photo": "/images/photo_2026-10-19_18-14-09-1.jpg"
-    },
-    {
-      "certificate": "/certificates/Abigail Alau R.Sadom (2)-1.pdf"
     }
   ],
   "activities": [
@@ -143,6 +140,10 @@
           "label": "My work"
         }
       ]
+    },
+    {
+      "role": "Participant of Gemini No-Code Hackathon 2026",
+      "period": "2026"
     }
   ]
 }
