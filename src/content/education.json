@@ -80,6 +80,12 @@
       "description": "Two-day bootcamp on digital innovation, technology applications and digital transformation.",
       "certificate": "/certificates/Abigail Alau R.Sadom (2)-1.pdf",
       "photo": "/images/photo_2026-10-19_18-14-09-1.jpg"
+    },
+    {
+      "title": "Social Engineering & Phishing in The Age of AI",
+      "issuer": "0day Academy",
+      "date": "2025",
+      "certificate": "/certificates/Social engineering cert.pdf"
     }
   ],
   "activities": [
