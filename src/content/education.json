@@ -139,7 +139,8 @@
       "area": "Artificial Intelligence (AI)",
       "files": [
         {
-          "file": "/certificates/AI in action.pdf"
+          "file": "/certificates/AI in action.pdf",
+          "label": "My work"
         }
       ]
     }
