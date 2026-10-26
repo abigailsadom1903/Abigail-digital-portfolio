@@ -1,6 +1,6 @@
 import data from '../content/education.json';
 import { records, text, texts } from './normalize';
-import type { Achievement, Activity, EducationEntry, Experience } from './types';
+import type { Achievement, Activity, Attachment, EducationEntry, Experience } from './types';
 import { withBase } from './withBase';
 
 const raw: Record<string, unknown> = data;
@@ -33,6 +33,18 @@ const toAchievement = (a: Record<string, unknown>): Achievement[] => {
 const toActivity = (a: Record<string, unknown>): Activity[] => {
   const role = text(a.role);
   if (!role) return [];
+
+  // `photo`, `certificate` and `certificateLabel` are the older single-upload fields; still read so old entries keep working.
+  const photos = [...texts([a.photo]), ...texts(a.photos)].map(withBase);
+  const legacyFile = upload(a.certificate);
+  const files: Attachment[] = [
+    ...(legacyFile ? [{ href: legacyFile, label: text(a.certificateLabel) ?? 'Certificate' }] : []),
+    ...records(a.files).flatMap((f) => {
+      const href = upload(f.file);
+      return href ? [{ href, label: text(f.label) ?? 'Document' }] : [];
+    }),
+  ];
+
   return [
     {
       role,
@@ -40,9 +52,8 @@ const toActivity = (a: Record<string, unknown>): Activity[] => {
       period: text(a.period) ?? '',
       area: text(a.area) ?? undefined,
       highlights: texts(a.highlights),
-      certificate: upload(a.certificate),
-      certificateLabel: text(a.certificateLabel) ?? undefined,
-      photo: upload(a.photo),
+      photos,
+      files,
     },
   ];
 };

@@ -118,6 +118,13 @@ export interface Achievement {
   photo?: string;
 }
 
+/** An uploaded document (PDF, Word, slides or image), resolved URL. */
+export interface Attachment {
+  href: string;
+  /** Button text, e.g. "Certificate" or "Transcript". */
+  label: string;
+}
+
 export interface Activity {
   role: string;
   organisation: string;
@@ -126,12 +133,12 @@ export interface Activity {
   area?: string;
   /** What Abigail did, as short bullet points. */
   highlights?: string[];
-  certificate?: string;
-  /** Button text for the uploaded document, e.g. "Transcript". Defaults to "Certificate". */
-  certificateLabel?: string;
-  photo?: string;
+  /** Uploaded photos, resolved URLs. The first is the cover. */
+  photos?: string[];
+  /** Uploaded documents, in the order they were added. */
+  files?: Attachment[];
 }
 
-export interface Experience extends Activity {
+export interface Experience extends Pick<Activity, 'role' | 'organisation' | 'period'> {
   description: string | null;
 }

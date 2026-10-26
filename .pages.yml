@@ -14,7 +14,7 @@ media:
   - name: certificates
     input: public/certificates
     output: /certificates
-    extensions: [pdf, jpg, jpeg, png, webp]
+    extensions: [pdf, doc, docx, ppt, pptx, xls, xlsx, jpg, jpeg, png, webp]
   - name: reports
     input: public/reports
     output: /reports
@@ -224,14 +224,20 @@ content:
           - { name: period, label: Period, type: string }
           - { name: area, label: Area (optional e.g. Science and Technology), type: string }
           - { name: highlights, label: What I did (bullet points), type: text, list: true }
-          - name: certificate
-            label: Certificate (PDF or image upload)
-            type: file
-            options:
-              media: certificates
-          - { name: certificateLabel, label: Document button text (optional; default Certificate), type: string }
-          - name: photo
-            label: Photo (optional)
+          - name: photos
+            label: Photos (add as many as you like; the first is the cover)
             type: image
+            list: true
             options:
               media: images
+          - name: files
+            label: Files (certificates, transcripts, reports; PDF, Word, PowerPoint or image)
+            type: object
+            list: true
+            fields:
+              - name: file
+                label: File
+                type: file
+                options:
+                  media: certificates
+              - { name: label, label: Button text (e.g. Certificate; default Document), type: string }

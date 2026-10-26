@@ -81,7 +81,9 @@
         "Shared insights on usability, user experience and potential improvements to support user needs.",
         "Supported community-focused digital innovation through collaboration, idea-sharing and constructive feedback."
       ],
-      "photo": "/images/photo_2026-10-19_22-57-24.jpg"
+      "photos": [
+        "/images/photo_2026-10-19_22-57-24.jpg"
+      ]
     },
     {
       "role": "Student Activity Transcript",
@@ -93,9 +95,15 @@
         "Took part in 28 programmes: 4 international, 7 national, 4 state, 9 university and 4 faculty or college programmes.",
         "Earned 574 merit points, including career programmes such as Crafting Career: Resume and Interview Prep, and Career Mapping: From Campus to Career."
       ],
-      "certificate": "/certificates/UMS-Student-Activity-Transcript.pdf",
-      "certificateLabel": "Transcript",
-      "photo": "/images/Screenshot 2026-10-19 231408.png"
+      "photos": [
+        "/images/Screenshot 2026-10-19 231408.png"
+      ],
+      "files": [
+        {
+          "file": "/certificates/UMS-Student-Activity-Transcript.pdf",
+          "label": "Transcript"
+        }
+      ]
     },
     {
       "role": "Committee Member",
@@ -106,13 +114,17 @@
       "role": "AJK Food and Gift",
       "organisation": "SULAM Project at Masjid Al-Huda, Kg. Unggun Jaya",
       "period": "2026",
-      "photo": "/images/photo_2026-06-26_17-10-51.jpg"
+      "photos": [
+        "/images/photo_2026-06-26_17-10-51.jpg"
+      ]
     },
     {
       "role": "Treasurer",
       "organisation": "Program Kembara Jati Diri UMS",
       "period": "2024",
-      "photo": "/images/photo_2026-10-19_18-41-36.jpg"
+      "photos": [
+        "/images/photo_2026-10-19_18-41-36.jpg"
+      ]
     },
     {
       "role": "Participant of AI in Action: Productivity Challenge Competition",
