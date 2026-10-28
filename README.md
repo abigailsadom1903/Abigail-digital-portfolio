@@ -2,6 +2,10 @@
 
 Personal portfolio built with Vite, React and TypeScript. Static site: no backend.
 
+![Portfolio home page](docs/screenshots/portfolio-home.png)
+
+*Home page of the live portfolio.*
+
 ## Project Overview
 
 A personal portfolio for Abigail Alau R. Sadom, a Software Engineering student at Universiti Malaysia Sabah (UMS). It presents her profile, projects, skills, education, experience and awards, together with an interactive **Engineering Lab** that shows how each project is designed and tested: architecture, data model, test scenarios and design decisions.
