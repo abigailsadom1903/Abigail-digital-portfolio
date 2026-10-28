@@ -246,9 +246,11 @@
       ]
     },
     {
-      "title": "FYP System For UMS",
+      "title": "UMS Final Year Project (FYP) System UI/UX Redesign",
       "category": "UI/UX",
       "cover": "/images/Screenshot 2026-10-19 210747.png",
+      "context": "Case Study: https://obe.ums.edu.my/fyp/default.aspx",
+      "summary": "Analysed the existing UMS FYP system to identify opportunities to improve usability, navigation, and the student project management experience.\n\nProposed interface improvements to streamline access to FYP information, submissions, and academic workflows.\n",
       "featured": false,
       "year": "2026",
       "role": "UI Design",
@@ -260,6 +262,10 @@
         {
           "label": "Slide deck",
           "url": "https://www.canva.com/design/DAHNZkA9RZ0/x9uj5dsU8TBidXTkSJZLrA/edit"
+        },
+        {
+          "label": "The existing UMS system",
+          "url": "https://obe.ums.edu.my/fyp/default.aspx"
         }
       ],
       "screenshots": [
