@@ -2,6 +2,75 @@
 
 Personal portfolio built with Vite, React and TypeScript. Static site: no backend.
 
+## Project Overview
+
+A personal portfolio for Abigail Alau R. Sadom, a Software Engineering student at Universiti Malaysia Sabah (UMS). It presents her profile, projects, skills, education, experience and awards, together with an interactive **Engineering Lab** that shows how each project is designed and tested: architecture, data model, test scenarios and design decisions.
+
+**Live site:** https://abigailsadom1903.github.io/Abigail-digital-portfolio/
+
+## Problem Statement
+
+A CV or a list of repositories shows what someone built, but not how it works or why it was designed that way. Student projects in particular are hard to evaluate from source code alone, and recruiters rarely have time to clone and run them.
+
+This portfolio puts the work in one place and makes the engineering visible, with architecture views, generated data models, runnable test scenarios and decision notes, while staying easy to update without touching code.
+
+## Features
+
+- **Portfolio sections:** Hero, Work, Engineering Lab, About, Skills, Recognition (awards) and Contact.
+- **Engineering Lab:** per-project interactive modules for architecture, data model, testing and a Decision Journal.
+- **Testing Playground:** runs test scenarios in the browser against the project's rules, clearly labelled as a simulation.
+- **Generated data models** built from each project's database schema (structure only, no data copied).
+- **Content management with Pages CMS:** edit profile, projects, skills, education and awards through forms, with upload support for photos, CV, certificates and reports.
+- **Content as JSON** in `src/content/`, so the site can also be edited by hand.
+- **Accessible design** using design tokens, focus styles and reduced-motion support.
+- **Automated deployment** to GitHub Pages on every push to `main`, with optional Netlify hosting.
+- **Automated testing:** unit and component tests (Vitest, React Testing Library) and browser tests (Playwright).
+
+## Technology Stack
+
+| Area | Technology |
+| --- | --- |
+| UI | React, TypeScript |
+| Build tool | Vite |
+| Content editing | Pages CMS (`.pages.yml`) with JSON content files |
+| Unit and component tests | Vitest, React Testing Library |
+| End-to-end tests | Playwright |
+| Linting | oxlint |
+| Hosting | GitHub Pages (GitHub Actions), optional Netlify |
+
+## Installation
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) (current LTS recommended) and npm
+- Git
+- Google Chrome (only needed to run the Playwright browser tests)
+
+### Steps
+
+1. **Clone the repository**
+
+   ```bash
+   git clone https://github.com/abigailsadom1903/Abigail-digital-portfolio.git
+   cd Abigail-digital-portfolio
+   ```
+
+2. **Install dependencies**
+
+   ```bash
+   npm install
+   ```
+
+3. **Start the development server**
+
+   ```bash
+   npm run dev
+   ```
+
+4. **Open the site** at http://localhost:5173
+
+The full list of commands, deployment options and content-editing instructions follows below.
+
 ## Commands
 
 ```bash
