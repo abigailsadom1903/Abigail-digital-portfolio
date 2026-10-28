@@ -42,6 +42,32 @@ This portfolio puts the work in one place and makes the engineering visible, wit
 | Linting | oxlint |
 | Hosting | GitHub Pages (GitHub Actions), optional Netlify |
 
+## Architecture
+
+A **static, content-driven single-page site**. All content is bundled at build time; there is no server and no database.
+
+```
+JSON content (src/content) ──▶ typed loaders (src/data) ──▶ sections / components ──▶ static build (dist/)
+                                                                  ▲
+Lab data (architecture, model, testing, decisions) ───────────────┘
+```
+
+- **Content layer:** editable JSON files, managed by hand or through Pages CMS forms.
+- **Data layer:** typed loaders in `src/data/` turn the JSON into typed objects, keeping content separate from presentation. The Lab loaders also contain schema queries and the test engine.
+- **Presentation layer:** page sections (`src/sections/`) assembled from reusable components (`src/components/`), with design tokens in `src/styles/tokens.css`.
+- **Data models are generated.** Scripts in `scripts/` read each project's real schema (SQL, a phpMyAdmin export or TypeScript types) and write `model.json`, copying structure only and no data.
+
+## Key Implementation Decisions
+
+- **Static site, no backend.** Cheap to host, with nothing to secure or maintain on a server.
+- **Content as JSON plus Pages CMS.** Content can be updated through forms, and every save publishes automatically without editing code.
+- **Generated Lab data models.** The portfolio's database diagrams are produced from the real schema files, so they cannot drift from the actual projects.
+- **Tests that validate the content.** Each Testing Playground scenario must pass against the real rules (checked by `npm test`), so the interactive demos cannot silently become wrong.
+- **A clearly labelled simulation.** The Testing Playground runs in the browser and never connects to the real systems.
+- **`BASE_PATH` environment variable** sets the URL path, so the same code builds for GitHub Pages (`/Abigail-digital-portfolio/`) and for Netlify or local development (`/`).
+- **Design tokens** in `tokens.css` keep colours, spacing and type consistent across sections.
+- **Verified content only.** Blank fields are hidden on the published site, and Church Management System screenshots use sample data only.
+
 ## Installation
 
 ### Prerequisites
@@ -172,3 +198,11 @@ src/
 scripts/          generators for the Lab data models
 e2e/              Playwright browser tests
 ```
+
+## Known Limitations
+
+- **Static content only.** There is no contact-form backend or comments; changes need a rebuild, which happens automatically on every push to `main`.
+- **Lab models are snapshots.** They reflect each source schema at the time it was generated and must be regenerated when a project's schema changes.
+- **The Testing Playground is a simulation**, not a live connection to the real systems.
+- **StudyUsia's Lab model shows no delete rules on foreign keys**, because the app's SQLite database does not enable foreign-key enforcement.
+- **End-to-end tests use a locally installed Google Chrome**, so Chrome must be available to run them.
