@@ -150,7 +150,10 @@
     {
       "role": "Participant of Malaysia Testing Cup",
       "organisation": "Malaysian Software Testing Board",
-      "area": "Software Testing & Quality Assurance (QA)"
+      "area": "Software Testing & Quality Assurance (QA)",
+      "photos": [
+        "/images/Testing competition.jpeg"
+      ]
     }
   ]
 }
