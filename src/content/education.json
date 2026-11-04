@@ -62,6 +62,15 @@
       "description": "Participated in 28 programmes across international, national, state, university and faculty levels.\n\nEarned 574 co-curricular merit points",
       "certificate": "/certificates/UMS-Student-Activity-Transcript.pdf",
       "photo": "/images/Screenshot 2026-10-19 231408-1.png"
+    },
+    {
+      "title": "Top 10 Winners of AI in Action: Productivity Challenge Competition",
+      "issuer": "Yayasan Peneraju",
+      "date": "2026",
+      "credentialUrl": "my work: https://drive.google.com/drive/folders/1_ErtB9QA9aBCWFg4T27ThdI69xM8STTV?usp=sharing",
+      "certificate": "/certificates/Ai winner.jpg",
+      "certificateLabel": "List of Winner",
+      "photo": "/images/c498b2c8-dc93-4f1f-8aa9-592ac87e6a9a.jpeg"
     }
   ],
   "training": [
@@ -116,21 +125,6 @@
       "period": "2024",
       "photos": [
         "/images/photo_2026-10-19_18-41-36.jpg"
-      ]
-    },
-    {
-      "role": "Participant of AI in Action: Productivity Challenge Competition",
-      "organisation": "Yayasan Peneraju",
-      "period": "2026",
-      "area": "Artificial Intelligence (AI)",
-      "photos": [
-        "/images/c498b2c8-dc93-4f1f-8aa9-592ac87e6a9a.jpeg"
-      ],
-      "files": [
-        {
-          "file": "/certificates/AI in action.pdf",
-          "label": "My work"
-        }
       ]
     },
     {
