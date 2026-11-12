@@ -130,6 +130,11 @@
       "role": "Participant of Gemini No-Code Hackathon 2026",
       "period": "2026",
       "area": "Application Development ",
+      "highlights": [
+        "Built U Fix Bah, a no-code Google AppSheet app for reporting damaged roads, streetlights, drainage and water supply around UMS.",
+        "Used AppSheet's AI to analyse each report photo and fill in the damage type, severity and a short description automatically.",
+        "Designed a Priority Score that ranks open reports by severity, damage type, upvotes and nearby reports, with a map, dashboard and AI summary to highlight the most urgent issues."
+      ],
       "photos": [
         "/images/3c6926e9-d033-4340-ae6f-797fbf231939.jpeg"
       ],
