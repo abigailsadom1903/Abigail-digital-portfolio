@@ -311,6 +311,42 @@
           "alt": "Cover Letter Editor showing the company form and a live A4 letter preview"
         }
       ]
+    },
+    {
+      "title": "U Fix Bah",
+      "category": "Mobile app (no-code)",
+      "context": "UMS community amenities reporting and prioritisation app",
+      "summary": "A Google AppSheet app for reporting damaged roads, streetlights, drainage and water supply around UMS. Students and drivers report a problem with a photo, the app records the time and GPS location, AI fills in the damage type, severity and a short description, and a Priority Score ranks every open report so the most urgent issues rise to the top.",
+      "featured": false,
+      "year": "2026",
+      "role": "Developer",
+      "problem": "Damaged roads, broken streetlights, drainage and water-supply problems around UMS are reported informally, if at all, so there is no single record of what is broken, where it is, or which issue should be fixed first.",
+      "approach": "Built as a no-code app in Google AppSheet with Google Sheets as the data source. Each report captures a photo, timestamp and GPS location, and AI analyses the photo to fill in the damage type, severity and a description. A virtual Priority Score column combines severity, damage type, upvotes and other open reports on the same road, and role-based rules let only Admins change a report's status and assigned agency.",
+      "features": [
+        "Photo reporting with automatic timestamp and GPS location",
+        "AI analysis of each photo: damage type, severity and a one-sentence description",
+        "Priority Score that ranks open reports by severity, damage type, upvotes and nearby reports",
+        "Case tracking by status: New, Under Review, Assigned, In Progress, Resolved",
+        "Map of all reports around UMS and Kota Kinabalu",
+        "Dashboard with charts by category, severity and status, plus an Open High Priority list",
+        "Role-based editing: only Admins can change status and assigned agency"
+      ],
+      "stack": [
+        "Google AppSheet",
+        "Google Sheets",
+        "AppSheet AI",
+        "AppSheet expressions"
+      ],
+      "links": [
+        {
+          "label": "Open the app",
+          "url": "https://www.appsheet.com/start/daef3935-9652-4e4e-be39-eaa13675e06b"
+        },
+        {
+          "label": "View app definition on GitHub",
+          "url": "https://github.com/abigailsadom1903/u-fix-bah"
+        }
+      ]
     }
   ]
 }
