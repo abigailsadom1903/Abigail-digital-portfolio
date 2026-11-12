@@ -346,6 +346,33 @@
           "label": "View app definition on GitHub",
           "url": "https://github.com/abigailsadom1903/u-fix-bah"
         }
+      ],
+      "screenshots": [
+        {
+          "image": "/images/1794491960330_image.png",
+          "caption": "Case Tracking: reports grouped by status",
+          "alt": "U Fix Bah Case Tracking list of new reports with photos, damage type, time and severity"
+        },
+        {
+          "image": "/images/1794492006746_image.png",
+          "caption": "Report detail with AI description and impact assessment",
+          "alt": "U Fix Bah report detail for a pothole, showing the photo, location, AI description, upvotes, status and impact assessment"
+        },
+        {
+          "image": "/images/1794492040706_image.png",
+          "caption": "Map of reports around UMS and Kota Kinabalu",
+          "alt": "U Fix Bah map view with report pins around Kota Kinabalu, Sepanggar and Donggongon"
+        },
+        {
+          "image": "/images/1794492075444_image.png",
+          "caption": "Dashboard with priority ranking and charts",
+          "alt": "U Fix Bah dashboard showing the Priority Ranking list, donut charts by category, severity and status, and the Open High Priority list"
+        },
+        {
+          "image": "/images/1794492098232_image.png",
+          "caption": "AI summary of open reports and priorities",
+          "alt": "U Fix Bah AI Summary view describing the main problem areas and a suggested repair order"
+        }
       ]
     }
   ]
