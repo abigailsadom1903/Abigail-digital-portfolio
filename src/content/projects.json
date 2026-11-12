@@ -315,6 +315,7 @@
     {
       "title": "U Fix Bah",
       "category": "Mobile app (no-code)",
+      "cover": "/images/1794492075444_image.png",
       "context": "UMS community amenities reporting and prioritisation app",
       "summary": "A Google AppSheet app for reporting damaged roads, streetlights, drainage and water supply around UMS. Students and drivers report a problem with a photo, the app records the time and GPS location, AI fills in the damage type, severity and a short description, and a Priority Score ranks every open report so the most urgent issues rise to the top.",
       "featured": false,
