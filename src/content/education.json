@@ -150,8 +150,12 @@
       "organisation": "Malaysian Software Testing Board",
       "period": "2026",
       "area": "Software Testing & Quality Assurance (QA)",
+      "highlights": [
+        "- Participated in a national-level, time-boxed software testing competition serving as a pre-qualifier for the World’s Best Tester Competition.\n- Conducted exploratory, functional, and UI testing to identify software defects.\n- Prepared structured bug reports detailing reproduction steps, expected and actual results, severity considerations, and product risks.\n- Applied software quality assurance principles, test planning, and defect prioritisation under a three-hour testing constraint."
+      ],
       "photos": [
-        "/images/Testing competition.jpeg"
+        "/images/Testing competition.jpeg",
+        "/images/IMG_6684.jpeg"
       ]
     }
   ]
