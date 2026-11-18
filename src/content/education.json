@@ -27,16 +27,16 @@
       "description": "Customer service, floral arrangements and bouquet preparation, and daily shop operations."
     },
     {
-      "role": "Part-Time Shop Assistant",
-      "organisation": "Petronas Station, Sipitang",
-      "period": "2023",
-      "description": "Customer service, cashier duties and payment transactions, and daily shop operations."
-    },
-    {
       "role": "Part-Time E-hailing UMS driver",
       "organisation": "UMS",
       "period": "2024",
       "description": "Part-time e-hailing driver providing safe, reliable, and efficient transportation with a focus on customer service and punctuality."
+    },
+    {
+      "role": "Part-Time Shop Assistant",
+      "organisation": "Petronas Station, Sipitang",
+      "period": "2023",
+      "description": "Customer service, cashier duties and payment transactions, and daily shop operations."
     }
   ],
   "achievements": [
