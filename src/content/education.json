@@ -117,9 +117,14 @@
       ]
     },
     {
-      "role": "AJK Food and Gift",
+      "role": "Member",
       "organisation": "SULAM Project at Masjid Al-Huda, Kg. Unggun Jaya",
       "period": "2026",
+      "area": "Community Service & Software Development",
+      "highlights": [
+        "Developed a mosque management system to streamline Masjid Al-Huda's administrative and record-keeping processes.",
+        "Distributed food to the residents in Kg. Unggun Jaya as part of the SULAM community outreach programme."
+      ],
       "photos": [
         "/images/photo_2026-06-26_17-10-51.jpg"
       ]
