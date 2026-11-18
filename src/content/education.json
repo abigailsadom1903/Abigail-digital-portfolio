@@ -157,7 +157,10 @@
       "period": "2026",
       "area": "Software Testing & Quality Assurance (QA)",
       "highlights": [
-        "- Competed in a national-level, time-boxed software testing competition as a pre-qualifier for the World's Best Tester Competition.\n- Performed exploratory, functional, and UI testing to identify software defects.\n- Documented structured bug reports covering reproduction steps, expected vs. actual results, severity, anad risk.\n- Applied QA principles, test planning, and defect prioritisation under a three-hour testing constraint."
+        "Competed in a national-level, time-boxed software testing competition as a pre-qualifier for the World's Best Tester Competition.",
+        "Performed exploratory, functional, and UI testing to identify software defects.",
+        "Documented structured bug reports covering reproduction steps, expected vs. actual results, severity, anad risk.",
+        "Applied QA principles, test planning, and defect prioritisation under a three-hour testing constraint."
       ],
       "photos": [
         "/images/Testing competition.jpeg",
