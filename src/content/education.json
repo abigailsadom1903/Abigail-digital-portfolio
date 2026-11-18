@@ -74,14 +74,6 @@
   ],
   "training": [
     {
-      "title": "MITE Generative AI Tools Training for the Workplace",
-      "issuer": "Sponsored by Yayasan Peneraju",
-      "date": "2026",
-      "description": "Two-day programme on generative AI tools for workplace productivity and workflow optimisation.",
-      "certificate": "/certificates/MITE-Generative-AI-Tools-for-the-Workplace.pdf",
-      "photo": "/images/photo_2026-10-19_18-30-41.jpg"
-    },
-    {
       "title": "PETRONAS BeDigital Bootcamp",
       "issuer": "PETRONAS",
       "date": "2025",
@@ -90,69 +82,27 @@
       "photo": "/images/photo_2026-10-19_18-14-09-1.jpg"
     },
     {
-      "title": "Social Engineering & Phishing in The Age of AI",
-      "issuer": "0day Academy",
-      "date": "2025",
-      "certificate": "/certificates/Social engineering cert.pdf"
+      "title": "MITE Generative AI Tools Training for the Workplace",
+      "issuer": "Sponsored by Yayasan Peneraju",
+      "date": "2026",
+      "description": "Two-day programme on generative AI tools for workplace productivity and workflow optimisation.",
+      "certificate": "/certificates/MITE-Generative-AI-Tools-for-the-Workplace.pdf",
+      "photo": "/images/photo_2026-10-19_18-30-41.jpg"
     },
     {
       "title": "Agentic AI for All",
       "issuer": "Ministry of Digital",
       "date": "2026",
       "certificate": "/certificates/Agentic AI for All-1.pdf"
+    },
+    {
+      "title": "Social Engineering & Phishing in The Age of AI",
+      "issuer": "0day Academy",
+      "date": "2025",
+      "certificate": "/certificates/Social engineering cert.pdf"
     }
   ],
   "activities": [
-    {
-      "role": "Digital Systems Feedback Contributor",
-      "organisation": "Archdiocese of Kota Kinabalu",
-      "period": "2026",
-      "area": "Science and Technology",
-      "highlights": [
-        "Contributed a youth perspective and Software Engineering knowledge by providing feedback on digital systems and technology initiatives.",
-        "Shared insights on usability, user experience and potential improvements to support user needs.",
-        "Supported community-focused digital innovation through collaboration, idea-sharing and constructive feedback."
-      ],
-      "photos": [
-        "/images/photo_2026-10-19_22-57-24.jpg"
-      ]
-    },
-    {
-      "role": "Community Project Digitalization of Mosque Administration",
-      "organisation": "SULAM - Ethics, Professional and E-Community",
-      "period": "2026",
-      "area": "Community Service & Software Development",
-      "highlights": [
-        "Developed a mosque management system to streamline Masjid Al-Huda's administrative and record-keeping processes.",
-        "Distributed food to the residents in Kg. Unggun Jaya as part of the SULAM community outreach programme.",
-        "Delivered a talk titled “Keselamatan Siber - Pendigitalan Kendiri: Melindungi Data Masjid dan Komuniti” (Cyber Security - Self-Digitalisation: Protecting Mosque and Community Data)."
-      ],
-      "photos": [
-        "/images/photo_2026-06-26_17-10-51.jpg",
-        "/images/photo_2026-06-26_00-39-21.jpg",
-        "/images/photo_2026-06-25_17-45-45-2.jpg"
-      ],
-      "files": [
-        {
-          "file": "/certificates/WORKSHOP POSTER.pdf",
-          "label": "Workshop Poster"
-        }
-      ]
-    },
-    {
-      "role": "Treasurer of Program Kembara Jati Diri UMS",
-      "organisation": "Pengurusan Organisasi Pelajar UMS",
-      "period": "2024",
-      "area": "Student Organisation Management & Finance",
-      "highlights": [
-        "Managed the budget and financial records for Program Kembara Jati Diri UMS.",
-        "Tracked income and expenditure for program activities, ensuring transparent and accurate financial reporting.",
-        "Coordinated fund collection and budget allocation to support program events and activities."
-      ],
-      "photos": [
-        "/images/photo_2026-10-19_18-41-36.jpg"
-      ]
-    },
     {
       "role": "Participant of Gemini No-Code Hackathon 2026",
       "period": "2026",
@@ -186,6 +136,56 @@
       "photos": [
         "/images/Testing competition.jpeg",
         "/images/IMG_6684.jpeg"
+      ]
+    },
+    {
+      "role": "Community Project Digitalization of Mosque Administration",
+      "organisation": "SULAM - Ethics, Professional and E-Community",
+      "period": "2026",
+      "area": "Community Service & Software Development",
+      "highlights": [
+        "Developed a mosque management system to streamline Masjid Al-Huda's administrative and record-keeping processes.",
+        "Distributed food to the residents in Kg. Unggun Jaya as part of the SULAM community outreach programme.",
+        "Delivered a talk titled “Keselamatan Siber - Pendigitalan Kendiri: Melindungi Data Masjid dan Komuniti” (Cyber Security - Self-Digitalisation: Protecting Mosque and Community Data)."
+      ],
+      "photos": [
+        "/images/photo_2026-06-26_17-10-51.jpg",
+        "/images/photo_2026-06-26_00-39-21.jpg",
+        "/images/photo_2026-06-25_17-45-45-2.jpg"
+      ],
+      "files": [
+        {
+          "file": "/certificates/WORKSHOP POSTER.pdf",
+          "label": "Workshop Poster"
+        }
+      ]
+    },
+    {
+      "role": "Digital Systems Feedback Contributor",
+      "organisation": "Archdiocese of Kota Kinabalu",
+      "period": "2026",
+      "area": "Science and Technology",
+      "highlights": [
+        "Contributed a youth perspective and Software Engineering knowledge by providing feedback on digital systems and technology initiatives.",
+        "Shared insights on usability, user experience and potential improvements to support user needs.",
+        "Supported community-focused digital innovation through collaboration, idea-sharing and constructive feedback."
+      ],
+      "photos": [
+        "/images/photo_2026-10-19_22-57-24.jpg"
+      ]
+    },
+    {
+      "role": "Treasurer of Program Kembara Jati Diri UMS",
+      "organisation": "Pengurusan Organisasi Pelajar UMS",
+      "period": "2024",
+      "area": "Student Organisation Management & Finance",
+      "highlights": [
+        "Managed the budget and financial records for Program Kembara Jati Diri UMS.",
+        "Tracked income and expenditure for program activities, ensuring transparent and accurate financial reporting.",
+        "Coordinated fund collection and budget allocation to support program events and activities."
+      ],
+      "photos": [
+        "/images/photo_2026-10-19_18-41-36.jpg"
       ]
     }
   ]
