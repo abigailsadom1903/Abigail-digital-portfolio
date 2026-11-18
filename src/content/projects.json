@@ -375,6 +375,23 @@
           "alt": "U Fix Bah AI Summary view describing the main problem areas and a suggested repair order"
         }
       ]
+    },
+    {
+      "title": "Mosque Management System for Masjid Al-Huda Kg Unggun Jaya",
+      "category": "Web Application",
+      "featured": false,
+      "year": "2026",
+      "role": "Volunteer Developer",
+      "problem": "Masjid Al-Huda in Kg. Unggun Jaya relied on manual, paper-based processes to manage administrative records, donations, and community data, making record-keeping time-consuming, error-prone, and difficult to retrieve or audit. The mosque committee also had limited awareness of good cybersecurity practices for protecting sensitive data as they moved toward digital tools.",
+      "approach": "Developed a digital mosque management system to centralise and streamline Masjid Al-Huda's administrative and record-keeping processes. Alongside development, delivered a cybersecurity talk, \"Keselamatan Siber - Pendigitalan Kendiri: Melindungi Data Masjid dan Komuniti,\" to raise awareness among committee members and the community on protecting mosque and community data during the digital transition.",
+      "report": "/reports/MODULE LIST KG UNGGUN.pdf",
+      "reportLabel": "List of Module for the System",
+      "links": [
+        {
+          "label": "Website Link",
+          "url": "https://masjid-unggun-community-system.vercel.app/"
+        }
+      ]
     }
   ]
 }
