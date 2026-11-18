@@ -46,15 +46,24 @@
       "photo": "/images/photo_2026-10-19_21-37-57.jpg"
     },
     {
-      "title": "First runner-up, Technopreneurship Business Idea Pitching competition ",
-      "date": "2025",
-      "certificate": "/certificates/photo_2026-10-19_21-36-18.jpg",
-      "photo": "/images/photo_2026-10-19_21-38-41.jpg"
+      "title": "Top 10 Winners of AI in Action: Productivity Challenge Competition",
+      "issuer": "Yayasan Peneraju",
+      "date": "2026",
+      "certificate": "/certificates/AI in action.pdf",
+      "certificateLabel": "My work",
+      "photo": "/images/Ai winner.jpg"
     },
     {
       "title": "Dean's List",
       "issuer": "Universiti Malaysia Sabah",
+      "certificate": "/certificates/UMS-Student-Activity-Transcript.pdf",
       "photo": "/images/photo_2026-10-19_22-31-28.jpg"
+    },
+    {
+      "title": "First runner-up, Technopreneurship Business Idea Pitching competition ",
+      "date": "2025",
+      "certificate": "/certificates/photo_2026-10-19_21-36-18.jpg",
+      "photo": "/images/photo_2026-10-19_21-38-41.jpg"
     },
     {
       "title": "Student Activity Transcript — Cemerlang (Excellent)",
@@ -63,14 +72,6 @@
       "description": "Participated in 28 programmes across international, national, state, university and faculty levels.\n\nEarned 574 co-curricular merit points",
       "certificate": "/certificates/UMS-Student-Activity-Transcript.pdf",
       "photo": "/images/Screenshot 2026-10-19 231408-1.png"
-    },
-    {
-      "title": "Top 10 Winners of AI in Action: Productivity Challenge Competition",
-      "issuer": "Yayasan Peneraju",
-      "date": "2026",
-      "certificate": "/certificates/AI in action.pdf",
-      "certificateLabel": "My work",
-      "photo": "/images/Ai winner.jpg"
     }
   ],
   "training": [
