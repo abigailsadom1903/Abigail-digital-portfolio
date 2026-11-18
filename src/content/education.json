@@ -117,13 +117,14 @@
       ]
     },
     {
-      "role": "Member",
-      "organisation": "SULAM Project at Masjid Al-Huda, Kg. Unggun Jaya",
+      "role": "Member of SULAM Project at Masjid Al-Huda, Kg. Unggun Jaya",
+      "organisation": "SULAM",
       "period": "2026",
       "area": "Community Service & Software Development",
       "highlights": [
         "Developed a mosque management system to streamline Masjid Al-Huda's administrative and record-keeping processes.",
-        "Distributed food to the residents in Kg. Unggun Jaya as part of the SULAM community outreach programme."
+        "Distributed food to the residents in Kg. Unggun Jaya as part of the SULAM community outreach programme.",
+        "Delivered a talk titled “Keselamatan Siber - Pendigitalan Kendiri: Melindungi Data Masjid dan Komuniti” (Cyber Security - Self-Digitalisation: Protecting Mosque and Community Data)."
       ],
       "photos": [
         "/images/photo_2026-06-26_17-10-51.jpg"
