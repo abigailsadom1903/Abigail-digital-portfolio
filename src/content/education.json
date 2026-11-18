@@ -94,6 +94,11 @@
       "issuer": "0day Academy",
       "date": "2025",
       "certificate": "/certificates/Social engineering cert.pdf"
+    },
+    {
+      "title": "Agentic AI for All",
+      "issuer": "Ministry of Digital",
+      "date": "2026"
     }
   ],
   "activities": [
