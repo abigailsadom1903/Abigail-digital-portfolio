@@ -6,7 +6,7 @@
       "cover": "/images/Screenshot 2026-10-19 210945.png",
       "context": "Archdiocese of Kota Kinabalu · Final Year Project",
       "summary": "A web-based system that brings church information, announcements, bulletins, events, sacraments, pastoral care, catechesis and donations for the 23 churches in Kota Kinabalu into one place, with separate access for members, church admins and a super admin.",
-      "featured": false,
+      "featured": true,
       "year": "2026",
       "role": "Full-stack developer",
       "problem": "Church information, bulletins, announcements and services across the 23 churches in Kota Kinabalu needed a single, central web platform.",
