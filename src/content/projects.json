@@ -117,40 +117,63 @@
       ]
     },
     {
-      "title": "Smart Street Light System",
-      "category": "IoT",
-      "cover": "/images/photo_2026-10-19_21-27-40.jpg",
-      "context": "IoT project · Solar-powered smart street light",
-      "summary": "A solar-powered smart street light with automated motion and light detection, ESP32-CAM surveillance and Telegram alerts for remote monitoring.",
+      "title": "Mosque Management System for Masjid Al-Huda Kg Unggun Jaya",
+      "category": "Web Application",
       "featured": false,
-      "year": "2025",
+      "year": "2026",
+      "role": "Volunteer Developer",
+      "problem": "Masjid Al-Huda in Kg. Unggun Jaya relied on manual, paper-based processes to manage administrative records, donations, and community data, making record-keeping time-consuming, error-prone, and difficult to retrieve or audit. The mosque committee also had limited awareness of good cybersecurity practices for protecting sensitive data as they moved toward digital tools.",
+      "approach": "Developed a digital mosque management system to centralise and streamline Masjid Al-Huda's administrative and record-keeping processes. Alongside development, delivered a cybersecurity talk, \"Keselamatan Siber - Pendigitalan Kendiri: Melindungi Data Masjid dan Komuniti,\" to raise awareness among committee members and the community on protecting mosque and community data during the digital transition.",
+      "report": "/reports/MODULE LIST KG UNGGUN.pdf",
+      "reportLabel": "List of Module for the System",
+      "links": [
+        {
+          "label": "Website Link",
+          "url": "https://masjid-unggun-community-system.vercel.app/"
+        }
+      ]
+    },
+    {
+      "title": "UniFest",
+      "category": "Web application",
+      "cover": "/images/Screenshot 2026-10-19 212202.png",
+      "context": "Campus event management system · Team project",
+      "summary": "A web-based campus event system where students, staff and the public browse and register for university events, organisers manage their events and participants, and admins approve events and manage users.",
+      "featured": false,
+      "year": "2026",
+      "role": "Web Developer ",
+      "problem": "University events are announced in many places, so students miss them, and organisers have no single place to track registrations, participants and feedback.",
+      "approach": "Built in PHP with PDO and MySQL, with role-based access for admins, staff, students and public users. Events go through an approval step before they are listed, and passwords are stored with password_hash.",
       "features": [
-        "Solar-powered operation",
-        "Automated motion detection (PIR sensor)",
-        "Automated light detection (LDR sensor)",
-        "ESP32-CAM surveillance",
-        "Telegram alerts for remote monitoring"
+        "Event listings by type (workshop, seminar, competition, festival, sport, course) and mode (physical, online, hybrid)",
+        "Public or university-only events, shown only after admin approval",
+        "One-click event registration that prevents duplicate sign-ups and notifies the organiser",
+        "Participant lists with CSV export and update messages to participants",
+        "In-app notifications and simulated email notifications",
+        "Event ratings and feedback",
+        "Admin reports, user management and role promotion",
+        "User profiles with password change"
       ],
       "stack": [
-        "ESP32",
-        "ESP32-CAM",
-        "Arduino IDE",
-        "C++",
-        "PIR sensor",
-        "LDR sensor",
-        "Telegram Bot API"
+        "PHP",
+        "PDO",
+        "MySQL",
+        "HTML",
+        "CSS",
+        "XAMPP"
       ],
-      "testing": [
-        "Unit testing",
-        "Integration testing",
-        "Field testing"
-      ],
-      "outcome": "Achieved an estimated 80% energy reduction.",
-      "report": "/reports/KK24602 INTERNET OF THINGS PROJECT REPORT GROUP 3  .pdf",
-      "screenshots": [
+      "links": [
         {
-          "caption": "Prototype photo",
-          "alt": "Smart Street Light System prototype"
+          "label": "View code on GitHub",
+          "url": "https://github.com/abigailsadom1903/UniFest"
+        },
+        {
+          "label": "Demonstration Video",
+          "url": "https://drive.google.com/file/d/10T4dniM-dmb9l5wbdqoWF6uy2xBNW1bi/view?usp=sharing"
+        },
+        {
+          "label": "Explore it in the Engineering Lab",
+          "url": "#lab-unifest"
         }
       ]
     },
@@ -202,117 +225,6 @@
       ]
     },
     {
-      "title": "UniFest",
-      "category": "Web application",
-      "cover": "/images/Screenshot 2026-10-19 212202.png",
-      "context": "Campus event management system · Team project",
-      "summary": "A web-based campus event system where students, staff and the public browse and register for university events, organisers manage their events and participants, and admins approve events and manage users.",
-      "featured": false,
-      "year": "2026",
-      "role": "Web Developer ",
-      "problem": "University events are announced in many places, so students miss them, and organisers have no single place to track registrations, participants and feedback.",
-      "approach": "Built in PHP with PDO and MySQL, with role-based access for admins, staff, students and public users. Events go through an approval step before they are listed, and passwords are stored with password_hash.",
-      "features": [
-        "Event listings by type (workshop, seminar, competition, festival, sport, course) and mode (physical, online, hybrid)",
-        "Public or university-only events, shown only after admin approval",
-        "One-click event registration that prevents duplicate sign-ups and notifies the organiser",
-        "Participant lists with CSV export and update messages to participants",
-        "In-app notifications and simulated email notifications",
-        "Event ratings and feedback",
-        "Admin reports, user management and role promotion",
-        "User profiles with password change"
-      ],
-      "stack": [
-        "PHP",
-        "PDO",
-        "MySQL",
-        "HTML",
-        "CSS",
-        "XAMPP"
-      ],
-      "links": [
-        {
-          "label": "View code on GitHub",
-          "url": "https://github.com/abigailsadom1903/UniFest"
-        },
-        {
-          "label": "Demonstration Video",
-          "url": "https://drive.google.com/file/d/10T4dniM-dmb9l5wbdqoWF6uy2xBNW1bi/view?usp=sharing"
-        },
-        {
-          "label": "Explore it in the Engineering Lab",
-          "url": "#lab-unifest"
-        }
-      ]
-    },
-    {
-      "title": "UMS Final Year Project (FYP) System UI/UX Redesign",
-      "category": "UI/UX",
-      "cover": "/images/Screenshot 2026-10-19 210747.png",
-      "context": "Case Study: https://obe.ums.edu.my/fyp/default.aspx",
-      "summary": "Analysed the existing UMS FYP system to identify opportunities to improve usability, navigation, and the student project management experience.\n\nProposed interface improvements to streamline access to FYP information, submissions, and academic workflows.\n",
-      "featured": false,
-      "year": "2026",
-      "role": "UI Design",
-      "links": [
-        {
-          "label": "Figma Walkthrough Design",
-          "url": "https://www.figma.com/design/mRtVK51PJffWGBEyWXCzUF/Untitled?node-id=0-1&t=CYXJKHzTFT3jFYvJ-1"
-        },
-        {
-          "label": "Slide deck",
-          "url": "https://www.canva.com/design/DAHNZkA9RZ0/x9uj5dsU8TBidXTkSJZLrA/edit"
-        },
-        {
-          "label": "The existing UMS system",
-          "url": "https://obe.ums.edu.my/fyp/default.aspx"
-        }
-      ],
-      "screenshots": [
-        {}
-      ]
-    },
-    {
-      "title": "Cover Letter Editor",
-      "category": "Web tool",
-      "cover": "/images/projects/cover-letter-editor.webp",
-      "context": "Personal tool · Internship applications",
-      "summary": "A browser-based tool that tailors my internship cover letter to each company: type the company’s name and address, check a live A4 preview, and download a one-page PDF or Word file.",
-      "featured": false,
-      "year": "2026",
-      "role": "Personal project",
-      "problem": "Sending the same cover letter to many companies meant re-editing the company details, date and wording by hand for every application.",
-      "approach": "A single offline web page with a live A4 preview. The PDF is generated in the browser with jsPDF, so nothing is uploaded, and personal details are kept out of the public code in git-ignored local files.",
-      "features": [
-        "Live A4 preview while typing",
-        "One-click PDF download, automatically fitted to one page",
-        "Word download and copy as plain text",
-        "Date filled in automatically (e.g. 19th October 2026)",
-        "Company name inserted into the letter text",
-        "Required-field checks before downloading",
-        "Personal details and signature kept in local, git-ignored files"
-      ],
-      "stack": [
-        "HTML",
-        "CSS",
-        "JavaScript",
-        "jsPDF"
-      ],
-      "links": [
-        {
-          "label": "View code on GitHub",
-          "url": "https://github.com/abigailsadom1903/Cover-Letter-Internship-Editor"
-        }
-      ],
-      "screenshots": [
-        {
-          "image": "/images/projects/cover-letter-editor.webp",
-          "caption": "Editor with sample details",
-          "alt": "Cover Letter Editor showing the company form and a live A4 letter preview"
-        }
-      ]
-    },
-    {
       "title": "U Fix Bah",
       "category": "Mobile app (no-code)",
       "cover": "/images/1794492075444_image.png",
@@ -338,6 +250,7 @@
         "AppSheet AI",
         "AppSheet expressions"
       ],
+      "report": "/reports/MODULE LIST KG UNGGUN.pdf",
       "links": [
         {
           "label": "Open the app",
@@ -377,19 +290,108 @@
       ]
     },
     {
-      "title": "Mosque Management System for Masjid Al-Huda Kg Unggun Jaya",
-      "category": "Web Application",
+      "title": "Cover Letter Editor",
+      "category": "Web tool",
+      "cover": "/images/projects/cover-letter-editor.webp",
+      "context": "Personal tool · Internship applications",
+      "summary": "A browser-based tool that tailors my internship cover letter to each company: type the company’s name and address, check a live A4 preview, and download a one-page PDF or Word file.",
       "featured": false,
       "year": "2026",
-      "role": "Volunteer Developer",
-      "problem": "Masjid Al-Huda in Kg. Unggun Jaya relied on manual, paper-based processes to manage administrative records, donations, and community data, making record-keeping time-consuming, error-prone, and difficult to retrieve or audit. The mosque committee also had limited awareness of good cybersecurity practices for protecting sensitive data as they moved toward digital tools.",
-      "approach": "Developed a digital mosque management system to centralise and streamline Masjid Al-Huda's administrative and record-keeping processes. Alongside development, delivered a cybersecurity talk, \"Keselamatan Siber - Pendigitalan Kendiri: Melindungi Data Masjid dan Komuniti,\" to raise awareness among committee members and the community on protecting mosque and community data during the digital transition.",
+      "role": "Personal project",
+      "problem": "Sending the same cover letter to many companies meant re-editing the company details, date and wording by hand for every application.",
+      "approach": "A single offline web page with a live A4 preview. The PDF is generated in the browser with jsPDF, so nothing is uploaded, and personal details are kept out of the public code in git-ignored local files.",
+      "features": [
+        "Live A4 preview while typing",
+        "One-click PDF download, automatically fitted to one page",
+        "Word download and copy as plain text",
+        "Date filled in automatically (e.g. 19th October 2026)",
+        "Company name inserted into the letter text",
+        "Required-field checks before downloading",
+        "Personal details and signature kept in local, git-ignored files"
+      ],
+      "stack": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "jsPDF"
+      ],
       "report": "/reports/MODULE LIST KG UNGGUN.pdf",
-      "reportLabel": "List of Module for the System",
       "links": [
         {
-          "label": "Website Link",
-          "url": "https://masjid-unggun-community-system.vercel.app/"
+          "label": "View code on GitHub",
+          "url": "https://github.com/abigailsadom1903/Cover-Letter-Internship-Editor"
+        }
+      ],
+      "screenshots": [
+        {
+          "image": "/images/projects/cover-letter-editor.webp",
+          "caption": "Editor with sample details",
+          "alt": "Cover Letter Editor showing the company form and a live A4 letter preview"
+        }
+      ]
+    },
+    {
+      "title": "UMS Final Year Project (FYP) System UI/UX Redesign",
+      "category": "UI/UX",
+      "cover": "/images/Screenshot 2026-10-19 210747.png",
+      "context": "Case Study: https://obe.ums.edu.my/fyp/default.aspx",
+      "summary": "Analysed the existing UMS FYP system to identify opportunities to improve usability, navigation, and the student project management experience.\n\nProposed interface improvements to streamline access to FYP information, submissions, and academic workflows.\n",
+      "featured": false,
+      "year": "2026",
+      "role": "UI Design",
+      "links": [
+        {
+          "label": "Figma Walkthrough Design",
+          "url": "https://www.figma.com/design/mRtVK51PJffWGBEyWXCzUF/Untitled?node-id=0-1&t=CYXJKHzTFT3jFYvJ-1"
+        },
+        {
+          "label": "Slide deck",
+          "url": "https://www.canva.com/design/DAHNZkA9RZ0/x9uj5dsU8TBidXTkSJZLrA/edit"
+        },
+        {
+          "label": "The existing UMS system",
+          "url": "https://obe.ums.edu.my/fyp/default.aspx"
+        }
+      ],
+      "screenshots": [
+        {}
+      ]
+    },
+    {
+      "title": "Smart Street Light System",
+      "category": "IoT",
+      "cover": "/images/photo_2026-10-19_21-27-40.jpg",
+      "context": "IoT project · Solar-powered smart street light",
+      "summary": "A solar-powered smart street light with automated motion and light detection, ESP32-CAM surveillance and Telegram alerts for remote monitoring.",
+      "featured": false,
+      "year": "2025",
+      "features": [
+        "Solar-powered operation",
+        "Automated motion detection (PIR sensor)",
+        "Automated light detection (LDR sensor)",
+        "ESP32-CAM surveillance",
+        "Telegram alerts for remote monitoring"
+      ],
+      "stack": [
+        "ESP32",
+        "ESP32-CAM",
+        "Arduino IDE",
+        "C++",
+        "PIR sensor",
+        "LDR sensor",
+        "Telegram Bot API"
+      ],
+      "testing": [
+        "Unit testing",
+        "Integration testing",
+        "Field testing"
+      ],
+      "outcome": "Achieved an estimated 80% energy reduction.",
+      "report": "/reports/KK24602 INTERNET OF THINGS PROJECT REPORT GROUP 3  .pdf",
+      "screenshots": [
+        {
+          "caption": "Prototype photo",
+          "alt": "Smart Street Light System prototype"
         }
       ]
     }
