@@ -408,7 +408,7 @@
       "context": "Personal project",
       "summary": "A Java Swing desktop application for booking bus and ferry tickets between towns across Sabah, simulating account registration, route and schedule selection, fare calculation, and payment.",
       "featured": false,
-      "year": "2026",
+      "year": "2024",
       "role": "Personal project",
       "problem": "Booking bus or ferry travel between towns in Sabah typically involves separate counters or operators, with no single place to compare routes, schedules, and fares.",
       "approach": "Built as a standalone Java Swing desktop app with a simple screen flow: register or log in, choose bus or ferry and one-way or round trip, pick an origin, destination, date, time and passenger count, then confirm the fare and complete a simulated card payment. Confirmed bookings are appended to a local text file.",
