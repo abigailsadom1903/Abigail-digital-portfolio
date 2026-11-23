@@ -137,6 +137,16 @@
       "photos": [
         "/images/Testing competition.jpeg",
         "/images/IMG_6684.jpeg"
+      ],
+      "files": [
+        {
+          "file": "/certificates/certificate-1.pdf",
+          "label": "Certificate"
+        },
+        {
+          "file": "/certificates/badge.png",
+          "label": "Badge"
+        }
       ]
     },
     {
