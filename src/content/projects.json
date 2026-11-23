@@ -6,7 +6,7 @@
       "cover": "/images/Screenshot 2026-10-19 210945.png",
       "context": "Archdiocese of Kota Kinabalu · Final Year Project",
       "summary": "A web-based system that brings church information, announcements, bulletins, events, sacraments, pastoral care, catechesis and donations for the 23 churches in Kota Kinabalu into one place, with separate access for members, church admins and a super admin.",
-      "featured": true,
+      "featured": false,
       "year": "2026",
       "role": "Full-stack developer",
       "problem": "Church information, bulletins, announcements and services across the 23 churches in Kota Kinabalu needed a single, central web platform.",
@@ -120,6 +120,8 @@
       "title": "Mosque Management System for Masjid Al-Huda Kg Unggun Jaya",
       "category": "Web Application",
       "cover": "/images/Screenshot 2026-11-18 210855.png",
+      "context": "Masjid Al-Huda, Kg Unggun Jaya · Volunteer project",
+      "summary": "A digital mosque management system built to replace manual, paper-based record-keeping for Masjid Al-Huda, Kg Unggun Jaya, alongside a community cybersecurity awareness talk on protecting mosque and community data.",
       "featured": false,
       "year": "2026",
       "role": "Volunteer Developer",
@@ -340,6 +342,8 @@
       "featured": false,
       "year": "2026",
       "role": "UI Design",
+      "problem": "The existing UMS FYP system (obe.ums.edu.my/fyp) has usability and navigation issues that make it harder for students to manage their project information, submissions and academic workflows.",
+      "approach": "Analysed the existing system to identify usability and navigation issues, then proposed and designed interface improvements in Figma to streamline access to FYP information, submissions, and academic workflows.",
       "links": [
         {
           "label": "Figma Walkthrough Design",
@@ -366,6 +370,8 @@
       "summary": "A solar-powered smart street light with automated motion and light detection, ESP32-CAM surveillance and Telegram alerts for remote monitoring.",
       "featured": false,
       "year": "2025",
+      "problem": "Conventional street lights run on a fixed schedule regardless of whether anyone is present, wasting energy, and have no way to alert anyone to nearby activity or faults.",
+      "approach": "Built an ESP32-based solar-powered street light that uses a PIR sensor to detect motion and an LDR sensor to detect ambient light, brightening only when needed, with an ESP32-CAM for surveillance and Telegram alerts for remote monitoring.",
       "features": [
         "Solar-powered operation",
         "Automated motion detection (PIR sensor)",
@@ -393,6 +399,36 @@
         {
           "caption": "Prototype photo",
           "alt": "Smart Street Light System prototype"
+        }
+      ]
+    },
+    {
+      "title": "Ticket Booking Transportation System",
+      "category": "Desktop application",
+      "context": "Personal project",
+      "summary": "A Java Swing desktop application for booking bus and ferry tickets between towns across Sabah, simulating account registration, route and schedule selection, fare calculation, and payment.",
+      "featured": false,
+      "year": "2026",
+      "role": "Personal project",
+      "problem": "Booking bus or ferry travel between towns in Sabah typically involves separate counters or operators, with no single place to compare routes, schedules, and fares.",
+      "approach": "Built as a standalone Java Swing desktop app with a simple screen flow: register or log in, choose bus or ferry and one-way or round trip, pick an origin, destination, date, time and passenger count, then confirm the fare and complete a simulated card payment. Confirmed bookings are appended to a local text file.",
+      "features": [
+        "User registration and login",
+        "Bus or ferry selection, one-way or round trip",
+        "Route, date, time and passenger count selection across 24 Sabah towns",
+        "Fare calculation (Bus RM15, Ferry RM5 per passenger)",
+        "Simulated card payment with basic format validation",
+        "Booking persistence to a local text file"
+      ],
+      "stack": [
+        "Java",
+        "Java Swing"
+      ],
+      "outcome": "A personal practice project demonstrating Java Swing UI design and end-to-end booking workflow logic.",
+      "links": [
+        {
+          "label": "View code on GitHub",
+          "url": "https://github.com/abigailsadom1903/ticket-booking-transportation-system"
         }
       ]
     }
