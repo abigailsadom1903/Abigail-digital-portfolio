@@ -405,6 +405,7 @@
     {
       "title": "Ticket Booking Transportation System",
       "category": "Desktop application",
+      "cover": "/images/IMG_6766.png",
       "context": "Personal project",
       "summary": "A Java Swing desktop application for booking bus and ferry tickets between towns across Sabah, simulating account registration, route and schedule selection, fare calculation, and payment.",
       "featured": false,
